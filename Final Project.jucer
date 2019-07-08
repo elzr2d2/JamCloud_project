@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<JUCERPROJECT id="LuD3xr" name="Final Project" projectType="guiapp" jucerVersion="5.4.3"
+              headerPath="../../SDKs/JUCE/modules&#10;../../SDKs/tracktion_engine&#10;../../Source&#10;">
+  <MAINGROUP id="O4Tt23" name="Final Project">
+    <GROUP id="{1AFD6650-92F3-872C-C857-A28CBFF0FBC0}" name="Icons">
+      <FILE id="pcD6E5" name="001-xylophone.png" compile="0" resource="1"
+            file="Icons/001-xylophone.png"/>
+      <FILE id="oenxze" name="002-volume-4.png" compile="0" resource="1"
+            file="Icons/002-volume-4.png"/>
+      <FILE id="XgNcUK" name="003-volume-3.png" compile="0" resource="1"
+            file="Icons/003-volume-3.png"/>
+      <FILE id="HL7ctD" name="004-volume-2.png" compile="0" resource="1"
+            file="Icons/004-volume-2.png"/>
+      <FILE id="AgCyDT" name="005-violin.png" compile="0" resource="1" file="Icons/005-violin.png"/>
+      <FILE id="tac9nO" name="006-microphone-4.png" compile="0" resource="1"
+            file="Icons/006-microphone-4.png"/>
+      <FILE id="Fi0yfN" name="007-turntable.png" compile="0" resource="1"
+            file="Icons/007-turntable.png"/>
+      <FILE id="E4aRzY" name="008-tuning-fork.png" compile="0" resource="1"
+            file="Icons/008-tuning-fork.png"/>
+      <FILE id="DUrTvp" name="009-trumpet.png" compile="0" resource="1" file="Icons/009-trumpet.png"/>
+      <FILE id="kA1S3x" name="010-triangle.png" compile="0" resource="1"
+            file="Icons/010-triangle.png"/>
+      <FILE id="yp2bgY" name="011-treble-clef.png" compile="0" resource="1"
+            file="Icons/011-treble-clef.png"/>
+      <FILE id="tzxe37" name="012-tambourine.png" compile="0" resource="1"
+            file="Icons/012-tambourine.png"/>
+      <FILE id="RuPY1Y" name="013-stop.png" compile="0" resource="1" file="Icons/013-stop.png"/>
+      <FILE id="iF8d6d" name="014-speaker.png" compile="0" resource="1" file="Icons/014-speaker.png"/>
+      <FILE id="pIuJ32" name="015-wave.png" compile="0" resource="1" file="Icons/015-wave.png"/>
+      <FILE id="eBWXdD" name="016-shaker.png" compile="0" resource="1" file="Icons/016-shaker.png"/>
+      <FILE id="rcIrer" name="017-musical-note-4.png" compile="0" resource="1"
+            file="Icons/017-musical-note-4.png"/>
+      <FILE id="s7DAOj" name="018-saxophone.png" compile="0" resource="1"
+            file="Icons/018-saxophone.png"/>
+      <FILE id="sIkquG" name="019-earphones-7.png" compile="0" resource="1"
+            file="Icons/019-earphones-7.png"/>
+      <FILE id="lDi3qi" name="020-rewind.png" compile="0" resource="1" file="Icons/020-rewind.png"/>
+      <FILE id="RBQ9Wi" name="021-microphone-3.png" compile="0" resource="1"
+            file="Icons/021-microphone-3.png"/>
+      <FILE id="sQw3px" name="022-microphone-2.png" compile="0" resource="1"
+            file="Icons/022-microphone-2.png"/>
+      <FILE id="bOM75q" name="023-record.png" compile="0" resource="1" file="Icons/023-record.png"/>
+      <FILE id="cJOelj" name="024-radio.png" compile="0" resource="1" file="Icons/024-radio.png"/>
+      <FILE id="CQqKXo" name="025-musical-note-3.png" compile="0" resource="1"
+            file="Icons/025-musical-note-3.png"/>
+      <FILE id="ns4lSi" name="026-musical-note-2.png" compile="0" resource="1"
+            file="Icons/026-musical-note-2.png"/>
+      <FILE id="NcjGeQ" name="027-previous.png" compile="0" resource="1"
+            file="Icons/027-previous.png"/>
+      <FILE id="O9gm5F" name="029-piano.png" compile="0" resource="1" file="Icons/029-piano.png"/>
+      <FILE id="G0Dgz3" name="030-phonograph.png" compile="0" resource="1"
+            file="Icons/030-phonograph.png"/>
+      <FILE id="rY5uaz" name="032-next.png" compile="0" resource="1" file="Icons/032-next.png"/>
+      <FILE id="z4NKhC" name="033-mute.png" compile="0" resource="1" file="Icons/033-mute.png"/>
+      <FILE id="QBHYgJ" name="034-playlist.png" compile="0" resource="1"
+            file="Icons/034-playlist.png"/>
+      <FILE id="VlrlGb" name="035-smartphone.png" compile="0" resource="1"
+            file="Icons/035-smartphone.png"/>
+      <FILE id="bsr6ql" name="036-music-stand.png" compile="0" resource="1"
+            file="Icons/036-music-stand.png"/>
+      <FILE id="L6ou8L" name="037-equalizer-1.png" compile="0" resource="1"
+            file="Icons/037-equalizer-1.png"/>
+      <FILE id="kqF8hE" name="038-album-1.png" compile="0" resource="1" file="Icons/038-album-1.png"/>
+      <FILE id="Mq4mdS" name="039-compact-disc-2.png" compile="0" resource="1"
+            file="Icons/039-compact-disc-2.png"/>
+      <FILE id="B1kvOl" name="040-album.png" compile="0" resource="1" file="Icons/040-album.png"/>
+      <FILE id="p4uAwz" name="041-microphone-1.png" compile="0" resource="1"
+            file="Icons/041-microphone-1.png"/>
+      <FILE id="Xj7MGT" name="042-microphone.png" compile="0" resource="1"
+            file="Icons/042-microphone.png"/>
+      <FILE id="GWwDUQ" name="043-megaphone.png" compile="0" resource="1"
+            file="Icons/043-megaphone.png"/>
+      <FILE id="nsoOkX" name="044-maracas.png" compile="0" resource="1" file="Icons/044-maracas.png"/>
+      <FILE id="QajCMS" name="045-earphones-6.png" compile="0" resource="1"
+            file="Icons/045-earphones-6.png"/>
+      <FILE id="OCoeie" name="046-ipod.png" compile="0" resource="1" file="Icons/046-ipod.png"/>
+      <FILE id="kMAkr1" name="047-volume-1.png" compile="0" resource="1"
+            file="Icons/047-volume-1.png"/>
+      <FILE id="jB19GV" name="048-headphones.png" compile="0" resource="1"
+            file="Icons/048-headphones.png"/>
+      <FILE id="oK2I8O" name="049-guitar.png" compile="0" resource="1" file="Icons/049-guitar.png"/>
+      <FILE id="wEi0Ov" name="050-amplifier.png" compile="0" resource="1"
+            file="Icons/050-amplifier.png"/>
+      <FILE id="Oeiy4Q" name="051-fast-forward.png" compile="0" resource="1"
+            file="Icons/051-fast-forward.png"/>
+      <FILE id="XuNCzy" name="052-equalizer.png" compile="0" resource="1"
+            file="Icons/052-equalizer.png"/>
+      <FILE id="BDFb2w" name="053-electric-guitar.png" compile="0" resource="1"
+            file="Icons/053-electric-guitar.png"/>
+      <FILE id="In3QRk" name="054-eject.png" compile="0" resource="1" file="Icons/054-eject.png"/>
+      <FILE id="H8Lne0" name="055-musical-note-1.png" compile="0" resource="1"
+            file="Icons/055-musical-note-1.png"/>
+      <FILE id="SqZBt2" name="056-earphones-5.png" compile="0" resource="1"
+            file="Icons/056-earphones-5.png"/>
+      <FILE id="hLVfjC" name="057-drumsticks.png" compile="0" resource="1"
+            file="Icons/057-drumsticks.png"/>
+      <FILE id="UIOgjc" name="058-drum.png" compile="0" resource="1" file="Icons/058-drum.png"/>
+      <FILE id="v6FyWe" name="059-djembe.png" compile="0" resource="1" file="Icons/059-djembe.png"/>
+      <FILE id="k70QKa" name="060-volume.png" compile="0" resource="1" file="Icons/060-volume.png"/>
+      <FILE id="qFiwqb" name="061-cymbal.png" compile="0" resource="1" file="Icons/061-cymbal.png"/>
+      <FILE id="V9VDnq" name="062-compact-disc-1.png" compile="0" resource="1"
+            file="Icons/062-compact-disc-1.png"/>
+      <FILE id="EM7C1A" name="063-cloud-computing.png" compile="0" resource="1"
+            file="Icons/063-cloud-computing.png"/>
+      <FILE id="LHdFH8" name="064-cd-player.png" compile="0" resource="1"
+            file="Icons/064-cd-player.png"/>
+      <FILE id="mBDJqk" name="065-compact-disc.png" compile="0" resource="1"
+            file="Icons/065-compact-disc.png"/>
+      <FILE id="JoLOyI" name="066-cassette.png" compile="0" resource="1"
+            file="Icons/066-cassette.png"/>
+      <FILE id="G03sv0" name="067-boombox.png" compile="0" resource="1" file="Icons/067-boombox.png"/>
+      <FILE id="OrYOJ3" name="068-earphones-4.png" compile="0" resource="1"
+            file="Icons/068-earphones-4.png"/>
+      <FILE id="SQUzBV" name="069-musical-note.png" compile="0" resource="1"
+            file="Icons/069-musical-note.png"/>
+      <FILE id="FaQVuM" name="070-banjo.png" compile="0" resource="1" file="Icons/070-banjo.png"/>
+      <FILE id="zFxRcl" name="071-sound.png" compile="0" resource="1" file="Icons/071-sound.png"/>
+      <FILE id="xy7uls" name="073-jack-connector-1.png" compile="0" resource="1"
+            file="Icons/073-jack-connector-1.png"/>
+      <FILE id="B4z0Kg" name="074-folder.png" compile="0" resource="1" file="Icons/074-folder.png"/>
+      <FILE id="DFJTvf" name="075-audio-file.png" compile="0" resource="1"
+            file="Icons/075-audio-file.png"/>
+      <FILE id="q20tAX" name="076-jack-connector.png" compile="0" resource="1"
+            file="Icons/076-jack-connector.png"/>
+      <FILE id="PzygdP" name="077-earphones-3.png" compile="0" resource="1"
+            file="Icons/077-earphones-3.png"/>
+      <FILE id="d7Om96" name="078-earphones-2.png" compile="0" resource="1"
+            file="Icons/078-earphones-2.png"/>
+      <FILE id="E3VrT2" name="079-earphones-1.png" compile="0" resource="1"
+            file="Icons/079-earphones-1.png"/>
+      <FILE id="MVFWrM" name="080-earphones.png" compile="0" resource="1"
+            file="Icons/080-earphones.png"/>
+      <FILE id="VkefkW" name="081-loop.png" compile="0" resource="1" file="Icons/081-loop.png"/>
+    </GROUP>
+    <GROUP id="{67F5AA5E-5EE1-DB6A-0E72-D95D5B6BFA00}" name="Images">
+      <FILE id="tic4Xd" name="072-settings.png" compile="0" resource="1"
+            file="Icons/072-settings.png"/>
+      <FILE id="k5bZWj" name="028-play.png" compile="0" resource="1" file="Icons/028-play.png"/>
+      <FILE id="gP7O61" name="031-pause.png" compile="0" resource="1" file="Icons/031-pause.png"/>
+    </GROUP>
+    <GROUP id="{473A1684-2AD1-A338-0F6C-1A388936821C}" name="Source">
+      <GROUP id="{955C5E93-3148-3E44-AF1A-7E529EFFA770}" name="Audio">
+        <FILE id="zJngmD" name="AudioEngine.cpp" compile="1" resource="0" file="Source/Audio/AudioEngine.cpp"/>
+        <FILE id="qsx8Ea" name="AudioEngine.h" compile="0" resource="0" file="Source/Audio/AudioEngine.h"/>
+      </GROUP>
+      <GROUP id="{7CD379ED-C2C3-7A36-4325-889CF56EA997}" name="Logic"/>
+      <GROUP id="{5BA90910-995E-70FB-0903-ECA7ACA47A5F}" name="Main">
+        <FILE id="nC5UoI" name="Main.cpp" compile="1" resource="0" file="Source/Main/Main.cpp"/>
+        <FILE id="praW5W" name="MainComponent.cpp" compile="1" resource="0"
+              file="Source/Main/MainComponent.cpp"/>
+        <FILE id="qSYM71" name="MainComponent.h" compile="0" resource="0" file="Source/Main/MainComponent.h"/>
+      </GROUP>
+      <GROUP id="{985D6AF6-6557-A815-8484-3B3482AEEEA3}" name="UI">
+        <FILE id="e7VVAL" name="MenuComponent.cpp" compile="1" resource="0"
+              file="Source/UI/MenuComponent.cpp"/>
+        <FILE id="mDr2qz" name="MenuComponent.h" compile="0" resource="0" file="Source/UI/MenuComponent.h"/>
+        <FILE id="JXsVSP" name="AudioSettings.cpp" compile="1" resource="0"
+              file="Source/UI/AudioSettings.cpp"/>
+        <FILE id="LEslrs" name="AudioSettings.h" compile="0" resource="0" file="Source/UI/AudioSettings.h"/>
+        <FILE id="JtFJI1" name="AudioThumbnailComponent.cpp" compile="1" resource="0"
+              file="Source/UI/AudioThumbnailComponent.cpp"/>
+        <FILE id="Vequ9Q" name="AudioThumbnailComponent.h" compile="0" resource="0"
+              file="Source/UI/AudioThumbnailComponent.h"/>
+        <FILE id="u7fW4z" name="ChannelComponent.cpp" compile="1" resource="0"
+              file="Source/UI/ChannelComponent.cpp"/>
+        <FILE id="hZ6dmS" name="ChannelComponent.h" compile="0" resource="0"
+              file="Source/UI/ChannelComponent.h"/>
+        <FILE id="CicnlY" name="ChannelWindow.cpp" compile="1" resource="0"
+              file="Source/UI/ChannelWindow.cpp"/>
+        <FILE id="iVdWig" name="ChannelWindow.h" compile="0" resource="0" file="Source/UI/ChannelWindow.h"/>
+        <FILE id="mINnSw" name="FXInsertComponent.cpp" compile="1" resource="0"
+              file="Source/UI/FXInsertComponent.cpp"/>
+        <FILE id="Pscvj9" name="FXInsertComponent.h" compile="0" resource="0"
+              file="Source/UI/FXInsertComponent.h"/>
+        <FILE id="zdfsMr" name="GridComponent.cpp" compile="1" resource="0"
+              file="Source/UI/GridComponent.cpp"/>
+        <FILE id="SPFqsl" name="GridComponent.h" compile="0" resource="0" file="Source/UI/GridComponent.h"/>
+        <FILE id="TTQYsU" name="ImageBinary.h" compile="0" resource="0" file="Source/UI/ImageBinary.h"/>
+        <FILE id="qL7iJp" name="MixerChannelComponent.cpp" compile="1" resource="0"
+              file="Source/UI/MixerChannelComponent.cpp"/>
+        <FILE id="zFqtyM" name="MixerChannelComponent.h" compile="0" resource="0"
+              file="Source/UI/MixerChannelComponent.h"/>
+        <FILE id="VugjdV" name="PlayButton.cpp" compile="1" resource="0" file="Source/UI/PlayButton.cpp"/>
+        <FILE id="a6doR8" name="PlayButton.h" compile="0" resource="0" file="Source/UI/PlayButton.h"/>
+        <FILE id="Xu2KUN" name="ToolbarComponent.cpp" compile="1" resource="0"
+              file="Source/UI/ToolbarComponent.cpp"/>
+        <FILE id="hUK7up" name="ToolbarComponent.h" compile="0" resource="0"
+              file="Source/UI/ToolbarComponent.h"/>
+        <FILE id="O2FzSf" name="PlayHeadComponent.cpp" compile="1" resource="0"
+              file="Source/UI/PlayHeadComponent.cpp"/>
+        <FILE id="nvVTRO" name="PlayHeadComponent.h" compile="0" resource="0"
+              file="Source/UI/PlayHeadComponent.h"/>
+        <FILE id="lvPjVM" name="UIEngine.cpp" compile="1" resource="0" file="Source/UI/UIEngine.cpp"/>
+        <FILE id="zJ69YG" name="UIEngine.h" compile="0" resource="0" file="Source/UI/UIEngine.h"/>
+      </GROUP>
+    </GROUP>
+  </MAINGROUP>
+  <EXPORTFORMATS>
+    <XCODE_MAC targetFolder="Builds/MacOSX">
+      <CONFIGURATIONS>
+        <CONFIGURATION isDebug="1" name="Debug"/>
+        <CONFIGURATION isDebug="0" name="Release"/>
+      </CONFIGURATIONS>
+      <MODULEPATHS>
+        <MODULEPATH id="juce_audio_basics" path="../JUCE/modules"/>
+        <MODULEPATH id="juce_audio_devices" path="../JUCE/modules"/>
+        <MODULEPATH id="juce_audio_formats" path="../JUCE/modules"/>
+        <MODULEPATH id="juce_core" path="../JUCE/modules"/>
+        <MODULEPATH id="juce_data_structures" path="../JUCE/modules"/>
+        <MODULEPATH id="juce_events" path="../JUCE/modules"/>
+        <MODULEPATH id="juce_audio_processors" path="../JUCE/modules"/>
+        <MODULEPATH id="juce_gui_basics" path="../JUCE/modules"/>
+        <MODULEPATH id="juce_graphics" path="../JUCE/modules"/>
+        <MODULEPATH id="juce_gui_extra" path="../JUCE/modules"/>
+        <MODULEPATH id="juce_audio_utils" path="../JUCE/modules"/>
+        <MODULEPATH id="juce_dsp" path="../tracktion_engine/modules/juce/modules"/>
+        <MODULEPATH id="juce_osc" path="../tracktion_engine/modules/juce/modules"/>
+        <MODULEPATH id="tracktion_engine" path="../../../../tracktion_engine/modules"/>
+      </MODULEPATHS>
+    </XCODE_MAC>
+    <XCODE_IPHONE targetFolder="Builds/iOS">
+      <CONFIGURATIONS>
+        <CONFIGURATION isDebug="1" name="Debug"/>
+        <CONFIGURATION isDebug="0" name="Release"/>
+      </CONFIGURATIONS>
+      <MODULEPATHS>
+        <MODULEPATH id="juce_audio_basics" path="../JUCE/modules"/>
+        <MODULEPATH id="juce_audio_devices" path="../JUCE/modules"/>
+        <MODULEPATH id="juce_audio_formats" path="../JUCE/modules"/>
+        <MODULEPATH id="juce_core" path="../JUCE/modules"/>
+        <MODULEPATH id="juce_data_structures" path="../JUCE/modules"/>
+        <MODULEPATH id="juce_events" path="../JUCE/modules"/>
+        <MODULEPATH id="juce_audio_processors" path="../JUCE/modules"/>
+        <MODULEPATH id="juce_gui_basics" path="../JUCE/modules"/>
+        <MODULEPATH id="juce_graphics" path="../JUCE/modules"/>
+        <MODULEPATH id="juce_gui_extra" path="../JUCE/modules"/>
+        <MODULEPATH id="juce_audio_utils" path="../JUCE/modules"/>
+        <MODULEPATH id="juce_dsp" path="../tracktion_engine/modules/juce/modules"/>
+        <MODULEPATH id="juce_osc" path="../tracktion_engine/modules/juce/modules"/>
+        <MODULEPATH id="tracktion_engine" path="../../../../tracktion_engine/modules"/>
+      </MODULEPATHS>
+    </XCODE_IPHONE>
+    <VS2017 targetFolder="Builds/VisualStudio2017">
+      <CONFIGURATIONS>
+        <CONFIGURATION isDebug="1" name="Debug"/>
+        <CONFIGURATION isDebug="0" name="Release"/>
+      </CONFIGURATIONS>
+      <MODULEPATHS>
+        <MODULEPATH id="juce_audio_basics" path="../JUCE/modules"/>
+        <MODULEPATH id="juce_audio_devices" path="../JUCE/modules"/>
+        <MODULEPATH id="juce_audio_formats" path="../JUCE/modules"/>
+        <MODULEPATH id="juce_core" path="../JUCE/modules"/>
+        <MODULEPATH id="juce_data_structures" path="../JUCE/modules"/>
+        <MODULEPATH id="juce_events" path="../JUCE/modules"/>
+        <MODULEPATH id="juce_audio_processors" path="../JUCE/modules"/>
+        <MODULEPATH id="juce_gui_basics" path="../JUCE/modules"/>
+        <MODULEPATH id="juce_graphics" path="../JUCE/modules"/>
+        <MODULEPATH id="juce_gui_extra" path="../JUCE/modules"/>
+        <MODULEPATH id="juce_audio_utils" path="../JUCE/modules"/>
+        <MODULEPATH id="juce_dsp" path="../tracktion_engine/modules/juce/modules"/>
+        <MODULEPATH id="juce_osc" path="../tracktion_engine/modules/juce/modules"/>
+        <MODULEPATH id="tracktion_engine" path="../../../../tracktion_engine/modules"/>
+      </MODULEPATHS>
+    </VS2017>
+    <CLION targetFolder="Builds/CLion" clionXcodeEnabled="1">
+      <MODULEPATHS>
+        <MODULEPATH id="juce_audio_basics" path="../JUCE/modules"/>
+        <MODULEPATH id="juce_audio_devices" path="../JUCE/modules"/>
+        <MODULEPATH id="juce_audio_formats" path="../JUCE/modules"/>
+        <MODULEPATH id="juce_core" path="../JUCE/modules"/>
+        <MODULEPATH id="juce_data_structures" path="../JUCE/modules"/>
+        <MODULEPATH id="juce_events" path="../JUCE/modules"/>
+        <MODULEPATH id="juce_audio_processors" path="../JUCE/modules"/>
+        <MODULEPATH id="juce_gui_basics" path="../JUCE/modules"/>
+        <MODULEPATH id="juce_graphics" path="../JUCE/modules"/>
+        <MODULEPATH id="juce_gui_extra" path="../JUCE/modules"/>
+        <MODULEPATH id="juce_audio_utils" path="../JUCE/modules"/>
+        <MODULEPATH id="juce_dsp" path="../tracktion_engine/modules/juce/modules"/>
+        <MODULEPATH id="juce_osc" path="../tracktion_engine/modules/juce/modules"/>
+        <MODULEPATH id="tracktion_engine" path="../../../../tracktion_engine/modules"/>
+      </MODULEPATHS>
+    </CLION>
+    <VS2019 targetFolder="Builds/VisualStudio2019">
+      <CONFIGURATIONS>
+        <CONFIGURATION isDebug="1" name="Debug"/>
+        <CONFIGURATION isDebug="0" name="Release"/>
+      </CONFIGURATIONS>
+      <MODULEPATHS>
+        <MODULEPATH id="juce_osc"/>
+        <MODULEPATH id="juce_gui_extra"/>
+        <MODULEPATH id="juce_gui_basics"/>
+        <MODULEPATH id="juce_graphics"/>
+        <MODULEPATH id="juce_events"/>
+        <MODULEPATH id="juce_dsp"/>
+        <MODULEPATH id="juce_data_structures"/>
+        <MODULEPATH id="juce_core"/>
+        <MODULEPATH id="juce_audio_utils"/>
+        <MODULEPATH id="juce_audio_processors"/>
+        <MODULEPATH id="juce_audio_formats"/>
+        <MODULEPATH id="juce_audio_devices"/>
+        <MODULEPATH id="juce_audio_basics"/>
+        <MODULEPATH id="tracktion_engine" path="../../../../tracktion_engine/modules"/>
+      </MODULEPATHS>
+    </VS2019>
+  </EXPORTFORMATS>
+  <MODULES>
+    <MODULE id="juce_audio_basics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_audio_devices" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_audio_formats" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_audio_processors" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_audio_utils" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_core" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_data_structures" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_dsp" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_events" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_graphics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_gui_basics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_gui_extra" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_osc" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="tracktion_engine" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+  </MODULES>
+  <LIVE_SETTINGS>
+    <WINDOWS/>
+    <OSX/>
+  </LIVE_SETTINGS>
+  <JUCEOPTIONS JUCE_STRICT_REFCOUNTEDPOINTER="1"/>
+</JUCERPROJECT>
