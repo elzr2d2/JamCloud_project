@@ -202,28 +202,20 @@ void ToolbarComponent::buttonClicked(Button* buttonThatWasClicked)
 
 void ToolbarComponent::getCurrentTimeText()
 {
-	/*  doesnt work good YET  */
-	auto playheadPos = engine.getTransport().getCurrentPlayhead()->getPosition();
 	
-	if (seconds < 60 )
+	auto playheadPos = engine.getTransport().getCurrentPlayhead()->getPosition();
+	seconds = roundDoubleToInt(playheadPos) % 60 ;
+	minutes = roundDoubleToInt(playheadPos) / 60;
+	auto  sec = std::to_string(seconds);
+	auto  min = std::to_string(minutes);
+
+	if (seconds < 10)
 	{
-		seconds = roundDoubleToInt(playheadPos);
-		auto  sec = std::to_string(seconds);
-		auto  min = std::to_string(minutes);
-		if (seconds < 10)
-		{
-			timeText->setText("0" + min + ":0" + sec);
-		}
-		else
-		{
-			timeText->setText("0" + min + ":" + sec);
-		}
-		
+		timeText->setText("0" + min + ":0" + sec);
 	}
 	else
 	{
-		minutes++;
-		seconds = roundDoubleToInt(playheadPos)%60;
+		timeText->setText("0" + min + ":" + sec);
 	}
 
 }

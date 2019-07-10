@@ -23,5 +23,6 @@ void UIEngine::resized()
 	menu.setBounds(0, 0, getWidth(), menuHeight);
     toolbar.setBounds(0, menuHeight, getWidth(), toolBarHeight);
 	grid.setBounds(getLocalBounds().withTrimmedTop(toolBarHeight + menuHeight));
+	
 }
 

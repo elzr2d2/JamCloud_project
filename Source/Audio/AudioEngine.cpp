@@ -159,6 +159,13 @@ TransportControl& AudioEngine::getTransport() const
     return edit->getTransport();
 }
 
+Edit * AudioEngine::getEdit() const
+{
+	return edit.get();
+}
+
+
+
 void AudioEngine::stop()
 {
     getTransport().stop(false, false, true, true);

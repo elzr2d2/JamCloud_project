@@ -16,15 +16,10 @@ public:
     void resized() override;
 
 private:
-	/*
-	Viewport viewport;
-	OR
-	std::unique_ptr<Viewport> viewport;
 
-	i dont know.......
-	*/
 	ChannelWindow channelWindow;
 	PlayHeadComponent playhead;
+	Viewport viewport;
 	AudioEngine& engine;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (GridComponent)

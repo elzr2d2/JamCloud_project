@@ -18,10 +18,10 @@ AudioThumbnailComponent::~AudioThumbnailComponent()
 
 void AudioThumbnailComponent::paint(Graphics& g)
 {
-	Rectangle<int> thumbnailBounds(200 *1, 70);
+	Rectangle<int> thumbnailBounds(100, 70);
 	if (!selected)
 	{
-		thumbnailBounds.setSize(200*clip.getMaximumLength(), 70);
+		thumbnailBounds.setSize(clip.getMaximumLength()*10, 70);
 	}
 	else
 	{

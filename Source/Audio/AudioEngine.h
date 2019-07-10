@@ -54,7 +54,7 @@ public :
 	bool isTrackArmed(te::AudioTrack& t, int position = 0);
 
 	TransportControl& getTransport() const;
-
+	Edit * getEdit() const;
 	bool isDirty() { return dirty; }
 	void setDirty(bool inDirty) { dirty = inDirty; }
 

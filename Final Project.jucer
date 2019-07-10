@@ -153,6 +153,7 @@
         <FILE id="qSYM71" name="MainComponent.h" compile="0" resource="0" file="Source/Main/MainComponent.h"/>
       </GROUP>
       <GROUP id="{985D6AF6-6557-A815-8484-3B3482AEEEA3}" name="UI">
+        <FILE id="CQCqDt" name="UiHelpers.h" compile="0" resource="0" file="Source/UI/UiHelpers.h"/>
         <FILE id="e7VVAL" name="MenuComponent.cpp" compile="1" resource="0"
               file="Source/UI/MenuComponent.cpp"/>
         <FILE id="mDr2qz" name="MenuComponent.h" compile="0" resource="0" file="Source/UI/MenuComponent.h"/>
