@@ -88,6 +88,8 @@ ToolbarComponent::ToolbarComponent(AudioEngine& inEngine) :
 	metronomeButton->setBounds(456, 35, 25, 23);
 
 
+
+
     setSize(1000, 500);
 }
 
@@ -194,7 +196,18 @@ void ToolbarComponent::buttonClicked(Button* buttonThatWasClicked)
 	}
 	else if (buttonThatWasClicked == metronomeButton.get())
 	{
-		//engine.activeMetro();
+		setBpm();
+
+		if (!metroGui.getStatePlay())
+		{
+			metroGui.setStatePlay(true);
+		}
+		else
+		{
+			metroGui.setStatePlay(false);
+		}
+
+
 		
 	}
 
@@ -202,20 +215,28 @@ void ToolbarComponent::buttonClicked(Button* buttonThatWasClicked)
 
 void ToolbarComponent::getCurrentTimeText()
 {
-	
+	/*  doesnt work good YET  */
 	auto playheadPos = engine.getTransport().getCurrentPlayhead()->getPosition();
-	seconds = roundDoubleToInt(playheadPos) % 60 ;
-	minutes = roundDoubleToInt(playheadPos) / 60;
-	auto  sec = std::to_string(seconds);
-	auto  min = std::to_string(minutes);
-
-	if (seconds < 10)
+	
+	if (seconds < 60 )
 	{
-		timeText->setText("0" + min + ":0" + sec);
+		seconds = roundDoubleToInt(playheadPos);
+		auto  sec = std::to_string(seconds);
+		auto  min = std::to_string(minutes);
+		if (seconds < 10)
+		{
+			timeText->setText("0" + min + ":0" + sec);
+		}
+		else
+		{
+			timeText->setText("0" + min + ":" + sec);
+		}
+		
 	}
 	else
 	{
-		timeText->setText("0" + min + ":" + sec);
+		minutes++;
+		seconds = roundDoubleToInt(playheadPos)%60;
 	}
 
 }
@@ -223,4 +244,11 @@ void ToolbarComponent::getCurrentTimeText()
 void ToolbarComponent::timerCallback()
 {
 	getCurrentTimeText();
+}
+
+void ToolbarComponent::setBpm()
+{
+
+	Logger::outputDebugString(bpmText->getText());
+	metroGui.setBpm(bpmText->getText().getDoubleValue());
 }
