@@ -408,9 +408,5 @@ void AudioEngine::deleteSelectedClips()
 
 void AudioEngine::activeMetro()
 {
-	String clickFileUrl[2]{"H:\\Juce-spacework\\Final-Project\\Metro\\Metronom Claves.wav","H:\\Juce-spacework\\Final-Project\\Metro\\Metronom Taktell Junior.wav" };
 	
-	click->setClickWaveFile(engine, false, clickFileUrl[0]);
-
-	click->getAudioNodeProperties(*clickAudioNodeProperties);
 }

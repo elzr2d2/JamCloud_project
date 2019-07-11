@@ -144,6 +144,10 @@
       <GROUP id="{955C5E93-3148-3E44-AF1A-7E529EFFA770}" name="Audio">
         <FILE id="zJngmD" name="AudioEngine.cpp" compile="1" resource="0" file="Source/Audio/AudioEngine.cpp"/>
         <FILE id="qsx8Ea" name="AudioEngine.h" compile="0" resource="0" file="Source/Audio/AudioEngine.h"/>
+        <FILE id="JIx9eD" name="MetronomeComponent.cpp" compile="1" resource="0"
+              file="Source/Audio/MetronomeComponent.cpp"/>
+        <FILE id="qA6QAP" name="MetronomeComponent.h" compile="0" resource="0"
+              file="Source/Audio/MetronomeComponent.h"/>
       </GROUP>
       <GROUP id="{7CD379ED-C2C3-7A36-4325-889CF56EA997}" name="Logic"/>
       <GROUP id="{5BA90910-995E-70FB-0903-ECA7ACA47A5F}" name="Main">
@@ -153,6 +157,10 @@
         <FILE id="qSYM71" name="MainComponent.h" compile="0" resource="0" file="Source/Main/MainComponent.h"/>
       </GROUP>
       <GROUP id="{985D6AF6-6557-A815-8484-3B3482AEEEA3}" name="UI">
+        <FILE id="yomrYr" name="MetronomeGuiComponent.cpp" compile="1" resource="0"
+              file="Source/UI/MetronomeGuiComponent.cpp"/>
+        <FILE id="CHCWGp" name="MetronomeGuiComponent.h" compile="0" resource="0"
+              file="Source/UI/MetronomeGuiComponent.h"/>
         <FILE id="e7VVAL" name="MenuComponent.cpp" compile="1" resource="0"
               file="Source/UI/MenuComponent.cpp"/>
         <FILE id="mDr2qz" name="MenuComponent.h" compile="0" resource="0" file="Source/UI/MenuComponent.h"/>

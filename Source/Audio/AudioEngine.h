@@ -76,6 +76,7 @@ private:
 	std::unique_ptr<te::ClickNode> click;
 	std::unique_ptr<te::AudioNodeProperties> clickAudioNodeProperties;
 	std::unique_ptr <te::VolumeAndPanPlugin> volumeAndPanPlugin;
+	std::unique_ptr<SynthesiserSound> synthSound;
 
 	bool channelSelected = false;
     bool dirty = true;

@@ -4,6 +4,8 @@
 #pragma once
 #include "JuceHeader.h"
 #include "Audio/AudioEngine.h"
+
+
 //==============================================================================
 class AudioSettings   : public AudioAppComponent,
                         public ChangeListener,
@@ -21,6 +23,10 @@ public:
     void paint (Graphics& g) override;
     void resized() override;
 
+
+
+
+
 private:
 
     void changeListenerCallback (ChangeBroadcaster*) override;
@@ -37,6 +43,7 @@ private:
     TextEditor diagnosticsBox;
 
 	AudioEngine& engine;
+	
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (AudioSettings)
 };

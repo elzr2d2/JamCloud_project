@@ -105,6 +105,7 @@ void AudioSettings::resized()
     diagnosticsBox.setBounds(rect);
 }
 
+
 void AudioSettings::changeListenerCallback(ChangeBroadcaster*)
 {
     dumpDeviceInfo();

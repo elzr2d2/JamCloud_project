@@ -88,6 +88,8 @@ ToolbarComponent::ToolbarComponent(AudioEngine& inEngine) :
 	metronomeButton->setBounds(456, 35, 25, 23);
 
 
+
+
     setSize(1000, 500);
 }
 
@@ -194,7 +196,17 @@ void ToolbarComponent::buttonClicked(Button* buttonThatWasClicked)
 	}
 	else if (buttonThatWasClicked == metronomeButton.get())
 	{
-		//engine.activeMetro();
+
+		if (!metroGui.getStatePlay())
+		{
+			metroGui.setStatePlay(true);
+		}
+		else
+		{
+			metroGui.setStatePlay(false);
+		}
+
+
 		
 	}
 
