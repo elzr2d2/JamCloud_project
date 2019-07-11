@@ -140,61 +140,69 @@
       <FILE id="k5bZWj" name="028-play.png" compile="0" resource="1" file="Icons/028-play.png"/>
       <FILE id="gP7O61" name="031-pause.png" compile="0" resource="1" file="Icons/031-pause.png"/>
     </GROUP>
-    <GROUP id="{473A1684-2AD1-A338-0F6C-1A388936821C}" name="Source">
-      <GROUP id="{955C5E93-3148-3E44-AF1A-7E529EFFA770}" name="Audio">
-        <FILE id="zJngmD" name="AudioEngine.cpp" compile="1" resource="0" file="Source/Audio/AudioEngine.cpp"/>
-        <FILE id="qsx8Ea" name="AudioEngine.h" compile="0" resource="0" file="Source/Audio/AudioEngine.h"/>
+    <GROUP id="{5C84F5EA-4009-49DF-D6E5-72E1897D921A}" name="Source">
+      <GROUP id="{71DA5122-BAB4-E6AC-AF0B-55F64052BFDA}" name="Audio">
+        <FILE id="MQynPJ" name="AudioEngine.cpp" compile="1" resource="0" file="Source/Audio/AudioEngine.cpp"/>
+        <FILE id="MVUzyq" name="AudioEngine.h" compile="0" resource="0" file="Source/Audio/AudioEngine.h"/>
+        <FILE id="VI5EQb" name="MetronomeComponent.cpp" compile="1" resource="0"
+              file="Source/Audio/MetronomeComponent.cpp"/>
+        <FILE id="UUOihP" name="MetronomeComponent.h" compile="0" resource="0"
+              file="Source/Audio/MetronomeComponent.h"/>
       </GROUP>
-      <GROUP id="{7CD379ED-C2C3-7A36-4325-889CF56EA997}" name="Logic"/>
-      <GROUP id="{5BA90910-995E-70FB-0903-ECA7ACA47A5F}" name="Main">
-        <FILE id="nC5UoI" name="Main.cpp" compile="1" resource="0" file="Source/Main/Main.cpp"/>
-        <FILE id="praW5W" name="MainComponent.cpp" compile="1" resource="0"
+      <GROUP id="{663A585A-E65B-2BD5-BBF8-CF3A5BD99027}" name="Main">
+        <FILE id="FLUxVS" name="Main.cpp" compile="1" resource="0" file="Source/Main/Main.cpp"/>
+        <FILE id="euND6o" name="MainComponent.cpp" compile="1" resource="0"
               file="Source/Main/MainComponent.cpp"/>
-        <FILE id="qSYM71" name="MainComponent.h" compile="0" resource="0" file="Source/Main/MainComponent.h"/>
+        <FILE id="LgVuWd" name="MainComponent.h" compile="0" resource="0" file="Source/Main/MainComponent.h"/>
       </GROUP>
-      <GROUP id="{985D6AF6-6557-A815-8484-3B3482AEEEA3}" name="UI">
-        <FILE id="CQCqDt" name="UiHelpers.h" compile="0" resource="0" file="Source/UI/UiHelpers.h"/>
-        <FILE id="e7VVAL" name="MenuComponent.cpp" compile="1" resource="0"
-              file="Source/UI/MenuComponent.cpp"/>
-        <FILE id="mDr2qz" name="MenuComponent.h" compile="0" resource="0" file="Source/UI/MenuComponent.h"/>
-        <FILE id="JXsVSP" name="AudioSettings.cpp" compile="1" resource="0"
+      <GROUP id="{556B2127-059F-C9B1-5111-5DE8263C093A}" name="UI">
+        <FILE id="NX8Zt4" name="AudioDeviceManagerTool.h" compile="0" resource="0"
+              file="Source/UI/AudioDeviceManagerTool.h"/>
+        <FILE id="lt0zH8" name="AudioSettings.cpp" compile="1" resource="0"
               file="Source/UI/AudioSettings.cpp"/>
-        <FILE id="LEslrs" name="AudioSettings.h" compile="0" resource="0" file="Source/UI/AudioSettings.h"/>
-        <FILE id="JtFJI1" name="AudioThumbnailComponent.cpp" compile="1" resource="0"
+        <FILE id="EklLya" name="AudioSettings.h" compile="0" resource="0" file="Source/UI/AudioSettings.h"/>
+        <FILE id="KF0FqI" name="AudioThumbnailComponent.cpp" compile="1" resource="0"
               file="Source/UI/AudioThumbnailComponent.cpp"/>
-        <FILE id="Vequ9Q" name="AudioThumbnailComponent.h" compile="0" resource="0"
+        <FILE id="ut6csd" name="AudioThumbnailComponent.h" compile="0" resource="0"
               file="Source/UI/AudioThumbnailComponent.h"/>
-        <FILE id="u7fW4z" name="ChannelComponent.cpp" compile="1" resource="0"
+        <FILE id="lgzwu5" name="ChannelComponent.cpp" compile="1" resource="0"
               file="Source/UI/ChannelComponent.cpp"/>
-        <FILE id="hZ6dmS" name="ChannelComponent.h" compile="0" resource="0"
+        <FILE id="w9AU8i" name="ChannelComponent.h" compile="0" resource="0"
               file="Source/UI/ChannelComponent.h"/>
-        <FILE id="CicnlY" name="ChannelWindow.cpp" compile="1" resource="0"
+        <FILE id="RTFopc" name="ChannelWindow.cpp" compile="1" resource="0"
               file="Source/UI/ChannelWindow.cpp"/>
-        <FILE id="iVdWig" name="ChannelWindow.h" compile="0" resource="0" file="Source/UI/ChannelWindow.h"/>
-        <FILE id="mINnSw" name="FXInsertComponent.cpp" compile="1" resource="0"
+        <FILE id="NWb4HW" name="ChannelWindow.h" compile="0" resource="0" file="Source/UI/ChannelWindow.h"/>
+        <FILE id="CTNf0C" name="FXInsertComponent.cpp" compile="1" resource="0"
               file="Source/UI/FXInsertComponent.cpp"/>
-        <FILE id="Pscvj9" name="FXInsertComponent.h" compile="0" resource="0"
+        <FILE id="mgekG3" name="FXInsertComponent.h" compile="0" resource="0"
               file="Source/UI/FXInsertComponent.h"/>
-        <FILE id="zdfsMr" name="GridComponent.cpp" compile="1" resource="0"
+        <FILE id="oBnZpo" name="GridComponent.cpp" compile="1" resource="0"
               file="Source/UI/GridComponent.cpp"/>
-        <FILE id="SPFqsl" name="GridComponent.h" compile="0" resource="0" file="Source/UI/GridComponent.h"/>
-        <FILE id="TTQYsU" name="ImageBinary.h" compile="0" resource="0" file="Source/UI/ImageBinary.h"/>
-        <FILE id="qL7iJp" name="MixerChannelComponent.cpp" compile="1" resource="0"
+        <FILE id="Jzncie" name="GridComponent.h" compile="0" resource="0" file="Source/UI/GridComponent.h"/>
+        <FILE id="VzXu0P" name="ImageBinary.h" compile="0" resource="0" file="Source/UI/ImageBinary.h"/>
+        <FILE id="VL7Bft" name="MenuComponent.cpp" compile="1" resource="0"
+              file="Source/UI/MenuComponent.cpp"/>
+        <FILE id="d0VyWq" name="MenuComponent.h" compile="0" resource="0" file="Source/UI/MenuComponent.h"/>
+        <FILE id="UgDcUE" name="MetronomeGuiComponent.cpp" compile="1" resource="0"
+              file="Source/UI/MetronomeGuiComponent.cpp"/>
+        <FILE id="reBrvO" name="MetronomeGuiComponent.h" compile="0" resource="0"
+              file="Source/UI/MetronomeGuiComponent.h"/>
+        <FILE id="uCWZ5S" name="MixerChannelComponent.cpp" compile="1" resource="0"
               file="Source/UI/MixerChannelComponent.cpp"/>
-        <FILE id="zFqtyM" name="MixerChannelComponent.h" compile="0" resource="0"
+        <FILE id="ADvBzs" name="MixerChannelComponent.h" compile="0" resource="0"
               file="Source/UI/MixerChannelComponent.h"/>
-        <FILE id="VugjdV" name="PlayButton.cpp" compile="1" resource="0" file="Source/UI/PlayButton.cpp"/>
-        <FILE id="a6doR8" name="PlayButton.h" compile="0" resource="0" file="Source/UI/PlayButton.h"/>
-        <FILE id="Xu2KUN" name="ToolbarComponent.cpp" compile="1" resource="0"
-              file="Source/UI/ToolbarComponent.cpp"/>
-        <FILE id="hUK7up" name="ToolbarComponent.h" compile="0" resource="0"
-              file="Source/UI/ToolbarComponent.h"/>
-        <FILE id="O2FzSf" name="PlayHeadComponent.cpp" compile="1" resource="0"
+        <FILE id="WigVho" name="PlayButton.cpp" compile="1" resource="0" file="Source/UI/PlayButton.cpp"/>
+        <FILE id="oz6C0R" name="PlayButton.h" compile="0" resource="0" file="Source/UI/PlayButton.h"/>
+        <FILE id="SaxTd5" name="PlayHeadComponent.cpp" compile="1" resource="0"
               file="Source/UI/PlayHeadComponent.cpp"/>
-        <FILE id="nvVTRO" name="PlayHeadComponent.h" compile="0" resource="0"
+        <FILE id="OvoXuk" name="PlayHeadComponent.h" compile="0" resource="0"
               file="Source/UI/PlayHeadComponent.h"/>
-        <FILE id="lvPjVM" name="UIEngine.cpp" compile="1" resource="0" file="Source/UI/UIEngine.cpp"/>
-        <FILE id="zJ69YG" name="UIEngine.h" compile="0" resource="0" file="Source/UI/UIEngine.h"/>
+        <FILE id="rYneaS" name="ToolbarComponent.cpp" compile="1" resource="0"
+              file="Source/UI/ToolbarComponent.cpp"/>
+        <FILE id="BwqNzm" name="ToolbarComponent.h" compile="0" resource="0"
+              file="Source/UI/ToolbarComponent.h"/>
+        <FILE id="xSz0RQ" name="UIEngine.cpp" compile="1" resource="0" file="Source/UI/UIEngine.cpp"/>
+        <FILE id="JpVLMc" name="UIEngine.h" compile="0" resource="0" file="Source/UI/UIEngine.h"/>
       </GROUP>
     </GROUP>
   </MAINGROUP>
@@ -320,11 +328,11 @@
     <MODULE id="juce_gui_basics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
     <MODULE id="juce_gui_extra" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
     <MODULE id="juce_osc" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
-    <MODULE id="tracktion_engine" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+    <MODULE id="tracktion_engine" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
   </MODULES>
   <LIVE_SETTINGS>
     <WINDOWS/>
     <OSX/>
   </LIVE_SETTINGS>
-  <JUCEOPTIONS JUCE_STRICT_REFCOUNTEDPOINTER="1"/>
+  <JUCEOPTIONS JUCE_STRICT_REFCOUNTEDPOINTER="1" JUCE_ASIO="1"/>
 </JUCERPROJECT>
