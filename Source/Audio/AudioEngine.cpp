@@ -1,4 +1,5 @@
 #include "AudioEngine.h"
+
 constexpr int NumberOfChannels = 5;
 
 AudioEngine::AudioEngine()
@@ -10,6 +11,7 @@ AudioEngine::AudioEngine()
 	
     te::EditFileOperations(*edit).save(true, true, false);
     removeAllTracks();
+
 
 	for (int i = 0; i < NumberOfChannels; i++)
 	{

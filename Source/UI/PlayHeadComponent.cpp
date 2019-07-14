@@ -3,15 +3,15 @@
 PlayHeadComponent::PlayHeadComponent(AudioEngine & inEngine ):
 	engine(inEngine)
   {
-	
 	startTimerHz(30);
   }
 
 void PlayHeadComponent::paint(Graphics & g)
 {
-	auto yPosition = 200;
-	g.setColour(Colours::yellow);
-	g.drawRect(xPosition, 0, 2, 70*5);
+	auto yPosition = 0;
+	g.setColour(Colours::blue);
+	//g.drawRect(xPosition, yPosition, 3, 70*5);
+	g.fillRect(300, yPosition, 3, 70 * 5);
 
 }
 
@@ -58,5 +58,4 @@ void PlayHeadComponent::timerCallback()
 		xPosition = newX;
 	}
 	
-
 }

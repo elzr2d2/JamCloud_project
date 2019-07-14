@@ -12,9 +12,9 @@ ToolbarComponent::ToolbarComponent(AudioEngine& inEngine) :
     recordButton->addListener(this);
     recordButton->setImages(false, true, true,
                             ImageCache::getFromMemory(BinaryData::_023record_png, BinaryData::_023record_pngSize), 1.0f,
-							Colours::black,
-							Image(), 1.0f, Colours::grey,
-							Image(), 1.0f, Colours::crimson);
+							Colours::whitesmoke,
+							Image(), 1.0f, Colours::darkred,
+							Image(), 1.0f, Colours::whitesmoke);
     recordButton->setBounds(384, 39, 16, 19);
 
 	/* Stop Button */
@@ -24,9 +24,9 @@ ToolbarComponent::ToolbarComponent(AudioEngine& inEngine) :
     stopButton->addListener(this);
 	stopButton->setImages(false, true, true,
 		ImageCache::getFromMemory(BinaryData::_013stop_png, BinaryData::_013stop_pngSize), 1.0f,
-		Colours::black,
-		Image(), 1.0f, Colours::grey,
-		Image(), 1.0f, Colours::white);
+		Colours::whitesmoke,
+		Image(), 1.0f, Colours::orange,
+		Image(), 1.0f, Colours::darkorange);
     stopButton->setBounds(352, 40, 16, 16);
 
 	/* Play Button */
@@ -40,12 +40,12 @@ ToolbarComponent::ToolbarComponent(AudioEngine& inEngine) :
     loopButton->addListener(this);
     loopButton->setImages(false, true, true,
                           ImageCache::getFromMemory(BinaryData::_081loop_png, BinaryData::_081loop_pngSize), 1.0f,
-						Colours::black,
-						Image(), 1.0f, Colours::grey,
-						Image(), 1.0f, Colours::white);
+						Colours::whitesmoke,
+						Image(), 1.0f, Colours::orange,
+						Image(), 1.0f, Colours::whitesmoke);
 
     loopButton->setBounds(414, 35, 16, 27);
-	
+
 	/* Time Text Editor */
     timeText.reset(new TextEditor("timeText"));
     addAndMakeVisible(timeText.get());
@@ -82,9 +82,10 @@ ToolbarComponent::ToolbarComponent(AudioEngine& inEngine) :
 	metronomeButton->addListener(this);
 	metronomeButton->setImages(false, true, true,
                                 ImageCache::getFromMemory(BinaryData::_010triangle_png,
-                                                          BinaryData::_010triangle_pngSize), 1.0f, Colours::whitesmoke,
-                                Image(), 1.0f, Colours::whitesmoke,
-                                Image(), 1.0f, Colours::darkorange);
+                                                          BinaryData::_010triangle_pngSize), 1.0f, 
+											   Colours::whitesmoke,
+                                Image(), 1.0f, Colours::orange,
+                                Image(), 1.0f, Colours::whitesmoke);
 	metronomeButton->setBounds(456, 35, 25, 23);
 
 
@@ -182,7 +183,26 @@ void ToolbarComponent::resized()
 void ToolbarComponent::buttonClicked(Button* buttonThatWasClicked)
 {
 	if (buttonThatWasClicked == recordButton.get())
+	{
 		engine.recording();
+		if (engine.isRecording())
+		{
+			recordButton->setImages(false, true, true,
+				ImageCache::getFromMemory(BinaryData::_023record_png, BinaryData::_023record_pngSize), 1.0f,
+				Colours::red,
+				Image(), 1.0f, Colours::lightgrey,
+				Image(), 1.0f, Colours::red);
+		}
+		else 
+		{
+			recordButton->setImages(false, true, true,
+				ImageCache::getFromMemory(BinaryData::_023record_png, BinaryData::_023record_pngSize), 1.0f,
+				Colours::whitesmoke,
+				Image(), 1.0f, Colours::darkred,
+				Image(), 1.0f, Colours::whitesmoke);
+		}
+
+	}
 
 	else if (buttonThatWasClicked == stopButton.get())
 	{

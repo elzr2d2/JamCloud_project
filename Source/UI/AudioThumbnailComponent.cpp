@@ -21,7 +21,10 @@ void AudioThumbnailComponent::paint(Graphics& g)
 	Rectangle<int> thumbnailBounds(100, 70);
 	if (!selected)
 	{
-		thumbnailBounds.setSize(clip.getMaximumLength()*10, 70);
+		g.setColour(Colours::blue);
+		
+		thumbnailBounds.setSize(clip.getMaximumLength()*100, 70);
+		g.fillRect(thumbnailBounds);
 	}
 	else
 	{

@@ -62,7 +62,7 @@ ChannelComponent::ChannelComponent(AudioEngine& inEngine, AudioTrack& inTrack)
     muteButton->setImages(false, true, true,
                           ImageCache::getFromMemory(BinaryData::_033mute_png, BinaryData::_033mute_pngSize), 1.000f,
                           Colours::whitesmoke,
-                          Image(), 1.000f, Colours::whitesmoke,
+                          Image(), 1.000f, Colours::orange,
                           Image(), 1.000f, Colours::whitesmoke);
     muteButton->setBounds(10, 40, 15, 15);
 
@@ -73,8 +73,8 @@ ChannelComponent::ChannelComponent(AudioEngine& inEngine, AudioTrack& inTrack)
     soloButton->addListener(this);
     soloButton->setImages(false, true, true,
                           ImageCache::getFromMemory(BinaryData::_048headphones_png, BinaryData::_048headphones_pngSize),
-                          1.000f, Colours::white,
-                          Image(), 1.000f, Colours::whitesmoke,
+                          1.000f, Colours::whitesmoke,
+                          Image(), 1.000f, Colours::orange,
                           Image(), 1.000f, Colours::whitesmoke);
     soloButton->setBounds(45, 40, 15, 15);
 
@@ -91,7 +91,7 @@ ChannelComponent::ChannelComponent(AudioEngine& inEngine, AudioTrack& inTrack)
 							Colours::whitesmoke,
                              Image(),
                              1.000f,
-							Colours::whitesmoke,
+							Colours::orange,
                              Image(),
                              1.000f,
                              Colours::darkorange);
@@ -110,7 +110,7 @@ ChannelComponent::ChannelComponent(AudioEngine& inEngine, AudioTrack& inTrack)
 		Colours::whitesmoke,
 		Image(),
 		1.000f,
-		Colours::whitesmoke,
+		Colours::orange,
 		Image(),
 		1.000f,
 		Colours::darkorange);
@@ -144,15 +144,16 @@ void ChannelComponent::resized()
     auto bounds = getLocalBounds();
 
 	int startX = 204;
-
+	
     for (auto& thumbnail: audioThumbnailComponents)
     {
 		auto position = thumbnail->getClip().getPosition();
 
 		auto start = position.getStart() / 10 * (double)getWidth();
-		auto length = position.getLength() / 10 * (double)getWidth();
-    	
-        thumbnail->setBounds(startX + (int)start, 0, int(length), bounds.getHeight());
+		auto length = position.getLength() / 10 * (double)getWidth();;
+	
+        thumbnail->setBounds(startX + start, 0, int(length), 70);
+
     }
 
 	
@@ -174,7 +175,7 @@ void ChannelComponent::buttonClicked(Button* buttonThatWasClicked)
 			muteButton->setImages(false, true, true,
 				ImageCache::getFromMemory(BinaryData::_033mute_png, BinaryData::_033mute_pngSize), 1.000f,
 				Colours::darkorange,
-				Image(), 1.000f, Colours::darkorange,
+				Image(), 1.000f, Colours::orange,
 				Image(), 1.000f, Colours::darkorange);
 		}
 		else
@@ -183,7 +184,7 @@ void ChannelComponent::buttonClicked(Button* buttonThatWasClicked)
 			muteButton->setImages(false, true, true,
 				ImageCache::getFromMemory(BinaryData::_033mute_png, BinaryData::_033mute_pngSize), 1.000f,
 				Colours::whitesmoke,
-				Image(), 1.000f, Colours::whitesmoke,
+				Image(), 1.000f, Colours::orange,
 				Image(), 1.000f, Colours::whitesmoke);
 		}
 	
@@ -199,7 +200,7 @@ void ChannelComponent::buttonClicked(Button* buttonThatWasClicked)
 			soloButton->setImages(false, true, true,
 				ImageCache::getFromMemory(BinaryData::_048headphones_png, BinaryData::_048headphones_pngSize), 1.000f,
 				Colours::darkorange,
-				Image(), 1.000f, Colours::darkorange,
+				Image(), 1.000f, Colours::orange,
 				Image(), 1.000f, Colours::darkorange);
 		}
 		else
@@ -208,7 +209,7 @@ void ChannelComponent::buttonClicked(Button* buttonThatWasClicked)
 			soloButton->setImages(false, true, true,
 				ImageCache::getFromMemory(BinaryData::_048headphones_png, BinaryData::_048headphones_pngSize),
 				1.000f, Colours::white,
-				Image(), 1.000f, Colours::whitesmoke,
+				Image(), 1.000f, Colours::orange,
 				Image(), 1.000f, Colours::whitesmoke);
 		}
 

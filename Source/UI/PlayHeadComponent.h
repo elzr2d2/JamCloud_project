@@ -40,7 +40,7 @@ private:
 
 	AudioEngine& engine;
 
-	int xPosition = 0;
+	int xPosition = 200;
 	bool firstTimer = true;
 
 	/* new Varebles */
