@@ -8,7 +8,7 @@ ChannelComponent::ChannelComponent(AudioEngine& inEngine, AudioTrack& inTrack)
         : engine(inEngine),
           track(inTrack)
 {
-    shouldUpdate.reset(new std::atomic<bool>(false));
+   
     startTimerHz(60);
 
     track.state.addListener(this);
@@ -142,20 +142,6 @@ void ChannelComponent::paint(Graphics& g)
 void ChannelComponent::resized()
 {
     auto bounds = getLocalBounds();
-
-	int startX = 204;
-	
-    for (auto& thumbnail: audioThumbnailComponents)
-    {
-		auto position = thumbnail->getClip().getPosition();
-
-		auto start = position.getStart() / 10 * (double)getWidth();
-		auto length = position.getLength() / 10 * (double)getWidth();;
-	
-        thumbnail->setBounds(startX + start, 0, int(length), 70);
-
-    }
-
 	
 }
 
@@ -248,9 +234,6 @@ void ChannelComponent::clickSelectButton() const
     selectButton->setColour(selectButton->buttonColourId, getArmedTrackColor());
 }
 
-
-
-
 Colour ChannelComponent::getArmedTrackColor() const
 {
     auto color = notArmedColor;
@@ -260,8 +243,6 @@ Colour ChannelComponent::getArmedTrackColor() const
 
     return color;
 }
-
-
 
 void ChannelComponent::sliderValueChanged(Slider* sliderThatWasMoved)
 {
@@ -279,27 +260,9 @@ void ChannelComponent::sliderValueChanged(Slider* sliderThatWasMoved)
 
 void ChannelComponent::timerCallback()
 {
-    if (shouldUpdate->load())
-    {
-        shouldUpdate->store(false);
-        rebuildClips();
-    }
+
 }
 
-void ChannelComponent::rebuildClips()
-{
-    audioThumbnailComponents.clear();
 
-    for (auto* clip:track.getClips())
-    {
-        audioThumbnailComponents.emplace_back();
-
-        auto& newThumbnail = audioThumbnailComponents.back();
-		newThumbnail.reset(new AudioThumbnailComponent(*clip));
-        addAndMakeVisible(*newThumbnail);
-    }
-
-    resized();
-}
 
 

@@ -4,6 +4,7 @@
 #include "Audio/AudioEngine.h"
 #include "PlayHeadComponent.h"
 #include "ChannelWindow.h"
+#include "AudioThumbnailWindow.h"
 
 class GridComponent  : public Component
 {
@@ -18,9 +19,11 @@ public:
 private:
 
 	ChannelWindow channelWindow;
+	AudioThumbnailWindow thumbnailsWindow;
 	PlayHeadComponent playhead;
 	Viewport viewport;
 	AudioEngine& engine;
+
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (GridComponent)
 };

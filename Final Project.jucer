@@ -156,6 +156,10 @@
         <FILE id="LgVuWd" name="MainComponent.h" compile="0" resource="0" file="Source/Main/MainComponent.h"/>
       </GROUP>
       <GROUP id="{556B2127-059F-C9B1-5111-5DE8263C093A}" name="UI">
+        <FILE id="SvPYCU" name="AudioThumbnailWindow.cpp" compile="1" resource="0"
+              file="Source/UI/AudioThumbnailWindow.cpp"/>
+        <FILE id="I014ud" name="AudioThumbnailWindow.h" compile="0" resource="0"
+              file="Source/UI/AudioThumbnailWindow.h"/>
         <FILE id="NX8Zt4" name="AudioDeviceManagerTool.h" compile="0" resource="0"
               file="Source/UI/AudioDeviceManagerTool.h"/>
         <FILE id="lt0zH8" name="AudioSettings.cpp" compile="1" resource="0"
@@ -189,6 +193,10 @@
               file="Source/UI/MetronomeGuiComponent.h"/>
         <FILE id="uCWZ5S" name="MixerChannelComponent.cpp" compile="1" resource="0"
               file="Source/UI/MixerChannelComponent.cpp"/>
+        <FILE id="AUEYsW" name="AudioTrackThumbnail.cpp" compile="1" resource="0"
+              file="Source/UI/AudioTrackThumbnail.cpp"/>
+        <FILE id="vjp8xB" name="AudioTrackThumbnail.h" compile="0" resource="0"
+              file="Source/UI/AudioTrackThumbnail.h"/>
         <FILE id="ADvBzs" name="MixerChannelComponent.h" compile="0" resource="0"
               file="Source/UI/MixerChannelComponent.h"/>
         <FILE id="WigVho" name="PlayButton.cpp" compile="1" resource="0" file="Source/UI/PlayButton.cpp"/>

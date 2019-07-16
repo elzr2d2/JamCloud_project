@@ -2,7 +2,7 @@
 
 #include "JuceHeader.h"
 #include "Audio/AudioEngine.h"
-#include "AudioThumbnailComponent.h"
+
 
 class ChannelComponent : public Component,
                          public Button::Listener,
@@ -21,9 +21,9 @@ public:
     void timerCallback() override;
 
 private:
-    void markForUpdate() { shouldUpdate->store(true); }
-    void valueTreeChildAdded(juce::ValueTree&, juce::ValueTree&) override { markForUpdate(); }
-    void valueTreeChildRemoved(juce::ValueTree&, juce::ValueTree&, int) override { markForUpdate(); }
+  
+	void valueTreeChildAdded(juce::ValueTree&, juce::ValueTree&) override { engine.markForUpdate(); }
+	void valueTreeChildRemoved(juce::ValueTree&, juce::ValueTree&, int) override { engine.markForUpdate(); }
     void clickSelectButton() const;
     void clickAddFileButton();
     void valueTreeChanged() override {};
@@ -36,12 +36,9 @@ private:
     std::unique_ptr<ImageButton> muteButton, soloButton, addFileButton, selectInputButton;
 	std::unique_ptr<Label>		 volLabel, panLabel;
 
-    std::vector<std::unique_ptr<AudioThumbnailComponent>> audioThumbnailComponents;
-    ValueTree inputsState;
     AudioEngine& engine;
     AudioTrack& track;
-    std::unique_ptr<std::atomic<bool>> shouldUpdate;
 
     bool selected = false;
-    void rebuildClips();
+
 };

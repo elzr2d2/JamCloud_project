@@ -1,7 +1,7 @@
 #pragma once
 
 #include "JuceHeader.h"
-
+#include <atomic> 
 
 using namespace tracktion_engine;
 namespace te = tracktion_engine;
@@ -49,7 +49,6 @@ public :
 	void enableInputMonitoring(te::AudioTrack& t, bool im, int position = 0);
 	bool trackHasInput(te::AudioTrack& t, int position = 0);
 	bool isInputMonitoringEnabled(te::AudioTrack& t, int position = 0);
-	//void exportFile();
 	void armTrack(te::AudioTrack& t, bool arm, int position = 0);
 	bool isTrackArmed(te::AudioTrack& t, int position = 0);
 
@@ -58,6 +57,9 @@ public :
 	bool isDirty() { return dirty; }
 	void setDirty(bool inDirty) { dirty = inDirty; }
 
+	std::atomic<bool>  shouldUpdate;
+	
+	void markForUpdate() { shouldUpdate.store(true); }
 private:
 
     te::WaveAudioClip::Ptr loadAudioFileAsClip(const File& file, AudioTrack& track);
@@ -83,5 +85,7 @@ private:
 
 	File lastRecording;
 	
+	
+
 	JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(AudioEngine)
 };
