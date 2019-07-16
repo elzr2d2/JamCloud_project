@@ -6,6 +6,7 @@
 #include "ChannelWindow.h"
 #include "AudioThumbnailWindow.h"
 
+
 class GridComponent  : public Component
 {
 public:

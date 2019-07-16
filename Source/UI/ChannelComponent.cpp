@@ -200,7 +200,6 @@ void ChannelComponent::buttonClicked(Button* buttonThatWasClicked)
 		}
 
 	}
-
 	else if (buttonThatWasClicked == addFileButton.get())
 		clickAddFileButton();
 	else if (buttonThatWasClicked == selectInputButton.get())
@@ -219,7 +218,9 @@ void ChannelComponent::clickAddFileButton()
         auto file = chooser.getResult();
 
         engine.addNewClipFromFile(file, track);
+
 		nameText.get()->setText(file.getFileName());
+	
     }
 	
 }

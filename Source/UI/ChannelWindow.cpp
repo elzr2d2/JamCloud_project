@@ -6,17 +6,15 @@ ChannelWindow::ChannelWindow(AudioEngine& inEngine) : engine(inEngine)
 														
 {
 	startTimerHz(60);
+	engine.getEdit()->state.addListener(this);
 }
 
-void ChannelWindow::timerCallback()
+void ChannelWindow::update()
 {
-	if (engine.isDirty())
-	{
-		rebuildTrackList();
-		engine.setDirty(false);
-	}
-
+	rebuildTrackList();
 }
+
+
 
 void ChannelWindow::rebuildTrackList()
 {
@@ -45,7 +43,7 @@ void ChannelWindow::addNewTrackComponent(AudioTrack& audioTrack)
     auto& addedChannel = channels.back();
 
     addedChannel.reset(new ChannelComponent(engine, audioTrack));
-    addAndMakeVisible(*addedChannel);
+	addAndMakeVisible(*addedChannel);
 	
     addedChannel->setBounds(0, channelY, getWidth(), channelHeight);
     channelY += channelHeight;

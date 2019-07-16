@@ -8,15 +8,15 @@ namespace te = tracktion_engine;
 
 class AudioEngine
 {
-public :
+public:
 
-    AudioEngine();
-    ~AudioEngine();
+	AudioEngine();
+	~AudioEngine();
 
-    void addChannel();
-    void removeChannel();
+	void addChannel();
+	void removeChannel();
 
-    void removeTrack(te::AudioTrack& track);
+	void removeTrack(te::AudioTrack& track);
 	TrackList& getTrackList() { return edit->getTrackList(); }
 	void addNewClipFromFile(const File& editFile, AudioTrack& track);
 
@@ -25,15 +25,15 @@ public :
 	void muteChannel(AudioTrack& track);
 	void soloChannel(AudioTrack& track);
 
-    void play();
+	void play();
 	//void loop();
-    void stop();
-    void pause();
+	void stop();
+	void pause();
 	void recording();
 	bool isRecording();
 	bool isPlaying();
 	void exportFile();
-	
+
 	void createTracksAndAssignInputs();
 	void changeListenerCallback(ChangeBroadcaster* source);
 
@@ -57,9 +57,9 @@ public :
 	bool isDirty() { return dirty; }
 	void setDirty(bool inDirty) { dirty = inDirty; }
 
+
+	void markForUpdate(){ shouldUpdate.store(true); };
 	std::atomic<bool>  shouldUpdate;
-	
-	void markForUpdate() { shouldUpdate.store(true); }
 private:
 
     te::WaveAudioClip::Ptr loadAudioFileAsClip(const File& file, AudioTrack& track);

@@ -3,13 +3,15 @@
 #include "JuceHeader.h"
 #include "Audio/AudioEngine.h"
 #include "ChannelComponent.h"
+#include "TreeComponent.h"
 
-class ChannelWindow : public Component, public Timer
+class ChannelWindow : public TreeComponent
+					  
 {
 public:
 	ChannelWindow(AudioEngine& inEngine);
 
-	void timerCallback() override;
+	void update() override;
 
 private:
     void addNewTrackComponent(AudioTrack& audioTrack);

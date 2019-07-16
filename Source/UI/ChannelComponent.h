@@ -3,7 +3,6 @@
 #include "JuceHeader.h"
 #include "Audio/AudioEngine.h"
 
-
 class ChannelComponent : public Component,
                          public Button::Listener,
                          public Slider::Listener,
@@ -35,6 +34,7 @@ private:
     std::unique_ptr<Slider>		 volumeSlider, panSlider;
     std::unique_ptr<ImageButton> muteButton, soloButton, addFileButton, selectInputButton;
 	std::unique_ptr<Label>		 volLabel, panLabel;
+	
 
     AudioEngine& engine;
     AudioTrack& track;

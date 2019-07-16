@@ -7,7 +7,7 @@
 
 class AudioTrackThumbnail : public Component, 
 							 public Timer,
-							 private te::ValueTreeAllEventListener
+							 public te::ValueTreeAllEventListener
 {
 public:
 	AudioTrackThumbnail(AudioEngine& inEngine, AudioTrack& inTrack);

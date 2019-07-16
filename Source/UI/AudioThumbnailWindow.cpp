@@ -10,16 +10,27 @@ AudioThumbnailWindow::AudioThumbnailWindow(AudioEngine & inEngine):
 
 void AudioThumbnailWindow::timerCallback()
 {
-	if (engine.isDirty())
+	/*if (engine.isDirty())
+	{
+		
+		engine.setDirty(false);
+	}
+
+	if (engine.shouldUpdate.load())
+	{
+
+		rebuildTrackThumbnailList();
+	}
+	*/
+	if (engine.shouldUpdate.load())
 	{
 		rebuildTrackThumbnailList();
-		engine.setDirty(false);
 	}
 }
 
 void AudioThumbnailWindow::paint(Graphics& g)
 {
-	g.fillAll(Colours::darkcyan);
+	//g.fillAll(Colours::darkcyan);
 }
 
 
