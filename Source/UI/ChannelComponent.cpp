@@ -118,6 +118,11 @@ ChannelComponent::ChannelComponent(AudioEngine& inEngine, AudioTrack& inTrack)
 
 }
 
+ChannelComponent::~ChannelComponent()
+{
+	track.state.removeListener(this);
+}
+
 void ChannelComponent::paint(Graphics& g)
 {
     g.fillAll(Colour(0xff25292b));

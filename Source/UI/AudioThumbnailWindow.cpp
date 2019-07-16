@@ -4,33 +4,24 @@ AudioThumbnailWindow::AudioThumbnailWindow(AudioEngine & inEngine):
 	engine(inEngine)
 {
 	startTimerHz(60);
-
+	engine.getEdit()->state.addListener(this);
 	
 }
 
-void AudioThumbnailWindow::timerCallback()
+AudioThumbnailWindow::~AudioThumbnailWindow()
 {
-	/*if (engine.isDirty())
-	{
-		
-		engine.setDirty(false);
-	}
-
-	if (engine.shouldUpdate.load())
-	{
-
-		rebuildTrackThumbnailList();
-	}
-	*/
-	if (engine.shouldUpdate.load())
-	{
-		rebuildTrackThumbnailList();
-	}
+	engine.getEdit()->state.removeListener(this);
 }
+
+void AudioThumbnailWindow::update()
+{
+	rebuildTrackThumbnailList();
+}
+
 
 void AudioThumbnailWindow::paint(Graphics& g)
 {
-	//g.fillAll(Colours::darkcyan);
+	g.fillAll(Colours::darkcyan);
 }
 
 
@@ -40,7 +31,7 @@ void AudioThumbnailWindow::addNewAudioTrackThumbnail(AudioTrack & audioTrack)
 
 	auto& addedTrackThumbnail = trackThumbnails.back();
 
-	addedTrackThumbnail.reset(new AudioTrackThumbnail(engine,audioTrack));
+	addedTrackThumbnail.reset(new AudioTrackThumbnail(audioTrack));
 
 	addAndMakeVisible(*addedTrackThumbnail);
 

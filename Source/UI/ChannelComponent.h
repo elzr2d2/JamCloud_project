@@ -12,6 +12,7 @@ class ChannelComponent : public Component,
 public:
 
     ChannelComponent(AudioEngine& inEngine, AudioTrack& inTrack);
+	~ChannelComponent();
     void paint(Graphics& g) override;
     void resized() override;
     void buttonClicked(Button* buttonThatWasClicked) override;

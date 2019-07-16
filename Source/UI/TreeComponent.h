@@ -5,7 +5,7 @@
 
 class TreeComponent : public Component,
 					  public Timer,
-					  public ValueTreeAllEventListener
+					  public tracktion_engine::ValueTreeAllEventListener
 {
 public:
 	TreeComponent();

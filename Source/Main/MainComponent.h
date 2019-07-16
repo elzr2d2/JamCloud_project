@@ -13,9 +13,9 @@ public:
     void resized() override;
 
 private:
-
+	AudioEngine engine;
     UIEngine ui;
-    AudioEngine engine;
+    
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (MainComponent)
 };

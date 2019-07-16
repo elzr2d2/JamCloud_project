@@ -1,18 +1,9 @@
-/*
-  ==============================================================================
-
-    TreeComponent.cpp
-    Created: 16 Jul 2019 8:57:11pm
-    Author:  Jordan
-
-  ==============================================================================
-*/
-
 #include "TreeComponent.h"
 
 TreeComponent::TreeComponent()
 {
 	startTimerHz(60);
+	markForUpdate();
 }
 
 void TreeComponent::timerCallback()

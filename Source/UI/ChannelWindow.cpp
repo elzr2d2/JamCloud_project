@@ -9,12 +9,15 @@ ChannelWindow::ChannelWindow(AudioEngine& inEngine) : engine(inEngine)
 	engine.getEdit()->state.addListener(this);
 }
 
+ChannelWindow::~ChannelWindow()
+{
+	engine.getEdit()->state.removeListener(this);
+}
+
 void ChannelWindow::update()
 {
 	rebuildTrackList();
 }
-
-
 
 void ChannelWindow::rebuildTrackList()
 {

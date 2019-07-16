@@ -1,19 +1,23 @@
 #include "AudioTrackThumbnail.h"
 
-AudioTrackThumbnail::AudioTrackThumbnail(AudioEngine & inEngine, AudioTrack& inTrack):
-	engine(inEngine),
+AudioTrackThumbnail::AudioTrackThumbnail( AudioTrack& inTrack):
 	track(inTrack)
   {
 	startTimerHz(60);
+	//engine.getEdit()->state.addListener(this);
+	track.state.addListener(this);
   }
 
-void AudioTrackThumbnail::timerCallback()
+AudioTrackThumbnail::~AudioTrackThumbnail()
 {
-	if (engine.shouldUpdate.load())
-	{
-		engine.shouldUpdate.store(false);
-		rebuildClips();
-	}
+	track.state.removeListener(this);
+}
+
+
+
+void AudioTrackThumbnail::update()
+{
+	rebuildClips();
 }
 
 void AudioTrackThumbnail::paint(Graphics & g)
