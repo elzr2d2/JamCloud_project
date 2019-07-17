@@ -156,6 +156,11 @@
         <FILE id="LgVuWd" name="MainComponent.h" compile="0" resource="0" file="Source/Main/MainComponent.h"/>
       </GROUP>
       <GROUP id="{556B2127-059F-C9B1-5111-5DE8263C093A}" name="UI">
+        <FILE id="I02gZ0" name="UiHelper.h" compile="0" resource="0" file="Source/UI/UiHelper.h"/>
+        <FILE id="jN1IzF" name="TimelineComponent.cpp" compile="1" resource="0"
+              file="Source/UI/TimelineComponent.cpp"/>
+        <FILE id="mYopdX" name="TimelineComponent.h" compile="0" resource="0"
+              file="Source/UI/TimelineComponent.h"/>
         <FILE id="gH7OMe" name="TreeComponent.cpp" compile="1" resource="0"
               file="Source/UI/TreeComponent.cpp"/>
         <FILE id="V8h41o" name="TreeComponent.h" compile="0" resource="0" file="Source/UI/TreeComponent.h"/>

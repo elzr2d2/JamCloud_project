@@ -74,8 +74,6 @@ void AudioThumbnailComponent::paintIfFileLoaded(Graphics& g, const Rectangle<int
 	
 }
 
-
-
 void AudioThumbnailComponent::mouseDown(const MouseEvent& /*event*/)
 {
 	selected = !selected;

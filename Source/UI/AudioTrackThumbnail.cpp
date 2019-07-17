@@ -4,7 +4,7 @@ AudioTrackThumbnail::AudioTrackThumbnail( AudioTrack& inTrack):
 	track(inTrack)
   {
 	startTimerHz(60);
-	//engine.getEdit()->state.addListener(this);
+
 	track.state.addListener(this);
   }
 
@@ -35,7 +35,6 @@ void AudioTrackThumbnail::resized()
 
 		auto start = position.getStart() / 10 * (double)getWidth();
 		auto length = position.getLength() / 10 * (double)getWidth();
-
 		thumbnail->setBounds( start, 0, int(length), 70);
 
 	}
