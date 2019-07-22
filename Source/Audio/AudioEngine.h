@@ -46,6 +46,8 @@ public:
 
 	void activeMetro();
 
+	void bpmChanger(double bpm);
+
 	void enableInputMonitoring(te::AudioTrack& t, bool im, int position = 0);
 	bool trackHasInput(te::AudioTrack& t, int position = 0);
 	bool isInputMonitoringEnabled(te::AudioTrack& t, int position = 0);
@@ -78,6 +80,10 @@ private:
 	std::unique_ptr<te::ClickNode> click;
 	std::unique_ptr<te::AudioNodeProperties> clickAudioNodeProperties;
 	std::unique_ptr <te::VolumeAndPanPlugin> volumeAndPanPlugin;
+	
+	std::unique_ptr <te::TempoSequence> tempoSequence;
+	std::unique_ptr <te::TempoSetting> tempoSetting;
+	
 
 	bool channelSelected = false;
     bool dirty = true;

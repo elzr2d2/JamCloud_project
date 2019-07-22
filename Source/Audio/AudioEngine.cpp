@@ -8,20 +8,25 @@ AudioEngine::AudioEngine()
     edit = std::make_unique<Edit>(engine, createEmptyEdit(), Edit::forEditing, nullptr, 0);
     createTracksAndAssignInputs();
     edit->playInStopEnabled = true;
+	tempoSequence = std::make_unique<TempoSequence>(*edit.get());
+	tempoSetting = std::make_unique<TempoSetting>(*tempoSequence.get(), createEmptyEdit());
 	
     te::EditFileOperations(*edit).save(true, true, false);
     removeAllTracks();
-
+	
 	
 	for (int i = 0; i < NumberOfChannels; i++)
 	{
 		addChannel(); 
 	}
+
+
+	
 }
 
 AudioEngine::~AudioEngine()
 {
-    engine.getTemporaryFileManager().getTempDirectory().deleteRecursively();
+	engine.getTemporaryFileManager().getTempDirectory().deleteRecursively();
 }
 
 void AudioEngine::removeAllTracks()
@@ -422,4 +427,10 @@ void AudioEngine::activeMetro()
 	click->setClickWaveFile(engine, false, clickFileUrl[0]);
 
 	click->getAudioNodeProperties(*clickAudioNodeProperties);
+}
+
+void AudioEngine::bpmChanger(double bpm)
+{
+	tempoSetting->setBpm(bpm);
+
 }

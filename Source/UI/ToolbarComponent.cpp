@@ -88,9 +88,6 @@ ToolbarComponent::ToolbarComponent(AudioEngine& inEngine) :
                                 Image(), 1.0f, Colours::whitesmoke);
 	metronomeButton->setBounds(456, 35, 25, 23);
 
-
-
-
     setSize(1000, 500);
 }
 
@@ -235,6 +232,7 @@ void ToolbarComponent::buttonClicked(Button* buttonThatWasClicked)
 
 void ToolbarComponent::getCurrentTimeText()
 {
+
 	/*  doesnt work good YET  */
 	auto playheadPos = engine.getTransport().getCurrentPlayhead()->getPosition();
 	
@@ -264,11 +262,13 @@ void ToolbarComponent::getCurrentTimeText()
 void ToolbarComponent::timerCallback()
 {
 	getCurrentTimeText();
+	setBpm();
 }
 
 void ToolbarComponent::setBpm()
 {
-
-	Logger::outputDebugString(bpmText->getText());
-	metroGui.setBpm(bpmText->getText().getDoubleValue());
+	//metroGui.setBpm(bpmText->getText().getDoubleValue());
+	engine.bpmChanger(bpmText->getText().getDoubleValue());
 }
+
+

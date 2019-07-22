@@ -22,6 +22,9 @@ public:
 	void timerCallback() override;
 
 	void setBpm();
+
+	
+
 private:
 
     std::unique_ptr<ImageButton> recordButton;
@@ -39,7 +42,6 @@ private:
     PlayButton playButton;
 
     AudioEngine& engine;
-	
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (ToolbarComponent)
 };
