@@ -12,14 +12,16 @@ constexpr int gridHight = numOfChannels * channelHight;
 class UiHelper
 {
 public:
-	double timeToX(double time, int width) const
-	{
-		
+	static double timeToX(double timeLength)
+	{		
+		double relativeTime = timeLength / 300;//300sec = 5 min
+		return gridWidth * relativeTime;	
 	}
 
-	double xToTime(int x, int width) const
+	static double xToTime(int x)
 	{
-		
+		double relativeX = x / 300;
+		return relativeX * gridWidth;
 	}
 };
 

@@ -1,7 +1,7 @@
 
 
 #include "AudioThumbnailComponent.h"
-
+#include "UiHelper.h"
 AudioThumbnailComponent::AudioThumbnailComponent(tracktion_engine::Clip& inClip) :
         thumbnailCache(5), thumbnail(512, formatManager, thumbnailCache),
         clip(inClip)
@@ -21,9 +21,11 @@ void AudioThumbnailComponent::paint(Graphics& g)
 	Rectangle<int> thumbnailBounds(100, 70);
 	if (!selected)
 	{
-		g.setColour(Colours::blue);
-		
-		thumbnailBounds.setSize(clip.getMaximumLength()*100, 70);
+		g.setColour(Colours::transparentWhite);
+
+		auto w = UiHelper::timeToX(clip.getMaximumLength());
+
+		thumbnailBounds.setSize(w, 70);
 		g.fillRect(thumbnailBounds);
 	}
 	else
@@ -65,7 +67,7 @@ void AudioThumbnailComponent::paintIfNoFileLoaded(Graphics& g, const Rectangle<i
 
 void AudioThumbnailComponent::paintIfFileLoaded(Graphics& g, const Rectangle<int>& thumbnailBounds)
 {
-	g.setColour(Colours::darkslategrey);
+	g.setColour(Colours::transparentBlack);
 	g.fillRect(thumbnailBounds);
 	
     g.setColour(Colours::darkorange);

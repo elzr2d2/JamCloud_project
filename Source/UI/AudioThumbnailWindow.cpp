@@ -1,11 +1,13 @@
 #include "AudioThumbnailWindow.h"
 
 AudioThumbnailWindow::AudioThumbnailWindow(AudioEngine & inEngine):
-	engine(inEngine)
+	engine(inEngine),
+	playhead(inEngine)
 {
 	startTimerHz(60);
 	engine.getEdit()->state.addListener(this);
-	
+	addAndMakeVisible(playhead);
+
 }
 
 AudioThumbnailWindow::~AudioThumbnailWindow()
@@ -16,12 +18,15 @@ AudioThumbnailWindow::~AudioThumbnailWindow()
 void AudioThumbnailWindow::update()
 {
 	rebuildTrackThumbnailList();
+	playhead.toFront(false);
+
 }
 
 
 void AudioThumbnailWindow::paint(Graphics& g)
 {
-	g.fillAll(Colours::darkcyan);
+	//g.fillAll(Colours::darkgrey);
+	
 }
 
 

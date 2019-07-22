@@ -3,59 +3,49 @@
 PlayHeadComponent::PlayHeadComponent(AudioEngine & inEngine ):
 	engine(inEngine)
   {
-	startTimerHz(30);
+	startTimerHz(60);
+	setSize(2, 70 * 5);
   }
 
 void PlayHeadComponent::paint(Graphics & g)
 {
 	auto yPosition = 0;
-	g.setColour(Colours::blue);
-	//g.drawRect(xPosition, yPosition, 3, 70*5);
-	g.fillRect(300, yPosition, 3, 70 * 5);
-
+	
+	g.setColour(Colours::purple);
+	
+	g.fillRect(0, yPosition, 2, 70*5);
 }
 
-bool PlayHeadComponent::hitTest(int x, int y)
-{
-	if (std::abs(x - xPosition) <= 3)
-		return true;
-	return false;
-}
+
 
 void PlayHeadComponent::mouseDrag(const MouseEvent &e)
 {
-	
-	double t = xToTime(e.x, getWidth());
-	engine.getTransport().setCurrentPosition(t);
+	xPos = e.x;
 	timerCallback();
-	
 }
 
 void PlayHeadComponent::mouseDown(const MouseEvent &e)
 {
-	engine.getTransport().setUserDragging(true);
+	//engine.getTransport().setUserDragging(true); 
+
 }
 
-void PlayHeadComponent::mouseUp(const MouseEvent &)
+void PlayHeadComponent::mouseUp(const MouseEvent &e)
 {
-	engine.getTransport().setUserDragging(false);
+
+	//engine.getTransport().setUserDragging(false);
 }
+
 
 void PlayHeadComponent::timerCallback()
 {
-	
-	if (firstTimer)
+	if (engine.isPlaying() || engine.isRecording())
 	{
-		// On Linux, don't set the mouse cursor until after the Component has appeared
-		firstTimer = false;
-		setMouseCursor(MouseCursor::LeftRightResizeCursor);
-	}
-
-	int newX = timeToX(engine.getTransport().getCurrentPosition(), getWidth());
-	if (newX != xPosition)
-	{
-		repaint(jmin(newX, xPosition) - 1, 0, jmax(newX, xPosition) - jmin(newX, xPosition) + 3, getHeight());
-		xPosition = newX;
+		double pos = engine.getTransport().getCurrentPosition();
+		double newPos = UiHelper::timeToX(pos);
+		xPos = newPos;	
 	}
 	
+	setBounds(xPos, 0, 3, 400);
+		
 }

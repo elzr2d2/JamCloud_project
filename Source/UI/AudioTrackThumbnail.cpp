@@ -1,4 +1,5 @@
 #include "AudioTrackThumbnail.h"
+#include "UiHelper.h"
 
 AudioTrackThumbnail::AudioTrackThumbnail( AudioTrack& inTrack):
 	track(inTrack)
@@ -32,10 +33,18 @@ void AudioTrackThumbnail::resized()
 	for (auto& thumbnail : audioThumbnailComponents)
 	{
 		auto position = thumbnail->getClip().getPosition();
+		auto length = position.getLength();
+		auto width = UiHelper::timeToX(length);
 
-		auto start = position.getStart() / 10 * (double)getWidth();
-		auto length = position.getLength() / 10 * (double)getWidth();
-		thumbnail->setBounds( start, 0, int(length), 70);
+		auto start = position.getStart();
+		auto stratPos = UiHelper::timeToX(start);
+		thumbnail->setBounds(stratPos, 0, width, 70);
+		
+
+		
+		//auto start = position.getStart() / 10 * (double)getWidth();
+		//auto length = position.getLength() / 10 * (double)getWidth();
+		
 
 	}
 }

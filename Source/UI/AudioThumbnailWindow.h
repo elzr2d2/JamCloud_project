@@ -4,6 +4,7 @@
 #include "TreeComponent.h"
 #include "Audio/AudioEngine.h"
 #include "AudioTrackThumbnail.h"
+#include "PlayHeadComponent.h"
 
 class AudioThumbnailWindow : public TreeComponent
 {
@@ -20,4 +21,5 @@ private:
 	AudioEngine& engine;
 	std::vector<std::unique_ptr<AudioTrackThumbnail>> trackThumbnails;
 
+	PlayHeadComponent playhead;
 };
