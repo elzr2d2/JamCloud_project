@@ -5,6 +5,7 @@
 #include "Audio/AudioEngine.h"
 #include "AudioTrackThumbnail.h"
 #include "PlayHeadComponent.h"
+#include "UiHelper.h"
 
 class AudioThumbnailWindow : public TreeComponent
 {
@@ -17,6 +18,7 @@ private:
 	void addNewAudioTrackThumbnail(AudioTrack& audioTrack);
 	void clearAudioTrackThumbnails();
 	void rebuildTrackThumbnailList();
+	void mouseDown(const MouseEvent&) override;
 	int channelY = 0;
 	AudioEngine& engine;
 	std::vector<std::unique_ptr<AudioTrackThumbnail>> trackThumbnails;

@@ -20,8 +20,6 @@ AudioEngine::AudioEngine()
 		addChannel(); 
 	}
 
-
-	
 }
 
 AudioEngine::~AudioEngine()
@@ -429,8 +427,13 @@ void AudioEngine::activeMetro()
 	click->getAudioNodeProperties(*clickAudioNodeProperties);
 }
 
-void AudioEngine::bpmChanger(double bpm)
+void AudioEngine::setBpm(double bpm)
 {
 	tempoSetting->setBpm(bpm);
-
 }
+
+double AudioEngine::getBpm()
+{
+	return tempoSetting->getBpm();
+}
+

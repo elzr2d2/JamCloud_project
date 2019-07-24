@@ -46,7 +46,8 @@ public:
 
 	void activeMetro();
 
-	void bpmChanger(double bpm);
+	void setBpm(double bpm);
+	double getBpm();
 
 	void enableInputMonitoring(te::AudioTrack& t, bool im, int position = 0);
 	bool trackHasInput(te::AudioTrack& t, int position = 0);

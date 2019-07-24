@@ -268,7 +268,7 @@ void ToolbarComponent::timerCallback()
 void ToolbarComponent::setBpm()
 {
 	//metroGui.setBpm(bpmText->getText().getDoubleValue());
-	engine.bpmChanger(bpmText->getText().getDoubleValue());
+	engine.setBpm(bpmText->getText().getDoubleValue());
 }
 
 

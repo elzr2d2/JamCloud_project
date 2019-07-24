@@ -10,7 +10,7 @@ MainComponent::MainComponent(): ui(engine)
 //==============================================================================
 void MainComponent::paint (Graphics& g)
 {
-	g.fillAll(Colour(0xff323e44));
+	g.fillAll(Colour(0xff25292b));
 }
 
 void MainComponent::resized()
