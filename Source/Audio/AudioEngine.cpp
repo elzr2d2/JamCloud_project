@@ -12,6 +12,7 @@ AudioEngine::AudioEngine()
 	tempoSetting = std::make_unique<TempoSetting>(*tempoSequence.get(), createEmptyEdit());
 	
     te::EditFileOperations(*edit).save(true, true, false);
+
     removeAllTracks();
 	
 	
@@ -69,10 +70,6 @@ te::WaveAudioClip::Ptr AudioEngine::loadAudioFileAsClip(const File& file, AudioT
 
 		auto tracklen = track.getLength();
 		auto audioFilelen = audioFile.getLength();
-		DBG("TRACK LENGTH : ");
-		DBG(tracklen);
-		DBG("AUDIO FILE LENGTH :");
-		DBG(audioFilelen);
 
         EditTimeRange timeRange(track.getLength(), track.getLength()+audioFile.getLength());
         ClipPosition position = { timeRange, 0 };
@@ -246,7 +243,7 @@ void AudioEngine::changeVolume(AudioTrack& track, float newVolume)
         auto plugin = plugins.getObjectPointer(index);
 
         auto volume = dynamic_cast<VolumeAndPanPlugin*>(plugin);
-
+		
         if (volume != nullptr)
             volume->setVolumeDb(newVolume);
     }
@@ -297,11 +294,58 @@ bool AudioEngine::isPlaying()
     return getTransport().isPlaying();
 }
 
+void AudioEngine::saveAsFile()
+{
+
+	File editFile{  };
+	
+	if (editFile == File())
+	{
+		FileChooser fc("New Edit", File::getSpecialLocation(File::userDocumentsDirectory), "*.tracktionedit");
+		if (fc.browseForFileToSave(true))
+		{
+
+			editFile = fc.getResult();
+			edit->editFileRetriever = [editFile] { return editFile; };
+		}
+		
+		te::EditFileOperations(*edit).saveAs(editFile,false);
+	}
+	
+}
+
+void AudioEngine::loadFile()
+{
+	/*not working yet*/
+	auto location = File::getSpecialLocation(File::userDesktopDirectory);
+
+	FileChooser chooser("Choose a file", location, "*.tracktionedit", true, false);
+
+	if (chooser.browseForFileToOpen())
+	{
+		auto file = chooser.getResult();
+		edit->editFileRetriever = [file] { return file; };
+		/*
+		auto newEditToLoad = te::loadEditFromFile(file, edit->getProjectItemID());
+		auto text = newEditToLoad.toXmlString();
+		int debug = 0;
+		auto x = newEditToLoad.createXml();
+		edit->state.fromXml(*x);
+		//edit->state.copyPropertiesAndChildrenFrom(newEditToLoad, nullptr);
+		//te::loadValueTree(file, true);
+		//auto xxx = edit->state.toXmlString();
+		*/
+	}
+
+}
+
 void AudioEngine::exportFile()
 {
 	//te::ExportJob exJob(edit, );
-	
 }
+
+
+
 
 bool AudioEngine::isRecording()
 {

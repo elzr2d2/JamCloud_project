@@ -6,10 +6,10 @@ constexpr int channelHight = 70;
 constexpr int channelWidth = 200;
 
 
-constexpr int gridWidth = 60000; 
+constexpr double gridWidth = 60000;
 constexpr int gridHight = numOfChannels * channelHight;
-constexpr int trackLength = 300;//seconds
-constexpr int trackLengthInMin = trackLength/60;
+constexpr double trackLength = 600;//seconds
+constexpr double trackLengthInMin = trackLength/60;
 
 class UiHelper
 {

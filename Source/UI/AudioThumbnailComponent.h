@@ -17,6 +17,8 @@ public:
     Clip& getClip() const { return clip; }
 
 	void mouseDown(const MouseEvent& event) override;
+	void mouseDrag(const MouseEvent& event) override;
+	void mouseUp(const MouseEvent& event) override;
 	bool isSelected() { return selected; };
 private:
 
@@ -31,7 +33,8 @@ private:
     AudioThumbnailCache thumbnailCache;
     AudioThumbnail thumbnail;
 	
-
+	ComponentDragger dragger;
+	ComponentBoundsConstrainer * boundsConstrainer;
 	bool selected = false;
 
     tracktion_engine::Clip& clip;

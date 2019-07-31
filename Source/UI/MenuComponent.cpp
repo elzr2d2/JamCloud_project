@@ -117,9 +117,9 @@ void MenuComponent::buttonClicked (Button* buttonThatWasClicked)
 		{
 		case newFile:;
 			break;
-		case loadFile:;
+		case loadFile:engine.loadFile();
 			break;
-		case saveAsFile:;
+		case saveAsFile:engine.saveAsFile();
 			break;
 		case exportAsWavFile:;
 			break;

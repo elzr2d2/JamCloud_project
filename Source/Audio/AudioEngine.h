@@ -32,6 +32,9 @@ public:
 	void recording();
 	bool isRecording();
 	bool isPlaying();
+
+	void saveAsFile();
+	void loadFile();
 	void exportFile();
 
 	void createTracksAndAssignInputs();

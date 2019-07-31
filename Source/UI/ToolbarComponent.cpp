@@ -44,7 +44,7 @@ ToolbarComponent::ToolbarComponent(AudioEngine& inEngine) :
 						Image(), 1.0f, Colours::orange,
 						Image(), 1.0f, Colours::whitesmoke);
 
-    loopButton->setBounds(414, 35, 16, 27);
+    loopButton->setBounds(414, 35, 20, 27);
 
 	/* Time Text Editor */
     timeText.reset(new TextEditor("timeText"));
@@ -232,30 +232,25 @@ void ToolbarComponent::buttonClicked(Button* buttonThatWasClicked)
 
 void ToolbarComponent::getCurrentTimeText()
 {
-
-	/*  doesnt work good YET  */
 	auto playheadPos = engine.getTransport().getCurrentPlayhead()->getPosition();
+	auto totalTime = roundDoubleToInt(playheadPos);
+
+	seconds = totalTime % 60;
+	minutes = totalTime / 60;
+
+	auto  sec = std::to_string(seconds);
+	auto  min = std::to_string(minutes);
 	
-	if (seconds < 60 )
+	if (seconds < 10)
 	{
-		seconds = roundDoubleToInt(playheadPos);
-		auto  sec = std::to_string(seconds);
-		auto  min = std::to_string(minutes);
-		if (seconds < 10)
-		{
-			timeText->setText("0" + min + ":0" + sec);
-		}
-		else
-		{
-			timeText->setText("0" + min + ":" + sec);
-		}
-		
+		timeText->setText("0" + min + ":0" + sec);
 	}
 	else
 	{
-		minutes++;
-		seconds = roundDoubleToInt(playheadPos)%60;
+		timeText->setText("0" + min + ":" + sec);
 	}
+
+
 
 }
 

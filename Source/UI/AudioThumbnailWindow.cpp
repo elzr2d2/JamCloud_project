@@ -30,49 +30,41 @@ void AudioThumbnailWindow::paint(Graphics& g)
 	{
 		float x = 0.0f, y = 0.0f, width = static_cast<float> (proportionOfWidth(1.0000f)), height = static_cast<float> (proportionOfHeight(1.0000f));
 		Colour fillColour = Colour(0x5c000000);
-		Colour fillColour2 = Colour(0x5C666666);
+		Colour greyJam = Colour(0x5C666666);
 		int h = 70;
+		/* Draw grey channels */
 		for (int i = 0; i < 5; i++)
 		{
-			g.setColour(fillColour2);
+			g.setColour(greyJam);
 			g.fillRoundedRectangle(x, y, width, h, 10.000f);
 			h += 70;
 		}
-		
+		/* Draw Frame */
 		g.setColour(fillColour);
 		g.fillRoundedRectangle(x, 70*5, width, 20, 10.000f);
 	}
 
 	{
-		int x = 0, y = 0, width = 1, height = proportionOfHeight(1.0000f);
-		Colour fillColour = Colour(0xff787d79);
-		g.setColour(fillColour);
+		int lineX = 0, lineY = 0, lineWidth = 1, lineHeight = proportionOfHeight(1.0000f);
+		int barNumberY = 70 * 5, barNumberWidth = 30,barNumberHeight = 20;
+		Colour mellowGrey = Colour(0xff787d79);
+		auto beats = UiHelper::getNumOfBeats(engine.getBpm());
+		double beatDistance = UiHelper::getBeatDistanceByBPM(engine.getBpm());
 
-		int numOfBars = 1;
 		
-		for (int i = 0; i < 600; i++)
+		for (int i = 0; i < beats; i++)
 		{
-			if (x < 100)
-			{
-				String bars = std::to_string(numOfBars);
-				g.setColour(Colours::white);
-				g.drawText(bars, x, 70 * 5, 20, 18,
-					Justification::centred, true);
-				x += UiHelper::getBeatDistanceByBPM(120);
-				numOfBars++;
-			}
-			g.setColour(fillColour);
-			g.fillRect(x, y, width, height);
-
+			/* Draw the grid lines */
+			g.setColour(mellowGrey);
+			g.fillRect(lineX,lineY, lineWidth, lineHeight);
+			/* Write bar numbers */
+			String bars = std::to_string(i+1);
 			g.setColour(Colours::white);
-			String bars = std::to_string(numOfBars);
-			g.drawText(bars, x, 70 * 5, 20, 18,
-				Justification::centred, true);
-			x += UiHelper::getBeatDistanceByBPM(120);
-			numOfBars++;
-
+			g.drawText(bars, lineX+1, barNumberY, barNumberWidth, barNumberHeight,
+				Justification::left, true);
+			lineX += beatDistance;
 		}
-		
+
 	}
 	
 }
