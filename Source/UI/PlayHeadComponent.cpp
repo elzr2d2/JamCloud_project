@@ -46,6 +46,4 @@ void PlayHeadComponent::timerCallback()
 		setBounds(xPos, 0, 3, 400);
 	}
 
-	
-		
 }

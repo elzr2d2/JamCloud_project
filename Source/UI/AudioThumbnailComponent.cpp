@@ -13,7 +13,7 @@ AudioThumbnailComponent::AudioThumbnailComponent(tracktion_engine::Clip& inClip)
     formatManager.registerBasicFormats();
     thumbnail.addChangeListener(this);
     initSource();
-	
+
 	
 }
 
@@ -87,9 +87,8 @@ void AudioThumbnailComponent::mouseDown(const MouseEvent& e/*event*/)
 
 	if (e.mods.isLeftButtonDown())
 	{
-		
 		selected = !selected;
-		dragger.startDraggingComponent(this, e);
+		
 		repaint();
 	}
 	else if (e.mods.isRightButtonDown() && selected)
@@ -113,27 +112,27 @@ void AudioThumbnailComponent::mouseDown(const MouseEvent& e/*event*/)
 			break;
 		}
 	}
-
-
-	
 }
 
 void AudioThumbnailComponent::mouseDrag(const MouseEvent & e)
 {
-
-	dragger.dragComponent(this, e, nullptr);
+	double y = getPosition().getY();
+	double x = 0;
+	if (e.x > 0)
+	{
+		x = e.x;
+		setBounds(x, y, getWidth(), getHeight());
+		repaint();
+	}
 }
 
 void AudioThumbnailComponent::mouseUp(const MouseEvent & e)
 {
-	//wants to take the x and change the time
-	/*
-	auto newPos = UiHelper::xToTime(e.x);
-	EditTimeRange timeRange(newPos,  clip.getMaximumLength());
+	auto x = getPosition().getX();
+	double newPos = UiHelper::xToTime(x);
+	EditTimeRange timeRange(newPos,  clip.getMaximumLength()+ newPos);
 	ClipPosition pos = { timeRange ,0};
 	clip.setPosition(pos);
-	DBG("MOUSE UP HERE EEE EEE");
-	*/
 }
 
 void AudioThumbnailComponent::initSource()

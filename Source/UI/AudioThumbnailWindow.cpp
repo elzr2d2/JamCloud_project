@@ -7,6 +7,7 @@ AudioThumbnailWindow::AudioThumbnailWindow(AudioEngine & inEngine):
 	startTimerHz(60);
 	engine.getEdit()->state.addListener(this);
 	addAndMakeVisible(playhead);
+	
 
 }
 

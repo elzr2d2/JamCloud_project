@@ -12,7 +12,9 @@ constexpr int audioSettings = 7;
 
 constexpr int login = 8;
 
-MenuComponent::MenuComponent (AudioEngine& inEngine):engine(inEngine)
+MenuComponent::MenuComponent (AudioEngine& inEngine):
+	engine(inEngine),
+	newProjectDialog(inEngine)
 {
 	/* File Button */
     fileButton.reset (new TextButton ("fileButton"));
@@ -115,7 +117,7 @@ void MenuComponent::buttonClicked (Button* buttonThatWasClicked)
 
 		switch (result)
 		{
-		case newFile:;
+		case newFile:DialogWindow::showDialog("Create New Project",&newProjectDialog,nullptr,Colours::grey,true);
 			break;
 		case loadFile:engine.loadFile();
 			break;

@@ -6,21 +6,14 @@ AudioEngine::AudioEngine()
 {
 	
     edit = std::make_unique<Edit>(engine, createEmptyEdit(), Edit::forEditing, nullptr, 0);
-    createTracksAndAssignInputs();
-    edit->playInStopEnabled = true;
+	createTracksAndAssignInputs();
+	edit->playInStopEnabled = true;
 	tempoSequence = std::make_unique<TempoSequence>(*edit.get());
 	tempoSetting = std::make_unique<TempoSetting>(*tempoSequence.get(), createEmptyEdit());
-	
-    te::EditFileOperations(*edit).save(true, true, false);
 
-    removeAllTracks();
-	
-	
-	for (int i = 0; i < NumberOfChannels; i++)
-	{
-		addChannel(); 
-	}
+	te::EditFileOperations(*edit).save(true, true, false);
 
+	removeAllTracks();
 }
 
 AudioEngine::~AudioEngine()
@@ -30,10 +23,14 @@ AudioEngine::~AudioEngine()
 
 void AudioEngine::removeAllTracks()
 {
-    for (auto track : getTrackList())
-    {
-        edit->deleteTrack(track);
-    }
+	if (!getTrackList().isEmpty())
+	{
+		for (auto track : getTrackList())
+		{
+			edit->deleteTrack(track);
+		}
+	}
+
 }
 
 void AudioEngine::removeChannel()
@@ -154,6 +151,23 @@ bool AudioEngine::trackHasInput(te::AudioTrack& t, int position)
 void AudioEngine::play()
 {
     getTransport().play(false);
+}
+
+void AudioEngine::loop()
+{
+	auto endLoopPos = edit->getTransport().getCurrentPosition();
+	EditTimeRange timeRange{ 0,endLoopPos };
+	
+	if (isLooping())
+	{
+		getTransport().looping.setValue(false, nullptr);
+	}
+	else
+	{
+		edit->getTransport().setLoopRange(timeRange);
+		getTransport().looping.setValue(true, nullptr);
+	}
+
 }
 
 TransportControl& AudioEngine::getTransport() const
@@ -294,6 +308,11 @@ bool AudioEngine::isPlaying()
     return getTransport().isPlaying();
 }
 
+bool AudioEngine::isLooping()
+{
+	return getTransport().looping.get();
+}
+
 void AudioEngine::saveAsFile()
 {
 
@@ -344,7 +363,15 @@ void AudioEngine::exportFile()
 	//te::ExportJob exJob(edit, );
 }
 
+void AudioEngine::createNewProject(String name, double bpm)
+{
 
+	for (int i = 0; i < NumberOfChannels; i++)
+	{
+		addChannel();
+	}
+	setBpm(bpm);
+}
 
 
 bool AudioEngine::isRecording()

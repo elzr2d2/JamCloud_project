@@ -26,16 +26,19 @@ public:
 	void soloChannel(AudioTrack& track);
 
 	void play();
-	//void loop();
+	void loop();
 	void stop();
 	void pause();
 	void recording();
+
 	bool isRecording();
 	bool isPlaying();
+	bool isLooping();
 
 	void saveAsFile();
 	void loadFile();
 	void exportFile();
+	void createNewProject(String name, double bpm);
 
 	void createTracksAndAssignInputs();
 	void changeListenerCallback(ChangeBroadcaster* source);

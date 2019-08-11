@@ -208,8 +208,23 @@ void ToolbarComponent::buttonClicked(Button* buttonThatWasClicked)
 	}
 	else if (buttonThatWasClicked == loopButton.get())
 	{
-
-		
+		engine.loop();
+		if (engine.isLooping())
+		{
+			loopButton->setImages(false, true, true,
+				ImageCache::getFromMemory(BinaryData::_081loop_png, BinaryData::_081loop_pngSize), 1.0f,
+				Colours::orange,
+				Image(), 1.0f, Colours::orange,
+				Image(), 1.0f, Colours::orange);
+		}
+		else
+		{
+			loopButton->setImages(false, true, true,
+				ImageCache::getFromMemory(BinaryData::_081loop_png, BinaryData::_081loop_pngSize), 1.0f,
+				Colours::whitesmoke,
+				Image(), 1.0f, Colours::orange,
+				Image(), 1.0f, Colours::whitesmoke);
+		}
 	}
 	else if (buttonThatWasClicked == metronomeButton.get())
 	{
@@ -250,8 +265,6 @@ void ToolbarComponent::getCurrentTimeText()
 		timeText->setText("0" + min + ":" + sec);
 	}
 
-
-
 }
 
 void ToolbarComponent::timerCallback()
@@ -262,7 +275,6 @@ void ToolbarComponent::timerCallback()
 
 void ToolbarComponent::setBpm()
 {
-	//metroGui.setBpm(bpmText->getText().getDoubleValue());
 	engine.setBpm(bpmText->getText().getDoubleValue());
 }
 

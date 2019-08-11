@@ -2,7 +2,7 @@
 
 #include "JuceHeader.h"
 #include "Audio/AudioEngine.h"
-
+#include "NewProjectDialog.h"
 class MenuComponent  : public Component,
                        public Button::Listener
 {
@@ -25,5 +25,6 @@ private:
 
 	PopupMenu fileMenu, cloudMenu, settingsMenu , userMenu;
 	AudioEngine &engine;
+	NewProjectDialog newProjectDialog;
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (MenuComponent)
 };

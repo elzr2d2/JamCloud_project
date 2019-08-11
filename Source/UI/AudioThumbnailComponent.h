@@ -33,8 +33,6 @@ private:
     AudioThumbnailCache thumbnailCache;
     AudioThumbnail thumbnail;
 	
-	ComponentDragger dragger;
-	ComponentBoundsConstrainer * boundsConstrainer;
 	bool selected = false;
 
     tracktion_engine::Clip& clip;

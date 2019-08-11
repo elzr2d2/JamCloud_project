@@ -156,6 +156,10 @@
         <FILE id="LgVuWd" name="MainComponent.h" compile="0" resource="0" file="Source/Main/MainComponent.h"/>
       </GROUP>
       <GROUP id="{556B2127-059F-C9B1-5111-5DE8263C093A}" name="UI">
+        <FILE id="v96soh" name="NewProjectDialog.cpp" compile="1" resource="0"
+              file="Source/UI/NewProjectDialog.cpp"/>
+        <FILE id="ya6A4Y" name="NewProjectDialog.h" compile="0" resource="0"
+              file="Source/UI/NewProjectDialog.h"/>
         <FILE id="I02gZ0" name="UiHelper.h" compile="0" resource="0" file="Source/UI/UiHelper.h"/>
         <FILE id="jN1IzF" name="TimelineComponent.cpp" compile="1" resource="0"
               file="Source/UI/TimelineComponent.cpp"/>
@@ -219,6 +223,7 @@
               file="Source/UI/ToolbarComponent.h"/>
         <FILE id="xSz0RQ" name="UIEngine.cpp" compile="1" resource="0" file="Source/UI/UIEngine.cpp"/>
         <FILE id="JpVLMc" name="UIEngine.h" compile="0" resource="0" file="Source/UI/UIEngine.h"/>
+        <FILE id="DT33FR" name="UiHelpers.h" compile="0" resource="0" file="Source/UI/UiHelpers.h"/>
       </GROUP>
     </GROUP>
   </MAINGROUP>
