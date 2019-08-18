@@ -13,28 +13,36 @@ public:
 	AudioEngine();
 	~AudioEngine();
 
+	/* Channel Actions */
 	void addChannel();
 	void removeChannel();
 
+	/* Track Actions */
 	void removeTrack(te::AudioTrack& track);
 	TrackList& getTrackList() { return edit->getTrackList(); }
+
+	/* Clip Actions */
 	void addNewClipFromFile(const File& editFile, AudioTrack& track);
 
+	/* Channel Sliders */
 	void changeVolume(AudioTrack& track, float newVolume);
 	void changePan(AudioTrack& track, float newPan);
 	void muteChannel(AudioTrack& track);
 	void soloChannel(AudioTrack& track);
 
+	/* Transport Actions */
 	void play();
 	void loop();
 	void stop();
 	void pause();
 	void recording();
 
+	/* Transport Checks */
 	bool isRecording();
 	bool isPlaying();
 	bool isLooping();
 
+	/* File Actions */
 	void saveAsFile();
 	void loadFile();
 	void exportFile();
@@ -43,6 +51,7 @@ public:
 	void createTracksAndAssignInputs();
 	void changeListenerCallback(ChangeBroadcaster* source);
 
+	/* Audio Settings */
 	void showAudioSettings();
 	void audioSettings();
 
@@ -98,7 +107,5 @@ private:
 
 	File lastRecording;
 	
-	
-
 	JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(AudioEngine)
 };

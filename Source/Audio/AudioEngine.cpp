@@ -12,7 +12,7 @@ AudioEngine::AudioEngine()
 	tempoSetting = std::make_unique<TempoSetting>(*tempoSequence.get(), createEmptyEdit());
 
 	te::EditFileOperations(*edit).save(true, true, false);
-
+	
 	removeAllTracks();
 }
 
@@ -360,7 +360,18 @@ void AudioEngine::loadFile()
 
 void AudioEngine::exportFile()
 {
-	//te::ExportJob exJob(edit, );
+	File dir{  };
+	
+	if (dir == File())
+	{
+		FileChooser fc("export", File::getSpecialLocation(File::userDocumentsDirectory), "*.tracktionedit");
+		if (fc.browseForDirectory())
+		{
+			dir = fc.getResult();
+			//edit->editFileRetriever = [editFile] { return editFile; };
+		}
+	}
+	//te::ExportJob exJob(edit.get(),&dir,Project::Ptr::get(),)
 }
 
 void AudioEngine::createNewProject(String name, double bpm)

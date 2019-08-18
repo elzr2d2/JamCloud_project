@@ -20,10 +20,9 @@ private:
     std::unique_ptr<TextButton> fileButton;
     std::unique_ptr<TextButton> cloudButton;
     std::unique_ptr<TextButton> settingsButton;
-    std::unique_ptr<TextButton> userButton;
     std::unique_ptr<Label> logo;
 
-	PopupMenu fileMenu, cloudMenu, settingsMenu , userMenu;
+	PopupMenu fileMenu, settingsMenu;
 	AudioEngine &engine;
 	NewProjectDialog newProjectDialog;
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (MenuComponent)

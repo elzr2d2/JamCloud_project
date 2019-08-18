@@ -5,6 +5,25 @@ ToolbarComponent::ToolbarComponent(AudioEngine& inEngine) :
         engine(inEngine)
 {
 	startTimerHz(30);
+	
+	Colour darkGreyJam = Colour(0xff2c302f);
+	Colour orangeJam = Colour(0xffc39400);
+	/* Play Button */
+	addAndMakeVisible(playButton);
+	playButton.setBounds(211, 24, 16, 16);
+
+	/* Stop Button */
+	stopButton.reset(new ImageButton("stopButton"));
+	addAndMakeVisible(stopButton.get());
+	stopButton->setButtonText(TRANS("new button"));
+	stopButton->addListener(this);
+	stopButton->setImages(false, true, true,
+		ImageCache::getFromMemory(BinaryData::_013stop_png, BinaryData::_013stop_pngSize), 1.0f,
+		darkGreyJam,
+		Image(), 1.0f, Colours::orange,
+		Image(), 1.0f, darkGreyJam);
+	stopButton->setBounds(243, 24, 16, 16);
+
 	/* Record Button */
     recordButton.reset(new ImageButton("recordButton"));
     addAndMakeVisible(recordButton.get());
@@ -12,26 +31,11 @@ ToolbarComponent::ToolbarComponent(AudioEngine& inEngine) :
     recordButton->addListener(this);
     recordButton->setImages(false, true, true,
                             ImageCache::getFromMemory(BinaryData::_023record_png, BinaryData::_023record_pngSize), 1.0f,
-							Colours::whitesmoke,
+							darkGreyJam,
 							Image(), 1.0f, Colours::darkred,
-							Image(), 1.0f, Colours::whitesmoke);
-    recordButton->setBounds(384, 39, 16, 19);
+							Image(), 1.0f, darkGreyJam);
+    recordButton->setBounds(275, 24, 16, 16);
 
-	/* Stop Button */
-    stopButton.reset(new ImageButton("stopButton"));
-    addAndMakeVisible(stopButton.get());
-    stopButton->setButtonText(TRANS("new button"));
-    stopButton->addListener(this);
-	stopButton->setImages(false, true, true,
-		ImageCache::getFromMemory(BinaryData::_013stop_png, BinaryData::_013stop_pngSize), 1.0f,
-		Colours::whitesmoke,
-		Image(), 1.0f, Colours::orange,
-		Image(), 1.0f, Colours::darkorange);
-    stopButton->setBounds(352, 40, 16, 16);
-
-	/* Play Button */
-    addAndMakeVisible(playButton);
-    playButton.setBounds(320, 40, 16, 16);
 
 	/* Loop Button */
     loopButton.reset(new ImageButton("loopButton"));
@@ -39,12 +43,12 @@ ToolbarComponent::ToolbarComponent(AudioEngine& inEngine) :
     loopButton->setButtonText(String());
     loopButton->addListener(this);
     loopButton->setImages(false, true, true,
-                          ImageCache::getFromMemory(BinaryData::_081loop_png, BinaryData::_081loop_pngSize), 1.0f,
-						Colours::whitesmoke,
+						ImageCache::getFromMemory(BinaryData::_081loop_png, BinaryData::_081loop_pngSize), 1.0f,
+						darkGreyJam,
 						Image(), 1.0f, Colours::orange,
-						Image(), 1.0f, Colours::whitesmoke);
+						Image(), 1.0f, darkGreyJam);
 
-    loopButton->setBounds(414, 35, 20, 27);
+    loopButton->setBounds(305, 18, 20, 27);
 
 	/* Time Text Editor */
     timeText.reset(new TextEditor("timeText"));
@@ -57,9 +61,12 @@ ToolbarComponent::ToolbarComponent(AudioEngine& inEngine) :
     timeText->setPopupMenuEnabled(true);
     timeText->setColour(TextEditor::backgroundColourId, Colour(0x00000000));
     timeText->setColour(TextEditor::highlightColourId, Colour(0xb21a574e));
-    timeText->setText(TRANS("00 : 00 : 00"));
+    timeText->setText(TRANS("time"));
+	timeText->setColour(TextEditor::ColourIds::textColourId, orangeJam);
 	timeText->setColour(TextEditor::ColourIds::outlineColourId, Colours::transparentWhite);
-    timeText->setBounds(64, 38, 80, 18);
+	timeText->setFont(Font("Bahnschrift", 20.00f, Font::plain).withTypefaceStyle("Regular"));
+    timeText->setBounds(12, 16, 80, 30);
+	
 
 	/* Bpm Text Editor */
     bpmText.reset(new TextEditor("bpmText"));
@@ -67,13 +74,15 @@ ToolbarComponent::ToolbarComponent(AudioEngine& inEngine) :
     bpmText->setMultiLine(false);
     bpmText->setReturnKeyStartsNewLine(false);
     bpmText->setReadOnly(false);
-    bpmText->setScrollbarsShown(true);
+    bpmText->setScrollbarsShown(false);
     bpmText->setCaretVisible(false);
     bpmText->setPopupMenuEnabled(true);
     bpmText->setColour(TextEditor::backgroundColourId, Colour(0x00000000));
-    bpmText->setText(TRANS("120"));
 	bpmText->setColour(TextEditor::ColourIds::outlineColourId, Colours::transparentWhite);
-    bpmText->setBounds(64, 58, 80, 16);
+	bpmText->setColour(TextEditor::ColourIds::textColourId, orangeJam);
+	bpmText->setFont(Font("Bahnschrift", 20.00f, Font::plain).withTypefaceStyle("Regular"));
+	bpmText->setText(TRANS("120"));
+    bpmText->setBounds(116, 16, 40, 30);
 
 	/* Metronome Button */
     metronomeButton.reset(new ImageButton("metronomeButton"));
@@ -83,10 +92,10 @@ ToolbarComponent::ToolbarComponent(AudioEngine& inEngine) :
 	metronomeButton->setImages(false, true, true,
                                 ImageCache::getFromMemory(BinaryData::_010triangle_png,
                                                           BinaryData::_010triangle_pngSize), 1.0f, 
-											   Colours::whitesmoke,
+								darkGreyJam,
                                 Image(), 1.0f, Colours::orange,
-                                Image(), 1.0f, Colours::whitesmoke);
-	metronomeButton->setBounds(456, 35, 25, 23);
+                                Image(), 1.0f, darkGreyJam);
+	metronomeButton->setBounds(352, 20, 20, 20);
 
     setSize(1000, 500);
 }
@@ -105,70 +114,39 @@ ToolbarComponent::~ToolbarComponent()
 void ToolbarComponent::paint(Graphics& g)
 {
 
+	/* Background */
+	g.fillAll(Colour(0xff2c2d35));
+	
+	/* Light Screen */
+	{
+		int x = 8, y = 8, width = 156, height = 44;
+		Colour lightScreen = Colour(0x258A878B);
+		g.setColour(lightScreen);
+		g.fillRect(x, y, width, height);
+	}
+	/* Frame Buttons */
+	{
+		float x = 204, y = 16, width = 30.0f, height = 30.0f;
+		Colour greyFrameButton = Colour(0xff848180);
+		g.setColour(greyFrameButton);
+		int numOfRectButtons = 4;
 
-    g.fillAll(Colour(0xff25292b));
+		for (int i = 0; i < numOfRectButtons; i++)
+		{
+			g.fillRoundedRectangle(x, y, width, height, 1.000f);
+			x += 32;
+		}
+		x += 15;
+		g.fillRoundedRectangle(x, y, width, height, 20.000f);
+	}
 
-    {
-        int x = 0, y = 0, width = proportionOfWidth(1.0f), height = 100;
-        Colour fillColour = Colour(0xff162f30);
-        g.setColour(fillColour);
-        g.fillRect(x, y, width, height);
-    }
-
-    {
-        float x = 6.0f, y = 6.0f, width = 180.0f, height = 90.0f;
-        Colour fillColour1 = Colour(0xff1d1d1d), fillColour2 = Colour(0xff292a2a);
-        g.setGradientFill(ColourGradient(Colours::black,
-                                         104.0f - 12.0f + x,
-                                         24.0f - 12.0f + y,
-                                         fillColour2,
-                                         static_cast<float> (-8) - 12.0f + x,
-                                         112.0f - 12.0f + y,
-                                         false));
-        g.fillRoundedRectangle(x, y, width, height, 10.0f);
-    }
-
-
-    {
-        int x = 20, y = 20, width = 156, height = 18;
-        String text(TRANS("Project Name"));
-        Colour fillColour = Colours::white;
-        g.setColour(fillColour);
-        g.setFont(Font("levenim MT", 20.0f, Font::plain).withTypefaceStyle("Bold"));
-        g.drawText(text, x, y, width, height,
-                   Justification::bottomLeft, true);
-    }
-
-    {
-        int x = 20, y = 40, width = 50, height = 18;
-        String text(TRANS("Time : "));
-        Colour fillColour = Colours::white;
-        g.setColour(fillColour);
-        g.setFont(Font("levenim MT", 20.0f, Font::plain).withTypefaceStyle("Bold"));
-        g.drawText(text, x, y, width, height,
-                   Justification::bottomLeft, true);
-    }
-
-    {
-        int x = 20, y = 60, width = 50, height = 18;
-        String text(TRANS("BPM : "));
-        Colour fillColour = Colours::white;
-        g.setColour(fillColour);
-        g.setFont(Font("levenim MT", 20.0f, Font::plain).withTypefaceStyle("Bold"));
-        g.drawText(text, x, y, width, height,
-                   Justification::bottomLeft, true);
-    }
-
-    {
-        float x = 310.0f, y = 30.0f, width = 137.0f, height = 36.0f;
-        Colour fillColour = Colour(0xf2275353);
-        Colour strokeColour = Colour(0xff202e2e);
-
-        g.setColour(fillColour);
-        g.fillRoundedRectangle(x, y, width, height, 10.0f);
-        g.setColour(strokeColour);
-        g.drawRoundedRectangle(x, y, width, height, 10.0f, 1.0f);
-    }
+	/* littleLine */
+	{
+		int x = 100, y = 16, width = 1, height = 28;
+		Colour littleLineColor = Colour(0xffa7a7a7);
+		g.setColour(littleLineColor);
+		g.fillRect(x, y, width, height);
+	}
 
 }
 
@@ -179,6 +157,7 @@ void ToolbarComponent::resized()
 
 void ToolbarComponent::buttonClicked(Button* buttonThatWasClicked)
 {
+	Colour darkGreyJam = Colour(0xff2c302f);
 	if (buttonThatWasClicked == recordButton.get())
 	{
 		engine.recording();
@@ -187,16 +166,16 @@ void ToolbarComponent::buttonClicked(Button* buttonThatWasClicked)
 			recordButton->setImages(false, true, true,
 				ImageCache::getFromMemory(BinaryData::_023record_png, BinaryData::_023record_pngSize), 1.0f,
 				Colours::red,
-				Image(), 1.0f, Colours::lightgrey,
+				Image(), 1.0f, darkGreyJam,
 				Image(), 1.0f, Colours::red);
 		}
 		else 
 		{
 			recordButton->setImages(false, true, true,
 				ImageCache::getFromMemory(BinaryData::_023record_png, BinaryData::_023record_pngSize), 1.0f,
-				Colours::whitesmoke,
+				darkGreyJam,
 				Image(), 1.0f, Colours::darkred,
-				Image(), 1.0f, Colours::whitesmoke);
+				Image(), 1.0f, darkGreyJam);
 		}
 
 	}
@@ -221,9 +200,9 @@ void ToolbarComponent::buttonClicked(Button* buttonThatWasClicked)
 		{
 			loopButton->setImages(false, true, true,
 				ImageCache::getFromMemory(BinaryData::_081loop_png, BinaryData::_081loop_pngSize), 1.0f,
-				Colours::whitesmoke,
+				darkGreyJam,
 				Image(), 1.0f, Colours::orange,
-				Image(), 1.0f, Colours::whitesmoke);
+				Image(), 1.0f, darkGreyJam);
 		}
 	}
 	else if (buttonThatWasClicked == metronomeButton.get())
@@ -238,9 +217,6 @@ void ToolbarComponent::buttonClicked(Button* buttonThatWasClicked)
 		{
 			metroGui.setStatePlay(false);
 		}
-
-
-		
 	}
 
 }
@@ -249,9 +225,10 @@ void ToolbarComponent::getCurrentTimeText()
 {
 	auto playheadPos = engine.getTransport().getCurrentPlayhead()->getPosition();
 	auto totalTime = roundDoubleToInt(playheadPos);
-
+	
 	seconds = totalTime % 60;
 	minutes = totalTime / 60;
+
 
 	auto  sec = std::to_string(seconds);
 	auto  min = std::to_string(minutes);

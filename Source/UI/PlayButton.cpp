@@ -7,11 +7,11 @@ PlayButton::PlayButton(AudioEngine& inEngine) : engine(inEngine)
 
     playButton.setButtonText("play");
     playButton.addListener(this);
-
+	Colour darkGreyJam = Colour(0xff2c302f);
     playButton.setImages(false, true, true,
-                         ImageCache::getFromMemory(BinaryData::_028play_png, BinaryData::_028play_pngSize), 1.0f, Colours::whitesmoke,
+                         ImageCache::getFromMemory(BinaryData::_028play_png, BinaryData::_028play_pngSize), 1.0f, darkGreyJam,
                          Image(), 0.965f, Colours::orange,
-                         Image(), 1.0f, Colours::whitesmoke);
+                         Image(), 1.0f, darkGreyJam);
 
     pauseButton.setButtonText("play");
     pauseButton.addListener(this);

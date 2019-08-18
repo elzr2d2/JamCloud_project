@@ -43,7 +43,10 @@ public:
 	{
 		return bpm * trackLengthInMin;
 	}
-
+	static int numChannels()
+	{
+		return numOfChannels;
+	}
 };
 
 

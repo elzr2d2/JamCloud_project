@@ -7,8 +7,6 @@ AudioThumbnailWindow::AudioThumbnailWindow(AudioEngine & inEngine):
 	startTimerHz(60);
 	engine.getEdit()->state.addListener(this);
 	addAndMakeVisible(playhead);
-	
-
 }
 
 AudioThumbnailWindow::~AudioThumbnailWindow()
@@ -19,8 +17,9 @@ AudioThumbnailWindow::~AudioThumbnailWindow()
 void AudioThumbnailWindow::update()
 {
 	rebuildTrackThumbnailList();
-	playhead.toFront(false);
+	
 	repaint();
+	playhead.toFront(true);
 
 }
 
@@ -56,11 +55,15 @@ void AudioThumbnailWindow::paint(Graphics& g)
 		for (int i = 0; i < beats; i++)
 		{
 			/* Draw the grid lines */
-			g.setColour(mellowGrey);
-			g.fillRect(lineX,lineY, lineWidth, lineHeight);
+			if (i != 0) {
+				g.setColour(mellowGrey);
+				g.fillRect(lineX, lineY, lineWidth, lineHeight);
+			}
+
 			/* Write bar numbers */
 			String bars = std::to_string(i+1);
-			g.setColour(Colours::white);
+			g.setColour(Colours::whitesmoke);
+			g.setFont(Font("Bahnschrift", 13.10f, Font::plain).withTypefaceStyle("Regular"));
 			g.drawText(bars, lineX+1, barNumberY, barNumberWidth, barNumberHeight,
 				Justification::left, true);
 			lineX += beatDistance;
@@ -108,5 +111,5 @@ void AudioThumbnailWindow::mouseDown(const MouseEvent &e)
 {
 	auto newPlayheadPos = e.x;
 	engine.getTransport().setCurrentPosition(UiHelper::xToTime(newPlayheadPos));
-	UiHelper::xToTime(newPlayheadPos);
+
 }

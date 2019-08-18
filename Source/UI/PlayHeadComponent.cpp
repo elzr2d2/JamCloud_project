@@ -10,9 +10,8 @@ PlayHeadComponent::PlayHeadComponent(AudioEngine & inEngine ):
 void PlayHeadComponent::paint(Graphics & g)
 {
 	auto yPosition = 0;
-	
-	g.setColour(Colours::greenyellow);
-	
+	Colour orangeJam = Colour(0xffc39400);
+	g.setColour(orangeJam);
 	g.fillRect(0, yPosition, 2, 70*5+20);
 }
 

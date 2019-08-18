@@ -5,7 +5,7 @@
 
 constexpr int deleteClip = 1;
 constexpr int trimClip = 2;
-constexpr int copyClip = 3;
+
 AudioThumbnailComponent::AudioThumbnailComponent(tracktion_engine::Clip& inClip) :
         thumbnailCache(5), thumbnail(512, formatManager, thumbnailCache),
         clip(inClip)
@@ -14,7 +14,6 @@ AudioThumbnailComponent::AudioThumbnailComponent(tracktion_engine::Clip& inClip)
     thumbnail.addChangeListener(this);
     initSource();
 
-	
 }
 
 AudioThumbnailComponent::~AudioThumbnailComponent()
@@ -33,6 +32,7 @@ void AudioThumbnailComponent::paint(Graphics& g)
 
 
 		g.fillRect(thumbnailBounds);
+	
 	}
 	else
 	{
@@ -96,17 +96,14 @@ void AudioThumbnailComponent::mouseDown(const MouseEvent& e/*event*/)
 		PopupMenu menu;
 		menu.addItem(1, "Delete");
 		menu.addItem(2, "Trim");
-		menu.addItem(3, "Copy");
-	
+
 		auto result = menu.show();
 
 		switch (result)
 		{
 		case deleteClip: clip.removeFromParentTrack();
 			break;
-		case trimClip:
-			break;
-		case copyClip:
+		case trimClip:  
 			break;
 		default:
 			break;

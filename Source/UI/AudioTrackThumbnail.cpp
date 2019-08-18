@@ -40,12 +40,6 @@ void AudioTrackThumbnail::resized()
 		auto stratPos = UiHelper::timeToX(start);
 		thumbnail->setBounds(stratPos, 0, width, 70);
 		
-
-		
-		//auto start = position.getStart() / 10 * (double)getWidth();
-		//auto length = position.getLength() / 10 * (double)getWidth();
-		
-
 	}
 }
 

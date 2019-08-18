@@ -1,6 +1,6 @@
 #include "UIEngine.h"
 
-constexpr int toolBarHeight = 100;
+constexpr int toolBarHeight = 60;
 constexpr int menuHeight = 40;
 constexpr int yOfGrid = 100;
 constexpr int xOfGrid = 200;
@@ -24,7 +24,7 @@ void UIEngine::resized()
 	auto width = proportionOfWidth(1.0f);
 	menu.setBounds(0, 0, getWidth(), menuHeight);
 	grid.setBounds(0, menuHeight*2, getWidth(), gridHeight);
-    toolbar.setBounds(0 + roundToInt(proportionOfWidth(1.0000f) * 0.0000f), proportionOfHeight(0.85f), getWidth(), toolBarHeight);
+    toolbar.setBounds(0, proportionOfHeight(0.91f), getWidth(), toolBarHeight);
 
 	
 }

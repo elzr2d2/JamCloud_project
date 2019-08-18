@@ -5,12 +5,9 @@ constexpr int saveAsFile = 2;
 constexpr int loadFile = 3;
 constexpr int exportAsWavFile = 4;
 
-constexpr int exportToCloud = 5;
-constexpr int importFromCloud = 6;
-
 constexpr int audioSettings = 7;
 
-constexpr int login = 8;
+
 
 MenuComponent::MenuComponent (AudioEngine& inEngine):
 	engine(inEngine),
@@ -21,7 +18,6 @@ MenuComponent::MenuComponent (AudioEngine& inEngine):
     addAndMakeVisible (fileButton.get());
     fileButton->setButtonText (TRANS("File"));
     fileButton->addListener (this);
-    fileButton->setColour (TextButton::buttonColourId, Colour (0xff346160));
     fileButton->setBounds (8, 8, 65, 24);
 
 	/* Cloud Button */
@@ -29,7 +25,6 @@ MenuComponent::MenuComponent (AudioEngine& inEngine):
     addAndMakeVisible (cloudButton.get());
     cloudButton->setButtonText (TRANS("Cloud"));
     cloudButton->addListener (this);
-    cloudButton->setColour (TextButton::buttonColourId, Colour (0xff346160));
     cloudButton->setBounds (80, 8, 65, 24);
 
 	/* Settings Button */
@@ -37,16 +32,9 @@ MenuComponent::MenuComponent (AudioEngine& inEngine):
     addAndMakeVisible (settingsButton.get());
     settingsButton->setButtonText (TRANS("Settings"));
     settingsButton->addListener (this);
-    settingsButton->setColour (TextButton::buttonColourId, Colour (0xff346160));
     settingsButton->setBounds (152, 8, 65, 24);
 
-	/* User button */
-    userButton.reset (new TextButton ("userButton"));
-    addAndMakeVisible (userButton.get());
-    userButton->setButtonText (TRANS("User"));
-    userButton->addListener (this);
-    userButton->setColour (TextButton::buttonColourId, Colour (0xff346160));
-    userButton->setBounds (224, 8, 65, 24);
+
 
 	/* LOGO */
     logo.reset (new Label ("logo",
@@ -64,15 +52,11 @@ MenuComponent::MenuComponent (AudioEngine& inEngine):
 	fileMenu.addItem(loadFile, "Load");
 	fileMenu.addItem(exportAsWavFile, "Export As WAV");
 
-	/* Cloud Menu */
-	cloudMenu.addItem(exportToCloud, "Export");
-	cloudMenu.addItem(importFromCloud, "Import");
-
 	/* Settings Menu*/
 	settingsMenu.addItem(audioSettings, "Audio Settings");
 	
-	/* User Menu */
-	userMenu.addItem(login, "Login...");
+
+
 
     setSize (600, 40);
 }
@@ -82,7 +66,6 @@ MenuComponent::~MenuComponent()
     fileButton = nullptr;
     cloudButton = nullptr;
     settingsButton = nullptr;
-    userButton = nullptr;
     logo = nullptr;
 }
 
@@ -132,25 +115,13 @@ void MenuComponent::buttonClicked (Button* buttonThatWasClicked)
     }
     else if (buttonThatWasClicked == cloudButton.get())
     {
-		auto result = cloudMenu.show();
 
-		switch (result)
-		{
-		case exportToCloud:;
-			break;
-		case importFromCloud:;
-			break;
-		default:
-			break;
-		}
 
     }
     else if (buttonThatWasClicked == settingsButton.get())
     {
 		auto result = settingsMenu.show();
 		
-		
-
 		switch (result)
 		{
 		case audioSettings: engine.showAudioSettings();
@@ -159,18 +130,7 @@ void MenuComponent::buttonClicked (Button* buttonThatWasClicked)
 			break;
 		}
     }
-    else if (buttonThatWasClicked == userButton.get())
-    {
-		auto result = userMenu.show();
 
-		switch (result)
-		{
-		case login:;
-			break;
-		default:
-			break;
-		}
-    }
 
 
 }
