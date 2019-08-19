@@ -264,10 +264,11 @@ void ChannelComponent::sliderValueChanged(Slider* sliderThatWasMoved)
 	}
 }
 
-void ChannelComponent::timerCallback()
+void ChannelComponent::update()
 {
 
 }
+
 
 
 

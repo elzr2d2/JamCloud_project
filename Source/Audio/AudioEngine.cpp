@@ -8,6 +8,7 @@ AudioEngine::AudioEngine()
     edit = std::make_unique<Edit>(engine, createEmptyEdit(), Edit::forEditing, nullptr, 0);
 	createTracksAndAssignInputs();
 	edit->playInStopEnabled = true;
+
 	tempoSequence = std::make_unique<TempoSequence>(*edit.get());
 	tempoSetting = std::make_unique<TempoSetting>(*tempoSequence.get(), createEmptyEdit());
 
@@ -235,7 +236,6 @@ void AudioEngine::addChannel()
 
     addVolumeAndPanPlugin(*track);
 
-    dirty = true;
 }
 
 void AudioEngine::addVolumeAndPanPlugin(AudioTrack& track) const

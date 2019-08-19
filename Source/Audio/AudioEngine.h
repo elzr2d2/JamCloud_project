@@ -20,9 +20,11 @@ public:
 	/* Track Actions */
 	void removeTrack(te::AudioTrack& track);
 	TrackList& getTrackList() { return edit->getTrackList(); }
+	void createTracksAndAssignInputs();
 
 	/* Clip Actions */
 	void addNewClipFromFile(const File& editFile, AudioTrack& track);
+	void deleteSelectedClips();
 
 	/* Channel Sliders */
 	void changeVolume(AudioTrack& track, float newVolume);
@@ -36,6 +38,8 @@ public:
 	void stop();
 	void pause();
 	void recording();
+	void setBpm(double bpm);
+	double getBpm();
 
 	/* Transport Checks */
 	bool isRecording();
@@ -48,36 +52,24 @@ public:
 	void exportFile();
 	void createNewProject(String name, double bpm);
 
-	void createTracksAndAssignInputs();
-	void changeListenerCallback(ChangeBroadcaster* source);
-
 	/* Audio Settings */
 	void showAudioSettings();
 	void audioSettings();
 
+	/* Input Actions */
 	void inputMonitoring(AudioTrack* at);
-
-	void deleteSelectedClips();
-
-	void activeMetro();
-
-	void setBpm(double bpm);
-	double getBpm();
-
 	void enableInputMonitoring(te::AudioTrack& t, bool im, int position = 0);
+	void armTrack(te::AudioTrack& t, bool arm, int position = 0);
+	/* Input Checks */
 	bool trackHasInput(te::AudioTrack& t, int position = 0);
 	bool isInputMonitoringEnabled(te::AudioTrack& t, int position = 0);
-	void armTrack(te::AudioTrack& t, bool arm, int position = 0);
 	bool isTrackArmed(te::AudioTrack& t, int position = 0);
 
+	void activeMetro();
+	void changeListenerCallback(ChangeBroadcaster* source);
 	TransportControl& getTransport() const;
 	Edit * getEdit() const;
-	bool isDirty() { return dirty; }
-	void setDirty(bool inDirty) { dirty = inDirty; }
 
-
-	void markForUpdate(){ shouldUpdate.store(true); };
-	std::atomic<bool>  shouldUpdate;
 private:
 
     te::WaveAudioClip::Ptr loadAudioFileAsClip(const File& file, AudioTrack& track);

@@ -2,12 +2,12 @@
 
 #include "JuceHeader.h"
 #include "Audio/AudioEngine.h"
-
-class ChannelComponent : public Component,
+#include "TreeComponent.h"
+class ChannelComponent : public TreeComponent,
                          public Button::Listener,
-                         public Slider::Listener,
-                         private te::ValueTreeAllEventListener,
-                         public Timer
+                         public Slider::Listener
+                         
+                         
 {
 public:
 
@@ -18,12 +18,11 @@ public:
     void buttonClicked(Button* buttonThatWasClicked) override;
     void sliderValueChanged(Slider* sliderThatWasMoved) override;
     bool isSelected() { return selected; };
-    void timerCallback() override;
+
+	void update() override;
 
 private:
   
-	void valueTreeChildAdded(juce::ValueTree&, juce::ValueTree&) override { engine.markForUpdate(); }
-	void valueTreeChildRemoved(juce::ValueTree&, juce::ValueTree&, int) override { engine.markForUpdate(); }
     void clickSelectButton() const;
     void clickAddFileButton();
     void valueTreeChanged() override {};

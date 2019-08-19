@@ -62,6 +62,7 @@ ToolbarComponent::ToolbarComponent(AudioEngine& inEngine) :
     timeText->setColour(TextEditor::backgroundColourId, Colour(0x00000000));
     timeText->setColour(TextEditor::highlightColourId, Colour(0xb21a574e));
     timeText->setText(TRANS("time"));
+	timeText->setJustification(Justification::centredLeft);
 	timeText->setColour(TextEditor::ColourIds::textColourId, orangeJam);
 	timeText->setColour(TextEditor::ColourIds::outlineColourId, Colours::transparentWhite);
 	timeText->setFont(Font("Bahnschrift", 20.00f, Font::plain).withTypefaceStyle("Regular"));
@@ -228,18 +229,25 @@ void ToolbarComponent::getCurrentTimeText()
 	
 	seconds = totalTime % 60;
 	minutes = totalTime / 60;
+	
+	double milSec = playheadPos - totalTime;
+	if (milSec < 0) {
+		seconds = seconds - 1;
+		milSec = (milSec * -1)+0.50;
+	}
+	milSec *= 100;
 
-
+	//milSec = roundDoubleToInt(milSec);
 	auto  sec = std::to_string(seconds);
 	auto  min = std::to_string(minutes);
-	
+	auto ms = std::to_string(roundDoubleToInt(milSec));
 	if (seconds < 10)
 	{
-		timeText->setText("0" + min + ":0" + sec);
+		timeText->setText("0" + min + ":0" + sec+":"+ms);
 	}
 	else
 	{
-		timeText->setText("0" + min + ":" + sec);
+		timeText->setText("0" + min + ":" + sec + ":" + ms);
 	}
 
 }
