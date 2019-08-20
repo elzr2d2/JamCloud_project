@@ -38,13 +38,13 @@ MenuComponent::MenuComponent (AudioEngine& inEngine):
 
 	/* LOGO */
     logo.reset (new Label ("logo",
-                           TRANS("CloudJam")));
+                           TRANS("JamCloud")));
     addAndMakeVisible (logo.get());
     logo->setFont (Font ("Levenim MT", 26.40f, Font::plain).withTypefaceStyle ("Regular").withExtraKerningFactor (-0.030f));
     logo->setJustificationType (Justification::centredLeft);
     logo->setEditable (false, false, false);
-    logo->setColour (TextEditor::textColourId, Colours::black);
-    logo->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
+    logo->setColour (TextEditor::textColourId, Colours::orange);
+    logo->setColour (TextEditor::backgroundColourId, Colours::white);
 
 	/* File Menu */
 	fileMenu.addItem(newFile, "New");
@@ -115,8 +115,10 @@ void MenuComponent::buttonClicked (Button* buttonThatWasClicked)
     }
     else if (buttonThatWasClicked == cloudButton.get())
     {
-
-
+		
+		URL url("C:\\CODE\\JamCloud\\JamCloud_Firesharp\\JamCloud_Firesharp\\bin\\Debug\\JamCloud_Firesharp.exe");
+		url.launchInDefaultBrowser();
+		
     }
     else if (buttonThatWasClicked == settingsButton.get())
     {
