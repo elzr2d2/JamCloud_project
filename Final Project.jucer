@@ -156,10 +156,12 @@
         <FILE id="LgVuWd" name="MainComponent.h" compile="0" resource="0" file="Source/Main/MainComponent.h"/>
       </GROUP>
       <GROUP id="{556B2127-059F-C9B1-5111-5DE8263C093A}" name="UI">
-        <FILE id="v96soh" name="NewProjectDialog.cpp" compile="1" resource="0"
-              file="Source/UI/NewProjectDialog.cpp"/>
-        <FILE id="ya6A4Y" name="NewProjectDialog.h" compile="0" resource="0"
-              file="Source/UI/NewProjectDialog.h"/>
+        <GROUP id="{35DE271E-36BB-0043-9104-4D4E5FB96CD1}" name="Dialogs">
+          <FILE id="v96soh" name="NewProjectDialog.cpp" compile="1" resource="0"
+                file="Source/UI/NewProjectDialog.cpp"/>
+          <FILE id="ya6A4Y" name="NewProjectDialog.h" compile="0" resource="0"
+                file="Source/UI/NewProjectDialog.h"/>
+        </GROUP>
         <FILE id="I02gZ0" name="UiHelper.h" compile="0" resource="0" file="Source/UI/UiHelper.h"/>
         <FILE id="jN1IzF" name="TimelineComponent.cpp" compile="1" resource="0"
               file="Source/UI/TimelineComponent.cpp"/>

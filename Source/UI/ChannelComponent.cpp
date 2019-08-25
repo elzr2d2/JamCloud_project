@@ -142,6 +142,44 @@ void ChannelComponent::paint(Graphics& g)
         g.fillRoundedRectangle(x, y, width, height, 10.000f);
     }
 
+	if (track.isMuted(true))
+	{
+		//change color if is  Muted
+		muteButton->setImages(false, true, true,
+			ImageCache::getFromMemory(BinaryData::_033mute_png, BinaryData::_033mute_pngSize), 1.000f,
+			Colours::darkorange,
+			Image(), 1.000f, Colours::orange,
+			Image(), 1.000f, Colours::darkorange);
+	}
+	else
+	{
+		//change color if is Not Muted
+		muteButton->setImages(false, true, true,
+			ImageCache::getFromMemory(BinaryData::_033mute_png, BinaryData::_033mute_pngSize), 1.000f,
+			Colours::whitesmoke,
+			Image(), 1.000f, Colours::orange,
+			Image(), 1.000f, Colours::whitesmoke);
+	}
+
+	if (track.isSolo(false))
+	{
+		//change color if is Not Solo
+		soloButton->setImages(false, true, true,
+			ImageCache::getFromMemory(BinaryData::_048headphones_png, BinaryData::_048headphones_pngSize), 1.000f,
+			Colours::darkorange,
+			Image(), 1.000f, Colours::orange,
+			Image(), 1.000f, Colours::darkorange);
+	}
+	else
+	{
+		//change color if is  Solo
+		soloButton->setImages(false, true, true,
+			ImageCache::getFromMemory(BinaryData::_048headphones_png, BinaryData::_048headphones_pngSize),
+			1.000f, Colours::white,
+			Image(), 1.000f, Colours::orange,
+			Image(), 1.000f, Colours::whitesmoke);
+	}
+
 }
 
 void ChannelComponent::resized()
@@ -159,75 +197,29 @@ void ChannelComponent::buttonClicked(Button* buttonThatWasClicked)
 	else if (buttonThatWasClicked == muteButton.get())
 	{
 		engine.muteChannel(track);
-		
-		if (track.isMuted(true))
-		{
-			//change color if is  Muted
-			muteButton->setImages(false, true, true,
-				ImageCache::getFromMemory(BinaryData::_033mute_png, BinaryData::_033mute_pngSize), 1.000f,
-				Colours::darkorange,
-				Image(), 1.000f, Colours::orange,
-				Image(), 1.000f, Colours::darkorange);
-		}
-		else
-		{
-			//change color if is Not Muted
-			muteButton->setImages(false, true, true,
-				ImageCache::getFromMemory(BinaryData::_033mute_png, BinaryData::_033mute_pngSize), 1.000f,
-				Colours::whitesmoke,
-				Image(), 1.000f, Colours::orange,
-				Image(), 1.000f, Colours::whitesmoke);
-		}
-	
 	}
-
 	else if (buttonThatWasClicked == soloButton.get())
 	{
 		engine.soloChannel(track);
-
-		if (track.isSolo(false))
-		{
-			//change color if is Not Solo
-			soloButton->setImages(false, true, true,
-				ImageCache::getFromMemory(BinaryData::_048headphones_png, BinaryData::_048headphones_pngSize), 1.000f,
-				Colours::darkorange,
-				Image(), 1.000f, Colours::orange,
-				Image(), 1.000f, Colours::darkorange);
-		}
-		else
-		{
-			//change color if is  Solo
-			soloButton->setImages(false, true, true,
-				ImageCache::getFromMemory(BinaryData::_048headphones_png, BinaryData::_048headphones_pngSize),
-				1.000f, Colours::white,
-				Image(), 1.000f, Colours::orange,
-				Image(), 1.000f, Colours::whitesmoke);
-		}
-
 	}
 	else if (buttonThatWasClicked == addFileButton.get())
 		clickAddFileButton();
 	else if (buttonThatWasClicked == selectInputButton.get())
 		engine.inputMonitoring(&track);
-
+	repaint();
 }
 
 void ChannelComponent::clickAddFileButton()
 {
     auto location = File::getSpecialLocation(File::userDesktopDirectory);
-
     FileChooser chooser("Choose a file", location, "*.wav", true, false);
 
     if (chooser.browseForFileToOpen())
     {
         auto file = chooser.getResult();
-
         engine.addNewClipFromFile(file, track);
-
 		nameText.get()->setText(file.getFileName());
-	
     }
-	
 }
 
 void ChannelComponent::clickSelectButton() const

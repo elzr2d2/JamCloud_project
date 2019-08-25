@@ -17,12 +17,9 @@ AudioThumbnailWindow::~AudioThumbnailWindow()
 void AudioThumbnailWindow::update()
 {
 	rebuildTrackThumbnailList();
-	
 	repaint();
 	playhead.toFront(true);
-
 }
-
 
 void AudioThumbnailWindow::paint(Graphics& g)
 {
@@ -76,16 +73,15 @@ void AudioThumbnailWindow::paint(Graphics& g)
 
 void AudioThumbnailWindow::addNewAudioTrackThumbnail(AudioTrack & audioTrack)
 {
+	int channelHeight = 70;
 	trackThumbnails.emplace_back();
 
 	auto& addedTrackThumbnail = trackThumbnails.back();
 
 	addedTrackThumbnail.reset(new AudioTrackThumbnail(audioTrack));
-
 	addAndMakeVisible(*addedTrackThumbnail);
-
-	addedTrackThumbnail->setBounds(0, channelY, getWidth(), 70);
-	channelY += 70;
+	addedTrackThumbnail->setBounds(0, channelY, getWidth(), channelHeight);
+	channelY += channelHeight;
 }
 
 void AudioThumbnailWindow::clearAudioTrackThumbnails()
@@ -104,7 +100,6 @@ void AudioThumbnailWindow::rebuildTrackThumbnailList()
 		if (audioTrack != nullptr)
 			addNewAudioTrackThumbnail(*audioTrack);
 	}
-	
 }
 
 void AudioThumbnailWindow::mouseDown(const MouseEvent &e)

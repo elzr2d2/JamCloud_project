@@ -34,8 +34,6 @@ MenuComponent::MenuComponent (AudioEngine& inEngine):
     settingsButton->addListener (this);
     settingsButton->setBounds (152, 8, 65, 24);
 
-
-
 	/* LOGO */
     logo.reset (new Label ("logo",
                            TRANS("CloudJam")));
@@ -55,9 +53,6 @@ MenuComponent::MenuComponent (AudioEngine& inEngine):
 	/* Settings Menu*/
 	settingsMenu.addItem(audioSettings, "Audio Settings");
 	
-
-
-
     setSize (600, 40);
 }
 
@@ -85,15 +80,11 @@ void MenuComponent::paint (Graphics& g)
 
 void MenuComponent::resized()
 {
-
     logo->setBounds (568, 6, roundToInt (65 * 1.6615f), 32);
-
 }
 
 void MenuComponent::buttonClicked (Button* buttonThatWasClicked)
 {
-
-
     if (buttonThatWasClicked == fileButton.get())
     {
 		auto result = fileMenu.show();
@@ -106,17 +97,15 @@ void MenuComponent::buttonClicked (Button* buttonThatWasClicked)
 			break;
 		case saveAsFile:engine.saveAsFile();
 			break;
-		case exportAsWavFile:;
+		case exportAsWavFile:engine.exportFile();
 			break;
-
 		default:
 			break;
 		}
     }
     else if (buttonThatWasClicked == cloudButton.get())
     {
-
-
+		
     }
     else if (buttonThatWasClicked == settingsButton.get())
     {

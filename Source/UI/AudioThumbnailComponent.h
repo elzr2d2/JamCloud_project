@@ -3,7 +3,6 @@
 #include "JuceHeader.h"
 #include "Audio/AudioEngine.h"
 
-//==============================================================================
 class AudioThumbnailComponent : public Component,
                                 private ChangeListener
 {
@@ -27,8 +26,6 @@ private:
     void paintIfNoFileLoaded(Graphics& g, const Rectangle<int>& thumbnailBounds);
     void paintIfFileLoaded(Graphics& g, const Rectangle<int>& thumbnailBounds);
 
-	
-
     AudioFormatManager formatManager;
     AudioThumbnailCache thumbnailCache;
     AudioThumbnail thumbnail;
@@ -36,7 +33,6 @@ private:
 	bool selected = false;
 
     tracktion_engine::Clip& clip;
-
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (AudioThumbnailComponent)
 };

@@ -4,11 +4,10 @@ constexpr int NumberOfChannels = 5;
 
 AudioEngine::AudioEngine()
 {
-	
     edit = std::make_unique<Edit>(engine, createEmptyEdit(), Edit::forEditing, nullptr, 0);
 	createTracksAndAssignInputs();
 	edit->playInStopEnabled = true;
-
+	
 	tempoSequence = std::make_unique<TempoSequence>(*edit.get());
 	tempoSetting = std::make_unique<TempoSetting>(*tempoSequence.get(), createEmptyEdit());
 
@@ -63,7 +62,6 @@ te::WaveAudioClip::Ptr AudioEngine::loadAudioFileAsClip(const File& file, AudioT
 	
     if (audioFile.isValid())
     {
-		
         auto name = file.getFileNameWithoutExtension();
 
 		auto tracklen = track.getLength();
@@ -149,27 +147,7 @@ bool AudioEngine::trackHasInput(te::AudioTrack& t, int position)
     return false;
 }
 
-void AudioEngine::play()
-{
-    getTransport().play(false);
-}
 
-void AudioEngine::loop()
-{
-	auto endLoopPos = edit->getTransport().getCurrentPosition();
-	EditTimeRange timeRange{ 0,endLoopPos };
-	
-	if (isLooping())
-	{
-		getTransport().looping.setValue(false, nullptr);
-	}
-	else
-	{
-		edit->getTransport().setLoopRange(timeRange);
-		getTransport().looping.setValue(true, nullptr);
-	}
-
-}
 
 TransportControl& AudioEngine::getTransport() const
 {
@@ -183,25 +161,57 @@ Edit * AudioEngine::getEdit() const
 
 
 
-void AudioEngine::stop()
+
+void AudioEngine::play()
 {
-    getTransport().stop(false, false, true, true);
-	getTransport().setCurrentPosition(0);		
+	getTransport().play(false);
 }
 
 void AudioEngine::pause()
 {
-    getTransport().stop(true, false, true, false);
+	//stop recording in case Record is on
+	if (isRecording())
+	{
+		getTransport().stop(true, false, true, false);
+	}
+	else
+	{
+		getTransport().stop(false, false, true, false);
+	}
+    
+}
+
+void AudioEngine::stop()
+{
+	getTransport().stop(false, false, true, true);
+	getTransport().setCurrentPosition(0);
 }
 
 void AudioEngine::recording()
 {
-    bool wasRecording = edit->getTransport().isRecording();
-    toggleRecord();
+	bool wasRecording = edit->getTransport().isRecording();
+	toggleRecord();
 
-    if (wasRecording)
-        te::EditFileOperations(*edit).save(true, true, false);
+	if (wasRecording)
+		te::EditFileOperations(*edit).save(true, true, false);
 }
+
+void AudioEngine::loop()
+{
+	auto endLoopPos = edit->getTransport().getCurrentPosition();
+	EditTimeRange timeRange{ 0,endLoopPos };
+
+	if (isLooping())
+	{
+		getTransport().looping.setValue(false, nullptr);
+	}
+	else
+	{
+		edit->getTransport().setLoopRange(timeRange);
+		getTransport().looping.setValue(true, nullptr);
+	}
+}
+
 
 void AudioEngine::toggleRecord()
 {
@@ -315,7 +325,6 @@ bool AudioEngine::isLooping()
 
 void AudioEngine::saveAsFile()
 {
-
 	File editFile{  };
 	
 	if (editFile == File())
@@ -323,14 +332,12 @@ void AudioEngine::saveAsFile()
 		FileChooser fc("New Edit", File::getSpecialLocation(File::userDocumentsDirectory), "*.tracktionedit");
 		if (fc.browseForFileToSave(true))
 		{
-
 			editFile = fc.getResult();
 			edit->editFileRetriever = [editFile] { return editFile; };
 		}
 		
 		te::EditFileOperations(*edit).saveAs(editFile,false);
 	}
-	
 }
 
 void AudioEngine::loadFile()

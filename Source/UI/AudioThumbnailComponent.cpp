@@ -29,10 +29,7 @@ void AudioThumbnailComponent::paint(Graphics& g)
 	if (!selected)
 	{
 		g.setColour(Colours::transparentWhite);
-
-
 		g.fillRect(thumbnailBounds);
-	
 	}
 	else
 	{
@@ -103,7 +100,7 @@ void AudioThumbnailComponent::mouseDown(const MouseEvent& e/*event*/)
 		{
 		case deleteClip: clip.removeFromParentTrack();
 			break;
-		case trimClip:  
+		case trimClip:;
 			break;
 		default:
 			break;
@@ -136,6 +133,5 @@ void AudioThumbnailComponent::initSource()
 {
     File file = clip.getCurrentSourceFile();
     thumbnail.setSource(new FileInputSource(file));
-
 }
 

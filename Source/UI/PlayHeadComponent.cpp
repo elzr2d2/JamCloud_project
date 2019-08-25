@@ -24,14 +24,12 @@ void PlayHeadComponent::mouseDrag(const MouseEvent &e)
 
 void PlayHeadComponent::mouseDown(const MouseEvent &e)
 {
-	//engine.getTransport().setUserDragging(true); 
-	
 
 }
 
 void PlayHeadComponent::mouseUp(const MouseEvent &e)
 {
-	//engine.getTransport().setUserDragging(false);
+	
 }
 
 

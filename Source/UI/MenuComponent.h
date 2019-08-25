@@ -3,6 +3,7 @@
 #include "JuceHeader.h"
 #include "Audio/AudioEngine.h"
 #include "NewProjectDialog.h"
+
 class MenuComponent  : public Component,
                        public Button::Listener
 {

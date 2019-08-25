@@ -2,7 +2,6 @@
 
 #include "JuceHeader.h"
 #include "Audio/AudioEngine.h"
-#include "PlayButton.h"
 #include "MetronomeGuiComponent.h"
 
 class ToolbarComponent  : public Component,
@@ -30,16 +29,14 @@ private:
     std::unique_ptr<ImageButton> recordButton;
     std::unique_ptr<ImageButton> stopButton;
     std::unique_ptr<ImageButton> loopButton;
-    std::unique_ptr<TextEditor> timeText;
-    std::unique_ptr<TextEditor> bpmText;
     std::unique_ptr<ImageButton> metronomeButton;
-	
+	std::unique_ptr<ImageButton> playButton;
+	std::unique_ptr<TextEditor>  timeText;
+	std::unique_ptr<TextEditor>  bpmText;
 	MetronomeGuiComponent metroGui;
 
 	int minutes = 0;
 	int seconds = 0;
-
-    PlayButton playButton;
 
     AudioEngine& engine;
 

@@ -6,7 +6,6 @@ GridComponent::GridComponent (AudioEngine& inEngine) :
 	channelWindow(inEngine),
 	thumbnailsWindow(inEngine)
 {
-
 	addAndMakeVisible(channelWindow);
 	addAndMakeVisible(viewport);
 	
@@ -21,11 +20,9 @@ GridComponent::~GridComponent()
 
 }
 
-
 void GridComponent::paint (Graphics& g)
 {
 	   g.fillAll (Colour(0xff25292b));
-	   
 }
 
 void GridComponent::resized()
@@ -33,6 +30,5 @@ void GridComponent::resized()
 	channelWindow.setBounds(0,0,200,360);
 	viewport.setBounds(200,0,proportionOfWidth(0.8f), (70*5)+10+20);
 	thumbnailsWindow.setBounds(0, 0, 60000, 70 * 5+20);
-
 }
 

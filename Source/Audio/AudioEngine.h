@@ -73,11 +73,12 @@ public:
 private:
 
     te::WaveAudioClip::Ptr loadAudioFileAsClip(const File& file, AudioTrack& track);
+	te::AudioTrack* getOrInsertAudioTrackAt(te::Edit& edit, int index);
     void removeAllClips(te::AudioTrack& track);
     void adjustClipProperties(tracktion_engine::WaveAudioClip& clip) const;
 	void removeAllTracks();
 	void addVolumeAndPanPlugin(AudioTrack& track) const;
-	te::AudioTrack* getOrInsertAudioTrackAt(te::Edit& edit, int index);
+
 	void toggleRecord();
 
     te::Engine engine{ProjectInfo::projectName};
@@ -91,13 +92,8 @@ private:
 	
 	std::unique_ptr <te::TempoSequence> tempoSequence;
 	std::unique_ptr <te::TempoSetting> tempoSetting;
-	
-
 	bool channelSelected = false;
-    bool dirty = true;
     int trackN = 0;
 
-	File lastRecording;
-	
 	JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(AudioEngine)
 };

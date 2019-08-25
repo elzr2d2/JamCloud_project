@@ -1,16 +1,23 @@
 #include "ToolbarComponent.h"
 
 ToolbarComponent::ToolbarComponent(AudioEngine& inEngine) :
-        playButton(inEngine),
         engine(inEngine)
 {
 	startTimerHz(30);
 	
 	Colour darkGreyJam = Colour(0xff2c302f);
 	Colour orangeJam = Colour(0xffc39400);
+
 	/* Play Button */
-	addAndMakeVisible(playButton);
-	playButton.setBounds(211, 24, 16, 16);
+	playButton.reset(new ImageButton("playButton"));
+	addAndMakeVisible(playButton.get());
+	playButton->setButtonText(TRANS("new button"));
+	playButton->addListener(this);
+	playButton->setImages(false, true, true,
+		ImageCache::getFromMemory(BinaryData::_028play_png, BinaryData::_028play_pngSize), 1.0f, darkGreyJam,
+		Image(), 0.965f, Colours::orange,
+		Image(), 1.0f, darkGreyJam);
+	playButton->setBounds(211, 24, 16, 16);
 
 	/* Stop Button */
 	stopButton.reset(new ImageButton("stopButton"));
@@ -109,12 +116,13 @@ ToolbarComponent::~ToolbarComponent()
     timeText = nullptr;
     bpmText = nullptr;
     metronomeButton = nullptr;
+	playButton = nullptr;
 }
 
 
 void ToolbarComponent::paint(Graphics& g)
 {
-
+	Colour darkGreyJam = Colour(0xff2c302f);
 	/* Background */
 	g.fillAll(Colour(0xff2c2d35));
 	
@@ -149,6 +157,55 @@ void ToolbarComponent::paint(Graphics& g)
 		g.fillRect(x, y, width, height);
 	}
 
+	/* Toggle Color For Buttons */
+	if (engine.isLooping())
+	{
+		loopButton->setImages(false, true, true,
+			ImageCache::getFromMemory(BinaryData::_081loop_png, BinaryData::_081loop_pngSize), 1.0f,
+			Colours::orange,
+			Image(), 1.0f, Colours::orange,
+			Image(), 1.0f, Colours::orange);
+	}
+	else
+	{
+		loopButton->setImages(false, true, true,
+			ImageCache::getFromMemory(BinaryData::_081loop_png, BinaryData::_081loop_pngSize), 1.0f,
+			darkGreyJam,
+			Image(), 1.0f, Colours::orange,
+			Image(), 1.0f, darkGreyJam);
+	}
+
+	if (engine.isRecording())
+	{
+		recordButton->setImages(false, true, true,
+			ImageCache::getFromMemory(BinaryData::_023record_png, BinaryData::_023record_pngSize), 1.0f,
+			Colours::red,
+			Image(), 1.0f, darkGreyJam,
+			Image(), 1.0f, Colours::red);
+	}
+	else
+	{
+		recordButton->setImages(false, true, true,
+			ImageCache::getFromMemory(BinaryData::_023record_png, BinaryData::_023record_pngSize), 1.0f,
+			darkGreyJam,
+			Image(), 1.0f, Colours::darkred,
+			Image(), 1.0f, darkGreyJam);
+	}
+
+	if (engine.isPlaying())
+	{
+		playButton->setImages(false, true, true,
+			ImageCache::getFromMemory(BinaryData::_031pause_png, BinaryData::_031pause_pngSize), 1.0f, Colours::darkorange,
+			Image(), 0.965f, Colours::orange,
+			Image(), 1.0f, Colours::darkorange);
+	}
+	else
+	{
+		playButton->setImages(false, true, true,
+			ImageCache::getFromMemory(BinaryData::_028play_png, BinaryData::_028play_pngSize), 1.0f, darkGreyJam,
+			Image(), 0.965f, Colours::orange,
+			Image(), 1.0f, darkGreyJam);
+	}
 }
 
 void ToolbarComponent::resized()
@@ -158,29 +215,10 @@ void ToolbarComponent::resized()
 
 void ToolbarComponent::buttonClicked(Button* buttonThatWasClicked)
 {
-	Colour darkGreyJam = Colour(0xff2c302f);
 	if (buttonThatWasClicked == recordButton.get())
 	{
 		engine.recording();
-		if (engine.isRecording())
-		{
-			recordButton->setImages(false, true, true,
-				ImageCache::getFromMemory(BinaryData::_023record_png, BinaryData::_023record_pngSize), 1.0f,
-				Colours::red,
-				Image(), 1.0f, darkGreyJam,
-				Image(), 1.0f, Colours::red);
-		}
-		else 
-		{
-			recordButton->setImages(false, true, true,
-				ImageCache::getFromMemory(BinaryData::_023record_png, BinaryData::_023record_pngSize), 1.0f,
-				darkGreyJam,
-				Image(), 1.0f, Colours::darkred,
-				Image(), 1.0f, darkGreyJam);
-		}
-
 	}
-
 	else if (buttonThatWasClicked == stopButton.get())
 	{
 		engine.pause();
@@ -189,22 +227,13 @@ void ToolbarComponent::buttonClicked(Button* buttonThatWasClicked)
 	else if (buttonThatWasClicked == loopButton.get())
 	{
 		engine.loop();
-		if (engine.isLooping())
-		{
-			loopButton->setImages(false, true, true,
-				ImageCache::getFromMemory(BinaryData::_081loop_png, BinaryData::_081loop_pngSize), 1.0f,
-				Colours::orange,
-				Image(), 1.0f, Colours::orange,
-				Image(), 1.0f, Colours::orange);
-		}
+	}
+	else if (buttonThatWasClicked == playButton.get())
+	{
+		if (!engine.isPlaying())
+			engine.play();
 		else
-		{
-			loopButton->setImages(false, true, true,
-				ImageCache::getFromMemory(BinaryData::_081loop_png, BinaryData::_081loop_pngSize), 1.0f,
-				darkGreyJam,
-				Image(), 1.0f, Colours::orange,
-				Image(), 1.0f, darkGreyJam);
-		}
+			engine.pause();
 	}
 	else if (buttonThatWasClicked == metronomeButton.get())
 	{
@@ -219,7 +248,7 @@ void ToolbarComponent::buttonClicked(Button* buttonThatWasClicked)
 			metroGui.setStatePlay(false);
 		}
 	}
-
+	repaint();
 }
 
 void ToolbarComponent::getCurrentTimeText()
@@ -237,7 +266,6 @@ void ToolbarComponent::getCurrentTimeText()
 	}
 	milSec *= 100;
 
-	//milSec = roundDoubleToInt(milSec);
 	auto  sec = std::to_string(seconds);
 	auto  min = std::to_string(minutes);
 	auto ms = std::to_string(roundDoubleToInt(milSec));
@@ -249,7 +277,6 @@ void ToolbarComponent::getCurrentTimeText()
 	{
 		timeText->setText("0" + min + ":" + sec + ":" + ms);
 	}
-
 }
 
 void ToolbarComponent::timerCallback()

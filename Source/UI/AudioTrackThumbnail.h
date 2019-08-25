@@ -6,9 +6,7 @@
 #include "Audio/AudioEngine.h"
 #include "TreeComponent.h"
 
-class AudioTrackThumbnail : public TreeComponent
-							 
-							 
+class AudioTrackThumbnail : public TreeComponent					 
 {
 public:
 	AudioTrackThumbnail(AudioTrack& inTrack);
@@ -18,11 +16,8 @@ public:
 	void resized() override;
 
 private:
-
 	void rebuildClips();
-
 	std::vector<std::unique_ptr<AudioThumbnailComponent>> audioThumbnailComponents;
-
 	AudioTrack& track;
 	
 };

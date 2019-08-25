@@ -2,11 +2,11 @@
 
 constexpr int numOfChannels = 5;
 
-constexpr int channelHight = 70;
+constexpr int channelHeight = 70;
 constexpr int channelWidth = 200;
 
 constexpr double gridWidth = 60000;
-constexpr int gridHight = numOfChannels * channelHight;
+constexpr int gridHight = numOfChannels * channelHeight;
 constexpr double trackLength = 600;//seconds
 constexpr double trackLengthInMin = trackLength/60;
 
