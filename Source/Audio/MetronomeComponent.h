@@ -36,6 +36,7 @@ private:
     AudioFormatManager mFormatManager;
     std::unique_ptr <AudioFormatReaderSource> pMetronomeSample { nullptr };
 
-
+	File hiBeat{ "C:/CODE/JamCloud/JamCloud/JamCloud_project/Source/Metronome_Sounds/cowbell.wav" };
+	File loBeat{ "C:/CODE/JamCloud/JamCloud/JamCloud_project/Source/Metronome_Sounds/sticks.wav" };
 };
 

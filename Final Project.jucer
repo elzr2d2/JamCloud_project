@@ -226,6 +226,10 @@
         <FILE id="DT33FR" name="UiHelpers.h" compile="0" resource="0" file="Source/UI/UiHelpers.h"/>
       </GROUP>
     </GROUP>
+    <GROUP id="{754B2F90-1AF6-E3B5-F764-A62936968E2E}" name="Metronome_Sounds">
+      <FILE id="stRIyD" name="cowbell.wav" compile="0" resource="1" file="Source/Metronome_Sounds/cowbell.wav"/>
+      <FILE id="fWnUt5" name="sticks.wav" compile="0" resource="1" file="Source/Metronome_Sounds/sticks.wav"/>
+    </GROUP>
   </MAINGROUP>
   <EXPORTFORMATS>
     <XCODE_MAC targetFolder="Builds/MacOSX">
@@ -337,7 +341,7 @@
   </EXPORTFORMATS>
   <MODULES>
     <MODULE id="juce_audio_basics" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
-    <MODULE id="juce_audio_devices" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+    <MODULE id="juce_audio_devices" showAllCode="1" useLocalCopy="1" useGlobalPath="1"/>
     <MODULE id="juce_audio_formats" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
     <MODULE id="juce_audio_processors" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
     <MODULE id="juce_audio_utils" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
@@ -355,5 +359,5 @@
     <WINDOWS/>
     <OSX/>
   </LIVE_SETTINGS>
-  <JUCEOPTIONS JUCE_STRICT_REFCOUNTEDPOINTER="1"/>
+  <JUCEOPTIONS JUCE_STRICT_REFCOUNTEDPOINTER="1" JUCE_ASIO="1"/>
 </JUCERPROJECT>

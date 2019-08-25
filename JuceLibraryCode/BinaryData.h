@@ -251,8 +251,14 @@ namespace BinaryData
     extern const char*   _031pause_png;
     const int            _031pause_pngSize = 4088;
 
+    extern const char*   cowbell_wav;
+    const int            cowbell_wavSize = 15804;
+
+    extern const char*   sticks_wav;
+    const int            sticks_wavSize = 6052;
+
     // Number of elements in the namedResourceList and originalFileNames arrays.
-    const int namedResourceListSize = 81;
+    const int namedResourceListSize = 83;
 
     // Points to the start of a list of resource names.
     extern const char* namedResourceList[];

@@ -14,6 +14,7 @@ public:
 	void valueTreeChildRemoved(juce::ValueTree&, juce::ValueTree&, int) override { markForUpdate(); }
 	void valueTreeChanged() override {};
 	void markForUpdate() { shouldUpdate.store(true); }
+
 protected:
 
 	virtual void update();
