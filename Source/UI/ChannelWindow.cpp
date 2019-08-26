@@ -1,6 +1,5 @@
 #include "ChannelWindow.h"
 
-const int channelHeight = 70;
 
 ChannelWindow::ChannelWindow(AudioEngine& inEngine) : engine(inEngine)
 														
@@ -41,6 +40,7 @@ void ChannelWindow::clearChannels()
 
 void ChannelWindow::addNewTrackComponent(AudioTrack& audioTrack)
 {
+	int  channelHeight = UiHelper::getChannelHeight();
     channels.emplace_back();
 
     auto& addedChannel = channels.back();

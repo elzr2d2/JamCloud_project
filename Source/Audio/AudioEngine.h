@@ -50,7 +50,7 @@ public:
 	void saveAsFile();
 	void loadFile();
 	void exportFile();
-	void createNewProject(String name, double bpm);
+	void createNewProject();
 
 	/* Audio Settings */
 	void showAudioSettings();
@@ -69,7 +69,7 @@ public:
 	void changeListenerCallback(ChangeBroadcaster* source);
 	TransportControl& getTransport() const;
 	Edit * getEdit() const;
-
+	String projectName;
 private:
 
     te::WaveAudioClip::Ptr loadAudioFileAsClip(const File& file, AudioTrack& track);

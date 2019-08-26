@@ -155,7 +155,7 @@ void NewProjectDialog::buttonClicked(Button * buttonThatWasClicked)
 		stringToDouble << bpmEditor->getText();
 		stringToDouble >> bpm;
 
-		engine.createNewProject(projectName, bpm);
+		//engine.createNewProject(projectName, bpm);
 		
 	}
 }

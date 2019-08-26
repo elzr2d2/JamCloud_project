@@ -22,8 +22,6 @@ public:
 
 	void setBpm();
 
-	
-
 private:
 
     std::unique_ptr<ImageButton> recordButton;

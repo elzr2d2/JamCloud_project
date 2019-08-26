@@ -36,6 +36,7 @@ private:
     AudioFormatManager mFormatManager;
     std::unique_ptr <AudioFormatReaderSource> pMetronomeSample { nullptr };
 
-
+	File hiBeat{ "C:/Users/yarde/Desktop/Projects Files/wavs/cowbell.wav" };
+	File loBeat{ "C:/Users/yarde/Desktop/Projects Files/wavs/cowbell.wav" };
 };
 

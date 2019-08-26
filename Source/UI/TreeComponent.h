@@ -14,9 +14,10 @@ public:
 	void valueTreeChildRemoved(juce::ValueTree&, juce::ValueTree&, int) override { markForUpdate(); }
 	void valueTreeChanged() override {};
 	void markForUpdate() { shouldUpdate.store(true); }
-protected:
 
+protected:
 	virtual void update();
+
 private:
 	std::atomic<bool>  shouldUpdate;
 };

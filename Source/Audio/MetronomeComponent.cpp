@@ -10,12 +10,13 @@
 
 #include "MetronomeComponent.h"
 
+
+
 MetronomeComponent::MetronomeComponent()
 {
     mFormatManager.registerBasicFormats();
     
-    File myFile { File::getSpecialLocation(File::SpecialLocationType::userDesktopDirectory) };
-    auto mySamples = myFile.findChildFiles(File::TypesOfFileToFind::findFiles, true, "cowbell.wav");
+	File mySamples[2]{ hiBeat, loBeat };
     
     jassert(mySamples[0].exists());
     

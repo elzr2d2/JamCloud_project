@@ -10,7 +10,7 @@ AudioEngine::AudioEngine()
 	
 	tempoSequence = std::make_unique<TempoSequence>(*edit.get());
 	tempoSetting = std::make_unique<TempoSetting>(*tempoSequence.get(), createEmptyEdit());
-
+	
 	te::EditFileOperations(*edit).save(true, true, false);
 	
 	removeAllTracks();
@@ -381,14 +381,45 @@ void AudioEngine::exportFile()
 	//te::ExportJob exJob(edit.get(),&dir,Project::Ptr::get(),)
 }
 
-void AudioEngine::createNewProject(String name, double bpm)
+void AudioEngine::createNewProject()
 {
+#if JUCE_MODAL_LOOPS_PERMITTED
+	AlertWindow w("New Project",
+		"This AlertWindow has a couple of extra components added to show how to add drop-down lists and text entry boxes.",
+		AlertWindow::AlertIconType::NoIcon);
+	w.addTextEditor("projectName", "enter the name of yo song","Name");
+	w.addTextEditor("bpm", "enter the BPM here", "BPM");
 
-	for (int i = 0; i < NumberOfChannels; i++)
+	w.addButton("OK", 1, KeyPress(KeyPress::returnKey, 0, 0));
+	w.addButton("Cancel", 0, KeyPress(KeyPress::escapeKey, 0, 0));
+
+	if (w.runModalLoop() != 0) // is they picked 'ok'
 	{
-		addChannel();
+
+		// this is the text they entered..
+		auto bpmText = w.getTextEditorContents("bpm");
+		double bpm = 0.0;
+		projectName = w.getTextEditorContents("projectName");
+
+		//convert from string to double
+		std::stringstream stringToDouble;
+		stringToDouble << bpmText;
+		stringToDouble >> bpm;
+
+		if (bpm > 60 && bpm < 200)
+			setBpm(bpm);
+		else
+			setBpm(120);
+
+		
+		for (int i = 0; i < NumberOfChannels; i++)
+		{
+			addChannel();
+		}
 	}
-	setBpm(bpm);
+#endif
+
+
 }
 
 

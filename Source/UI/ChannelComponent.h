@@ -3,6 +3,7 @@
 #include "JuceHeader.h"
 #include "Audio/AudioEngine.h"
 #include "TreeComponent.h"
+#include "UiHelper.h"
 class ChannelComponent : public TreeComponent,
                          public Button::Listener,
                          public Slider::Listener

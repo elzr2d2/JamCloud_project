@@ -47,6 +47,15 @@ public:
 	{
 		return numOfChannels;
 	}
+	static int getChannelHeight()
+	{
+		return channelHeight;
+	}
+	static int getPlayheadHeight()
+	{
+		int timelineHeight = 20;
+		return numOfChannels * channelHeight+ timelineHeight;
+	}
 };
 
 

@@ -36,13 +36,13 @@ MenuComponent::MenuComponent (AudioEngine& inEngine):
 
 	/* LOGO */
     logo.reset (new Label ("logo",
-                           TRANS("CloudJam")));
+                           TRANS("JamCloud")));
     addAndMakeVisible (logo.get());
     logo->setFont (Font ("Levenim MT", 26.40f, Font::plain).withTypefaceStyle ("Regular").withExtraKerningFactor (-0.030f));
     logo->setJustificationType (Justification::centredLeft);
     logo->setEditable (false, false, false);
-    logo->setColour (TextEditor::textColourId, Colours::black);
-    logo->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
+    logo->setColour (TextEditor::textColourId, Colours::orange);
+    logo->setColour (TextEditor::backgroundColourId, Colours::white);
 
 	/* File Menu */
 	fileMenu.addItem(newFile, "New");
@@ -91,11 +91,12 @@ void MenuComponent::buttonClicked (Button* buttonThatWasClicked)
 
 		switch (result)
 		{
-		case newFile:DialogWindow::showDialog("Create New Project",&newProjectDialog,nullptr,Colours::grey,true);
+		case newFile:		engine.createNewProject();
+			//DialogWindow::showDialog("Create New Project",&newProjectDialog,nullptr,Colours::grey,true);
 			break;
-		case loadFile:engine.loadFile();
+		case loadFile:		engine.loadFile();
 			break;
-		case saveAsFile:engine.saveAsFile();
+		case saveAsFile:	engine.saveAsFile();
 			break;
 		case exportAsWavFile:engine.exportFile();
 			break;
@@ -104,8 +105,13 @@ void MenuComponent::buttonClicked (Button* buttonThatWasClicked)
 		}
     }
     else if (buttonThatWasClicked == cloudButton.get())
-    {
+    {		
+	/*<<<<<<< HEAD
+			=======
+		URL url("C:\\CODE\\JamCloud\\JamCloud_Firesharp\\JamCloud_Firesharp\\bin\\Debug\\JamCloud_Firesharp.exe");
+		url.launchInDefaultBrowser();
 		
+	>>>>>>> 94bb6dab4f1cd123fcb301de587e9386a3d35793*/	
     }
     else if (buttonThatWasClicked == settingsButton.get())
     {

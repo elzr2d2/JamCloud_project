@@ -13,9 +13,12 @@ UIEngine::UIEngine(AudioEngine& inEngine) :
 	menu(inEngine),
 	grid(inEngine)
 {
+
+	
 	addAndMakeVisible(menu);
-    addAndMakeVisible(toolbar);
+	addAndMakeVisible(toolbar);
 	addAndMakeVisible(grid);
+
 	
 }
 
@@ -25,7 +28,8 @@ void UIEngine::resized()
 	menu.setBounds(0, 0, getWidth(), menuHeight);
 	grid.setBounds(0, menuHeight*2, getWidth(), gridHeight);
     toolbar.setBounds(0, proportionOfHeight(0.91f), getWidth(), toolBarHeight);
-
+	
 	
 }
+
 
