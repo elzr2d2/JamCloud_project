@@ -16,9 +16,7 @@ struct NewProject : Command
 
 struct LoadProject : Command
 {
-    LoadProject(const File& fileToUse) : file(fileToUse) {}
 
-    File file;
 };
 
 }

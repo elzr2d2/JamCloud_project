@@ -95,7 +95,8 @@ void MenuComponent::buttonClicked (Button* buttonThatWasClicked)
 		case newFile:
 			invokeCommand(new Commands::NewProject());
 			break;
-		case loadFile:		engine.loadFile();
+		case loadFile:
+		    invokeCommand(new Commands::LoadProject());
 			break;
 		case saveAsFile:	engine.saveAsFile();
 			break;

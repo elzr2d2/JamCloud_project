@@ -1,37 +1,59 @@
 #include "AudioEngine.h"
 
+std::unique_ptr<te::Engine> tracktionEngine;
+
+te::Engine& getTracktionEngine()
+{
+    if (tracktionEngine == nullptr)
+        tracktionEngine = std::make_unique<te::Engine>("JamCloud");
+
+    return *tracktionEngine;
+}
+
 constexpr int NumberOfChannels = 5;
 
-AudioEngine::AudioEngine()
+AudioEngine::AudioEngine(ValueTree projectToLoad)
 {
-    edit = std::make_unique<Edit>(engine, createEmptyEdit(), Edit::forEditing, nullptr, 0);
-	createTracksAndAssignInputs();
-	edit->playInStopEnabled = true;
-	
-	tempoSequence = std::make_unique<TempoSequence>(*edit.get());
-	tempoSetting = std::make_unique<TempoSetting>(*tempoSequence.get(), createEmptyEdit());
-	
-	te::EditFileOperations(*edit).save(true, true, false);
+    getTracktionEngine(); //makes sure an engine exists;
 
-	removeAllTracks();
+    if (projectToLoad.isValid())
+        initEditFromProject(projectToLoad);
+    else
+    {
+        initEditFromProject(createEmptyEdit());
 
-    createNewProject();
+        //te::EditFileOperations(*edit).save(true, true, false);
+
+        removeAllTracks();
+        createNewProject();
+    }
+}
+
+
+void AudioEngine::initEditFromProject(ValueTree projectFile)
+{
+    edit = std::make_unique<Edit>(getTracktionEngine(), projectFile, Edit::forEditing, nullptr, 0);
+    createTracksAndAssignInputs();
+    edit->playInStopEnabled = true;
+
+    tempoSequence = std::make_unique<TempoSequence>(*edit.get());
+    tempoSetting = std::make_unique<TempoSetting>(*tempoSequence.get(), createEmptyEdit());
 }
 
 AudioEngine::~AudioEngine()
 {
-	engine.getTemporaryFileManager().getTempDirectory().deleteRecursively();
+    getTracktionEngine().getTemporaryFileManager().getTempDirectory().deleteRecursively();
 }
 
 void AudioEngine::removeAllTracks()
 {
-	if (!getTrackList().isEmpty())
-	{
-		for (auto track : getTrackList())
-		{
-			edit->deleteTrack(track);
-		}
-	}
+    if (!getTrackList().isEmpty())
+    {
+        for (auto track : getTrackList())
+        {
+            edit->deleteTrack(track);
+        }
+    }
 
 }
 
@@ -46,7 +68,7 @@ void AudioEngine::removeChannel()
 
 te::AudioTrack* AudioEngine::getOrInsertAudioTrackAt(te::Edit& inEdit, int index)
 {
-	inEdit.ensureNumberOfAudioTracks(index + 1);
+    inEdit.ensureNumberOfAudioTracks(index + 1);
     return te::getAudioTracks(inEdit)[index];
 }
 
@@ -61,17 +83,17 @@ te::WaveAudioClip::Ptr AudioEngine::loadAudioFileAsClip(const File& file, AudioT
 {
     // Add a new clip to this track
     AudioFile audioFile(file);
-	
+
     if (audioFile.isValid())
     {
         auto name = file.getFileNameWithoutExtension();
 
-		auto tracklen = track.getLength();
-		auto audioFilelen = audioFile.getLength();
+        auto tracklen = track.getLength();
+        auto audioFilelen = audioFile.getLength();
 
-        EditTimeRange timeRange(track.getLength(), track.getLength()+audioFile.getLength());
+        EditTimeRange timeRange(track.getLength(), track.getLength() + audioFile.getLength());
         ClipPosition position = { timeRange, 0 };
-		
+
         auto newClip = track.insertWaveClip(name, file, position, false);
 
         if (newClip != nullptr)
@@ -150,68 +172,65 @@ bool AudioEngine::trackHasInput(te::AudioTrack& t, int position)
 }
 
 
-
 TransportControl& AudioEngine::getTransport() const
 {
     return edit->getTransport();
 }
 
-Edit * AudioEngine::getEdit() const
+Edit* AudioEngine::getEdit() const
 {
-	return edit.get();
+    return edit.get();
 }
-
-
 
 
 void AudioEngine::play()
 {
-	getTransport().play(false);
+    getTransport().play(false);
 }
 
 void AudioEngine::pause()
 {
-	//stop recording in case Record is on
-	if (isRecording())
-	{
-		getTransport().stop(true, false, true, false);
-	}
-	else
-	{
-		getTransport().stop(false, false, true, false);
-	}
-    
+    //stop recording in case Record is on
+    if (isRecording())
+    {
+        getTransport().stop(true, false, true, false);
+    }
+    else
+    {
+        getTransport().stop(false, false, true, false);
+    }
+
 }
 
 void AudioEngine::stop()
 {
-	getTransport().stop(false, false, true, true);
-	getTransport().setCurrentPosition(0);
+    getTransport().stop(false, false, true, true);
+    getTransport().setCurrentPosition(0);
 }
 
 void AudioEngine::recording()
 {
-	bool wasRecording = edit->getTransport().isRecording();
-	toggleRecord();
+    bool wasRecording = edit->getTransport().isRecording();
+    toggleRecord();
 
-	if (wasRecording)
-		te::EditFileOperations(*edit).save(true, true, false);
+    if (wasRecording)
+        te::EditFileOperations(*edit).save(true, true, false);
 }
 
 void AudioEngine::loop()
 {
-	auto endLoopPos = edit->getTransport().getCurrentPosition();
-	EditTimeRange timeRange{ 0,endLoopPos };
+    auto endLoopPos = edit->getTransport().getCurrentPosition();
+    EditTimeRange timeRange { 0, endLoopPos };
 
-	if (isLooping())
-	{
-		getTransport().looping.setValue(false, nullptr);
-	}
-	else
-	{
-		edit->getTransport().setLoopRange(timeRange);
-		getTransport().looping.setValue(true, nullptr);
-	}
+    if (isLooping())
+    {
+        getTransport().looping.setValue(false, nullptr);
+    }
+    else
+    {
+        edit->getTransport().setLoopRange(timeRange);
+        getTransport().looping.setValue(true, nullptr);
+    }
 }
 
 
@@ -238,7 +257,7 @@ void AudioEngine::adjustClipProperties(tracktion_engine::WaveAudioClip& clip) co
     // Disable auto tempo and pitch, we'll handle these manually
     clip.setAutoTempo(false);
     clip.setAutoPitch(false);
-    clip.setTimeStretchMode(TimeStretcher::defaultMode);	
+    clip.setTimeStretchMode(TimeStretcher::defaultMode);
 }
 
 void AudioEngine::addChannel()
@@ -269,7 +288,7 @@ void AudioEngine::changeVolume(AudioTrack& track, float newVolume)
         auto plugin = plugins.getObjectPointer(index);
 
         auto volume = dynamic_cast<VolumeAndPanPlugin*>(plugin);
-		
+
         if (volume != nullptr)
             volume->setVolumeDb(newVolume);
     }
@@ -277,17 +296,17 @@ void AudioEngine::changeVolume(AudioTrack& track, float newVolume)
 
 void AudioEngine::changePan(AudioTrack& track, float newPan)
 {
-	auto plugins = track.getAllPlugins();
+    auto plugins = track.getAllPlugins();
 
-	for (int index = 0; index < plugins.size(); ++index)
-	{
-		auto plugin = plugins.getObjectPointer(index);
+    for (int index = 0; index < plugins.size(); ++index)
+    {
+        auto plugin = plugins.getObjectPointer(index);
 
-		auto pan = dynamic_cast<VolumeAndPanPlugin*>(plugin);
+        auto pan = dynamic_cast<VolumeAndPanPlugin*>(plugin);
 
-		if (pan != nullptr)
-			pan->setPan(newPan);
-	}
+        if (pan != nullptr)
+            pan->setPan(newPan);
+    }
 }
 
 void AudioEngine::muteChannel(AudioTrack& track)
@@ -322,117 +341,92 @@ bool AudioEngine::isPlaying()
 
 bool AudioEngine::isLooping()
 {
-	return getTransport().looping.get();
+    return getTransport().looping.get();
 }
 
 void AudioEngine::saveAsFile()
 {
-	File editFile{  };
-	
-	if (editFile == File())
-	{
-		FileChooser fc("New Edit", File::getSpecialLocation(File::userDocumentsDirectory), "*.tracktionedit");
-		if (fc.browseForFileToSave(true))
-		{
-			editFile = fc.getResult();
-			edit->editFileRetriever = [editFile] { return editFile; };
-		}
-		
-		te::EditFileOperations(*edit).saveAs(editFile,false);
-	}
-}
+    File editFile {};
 
-void AudioEngine::loadFile()
-{
-	/*not working yet*/
-	auto location = File::getSpecialLocation(File::userDesktopDirectory);
+    if (editFile == File())
+    {
+        FileChooser fc("New Edit", File::getSpecialLocation(File::userDocumentsDirectory), "*.tracktionedit");
+        if (fc.browseForFileToSave(true))
+        {
+            editFile = fc.getResult();
+            edit->editFileRetriever = [editFile]
+            { return editFile; };
+        }
 
-	FileChooser chooser("Choose a file", location, "*.tracktionedit", true, false);
-
-	if (chooser.browseForFileToOpen())
-	{
-		auto file = chooser.getResult();
-		edit->editFileRetriever = [file] { return file; };
-		/*
-		auto newEditToLoad = te::loadEditFromFile(file, edit->getProjectItemID());
-		auto text = newEditToLoad.toXmlString();
-		int debug = 0;
-		auto x = newEditToLoad.createXml();
-		edit->state.fromXml(*x);
-		//edit->state.copyPropertiesAndChildrenFrom(newEditToLoad, nullptr);
-		//te::loadValueTree(file, true);
-		//auto xxx = edit->state.toXmlString();
-		*/
-	}
-
+        te::EditFileOperations(*edit).saveAs(editFile, false);
+    }
 }
 
 void AudioEngine::exportFile()
 {
-	File dir{  };
-	
-	if (dir == File())
-	{
-		FileChooser fc("export", File::getSpecialLocation(File::userDocumentsDirectory), "*.tracktionedit");
-		if (fc.browseForDirectory())
-		{
-			dir = fc.getResult();
-			//edit->editFileRetriever = [editFile] { return editFile; };
-		}
-	}
-	//te::ExportJob exJob(edit.get(),&dir,Project::Ptr::get(),)
+    File dir {};
+
+    if (dir == File())
+    {
+        FileChooser fc("export", File::getSpecialLocation(File::userDocumentsDirectory), "*.tracktionedit");
+        if (fc.browseForDirectory())
+        {
+            dir = fc.getResult();
+            //edit->editFileRetriever = [editFile] { return editFile; };
+        }
+    }
+    //te::ExportJob exJob(edit.get(),&dir,Project::Ptr::get(),)
 }
 
 void AudioEngine::createNewProject()
 {
 #if JUCE_MODAL_LOOPS_PERMITTED
-	AlertWindow w("New Project",
-		"This AlertWindow has a couple of extra components added to show how to add drop-down lists and text entry boxes.",
-		AlertWindow::AlertIconType::NoIcon);
-	w.addTextEditor("projectName", "enter the name of yo song","Name");
-	w.addTextEditor("bpm", "enter the BPM here", "BPM");
+    AlertWindow w("New Project",
+                  "This AlertWindow has a couple of extra components added to show how to add drop-down lists and text entry boxes.",
+                  AlertWindow::AlertIconType::NoIcon);
+    w.addTextEditor("projectName", "enter the name of yo song", "Name");
+    w.addTextEditor("bpm", "enter the BPM here", "BPM");
 
-	w.addButton("OK", 1, KeyPress(KeyPress::returnKey, 0, 0));
-	w.addButton("Cancel", 0, KeyPress(KeyPress::escapeKey, 0, 0));
+    w.addButton("OK", 1, KeyPress(KeyPress::returnKey, 0, 0));
+    w.addButton("Cancel", 0, KeyPress(KeyPress::escapeKey, 0, 0));
 
-	if (w.runModalLoop() != 0) // is they picked 'ok'
-	{
+    if (w.runModalLoop() != 0) // is they picked 'ok'
+    {
 
-		// this is the text they entered..
-		auto bpmText = w.getTextEditorContents("bpm");
-		double bpm = 0.0;
-		projectName = w.getTextEditorContents("projectName");
+        // this is the text they entered..
+        auto bpmText = w.getTextEditorContents("bpm");
+        double bpm = 0.0;
+        projectName = w.getTextEditorContents("projectName");
 
-		//convert from string to double
-		std::stringstream stringToDouble;
-		stringToDouble << bpmText;
-		stringToDouble >> bpm;
+        //convert from string to double
+        std::stringstream stringToDouble;
+        stringToDouble << bpmText;
+        stringToDouble >> bpm;
 
-		if (bpm > 60 && bpm < 200)
-			setBpm(bpm);
-		else
-			setBpm(120);
+        if (bpm > 60 && bpm < 200)
+            setBpm(bpm);
+        else
+            setBpm(120);
 
-		
-		for (int i = 0; i < NumberOfChannels; i++)
-		{
-			addChannel();
-		}
-	}
+
+        for (int i = 0; i < NumberOfChannels; i++)
+        {
+            addChannel();
+        }
+    }
 #endif
-
 
 }
 
 
 bool AudioEngine::isRecording()
 {
-	return getTransport().isRecording();
+    return getTransport().isRecording();
 }
 
 void AudioEngine::createTracksAndAssignInputs()
 {
-    auto& dm = engine.getDeviceManager();
+    auto& dm = getTracktionEngine().getDeviceManager();
 
     for (int i = 0; i < dm.getNumWaveInDevices(); i++)
         if (auto wip = dm.getWaveInDevice(i))
@@ -483,7 +477,8 @@ void AudioEngine::audioSettings()
     o.dialogTitle = TRANS("Audio Settings");
     o.dialogBackgroundColour = LookAndFeel::getDefaultLookAndFeel().findColour(ResizableWindow::backgroundColourId);
     o.content.setOwned(
-            new AudioDeviceSelectorComponent(engine.getDeviceManager().deviceManager, 2, 2, 0, 2, false, false, true,
+            new AudioDeviceSelectorComponent(getTracktionEngine().getDeviceManager().deviceManager, 2, 2, 0, 2, false,
+                                             false, true,
                                              true));
     o.content->setSize(400, 600);
     o.launchAsync();
@@ -492,7 +487,7 @@ void AudioEngine::audioSettings()
 void AudioEngine::inputMonitoring(AudioTrack* at)
 {
     PopupMenu m;
-	
+
     if (trackHasInput(*at))
     {
         bool ticked = isInputMonitoringEnabled(*at);
@@ -534,28 +529,30 @@ void AudioEngine::inputMonitoring(AudioTrack* at)
 
 void AudioEngine::deleteSelectedClips()
 {
-	auto allSelectedObjects=selectionManager->getSelectedObjects();
+    auto allSelectedObjects = selectionManager->getSelectedObjects();
 
-	allSelectedObjects.clear();
-	
+    allSelectedObjects.clear();
+
 }
 
 void AudioEngine::activeMetro()
 {
-	String clickFileUrl[2]{"H:\\Juce-spacework\\Final-Project\\Metro\\Metronom Claves.wav","H:\\Juce-spacework\\Final-Project\\Metro\\Metronom Taktell Junior.wav" };
-	
-	click->setClickWaveFile(engine, false, clickFileUrl[0]);
+    String clickFileUrl[2] { "H:\\Juce-spacework\\Final-Project\\Metro\\Metronom Claves.wav",
+                             "H:\\Juce-spacework\\Final-Project\\Metro\\Metronom Taktell Junior.wav" };
 
-	click->getAudioNodeProperties(*clickAudioNodeProperties);
+    click->setClickWaveFile(getTracktionEngine(), false, clickFileUrl[0]);
+
+    click->getAudioNodeProperties(*clickAudioNodeProperties);
 }
 
 void AudioEngine::setBpm(double bpm)
 {
-	tempoSetting->setBpm(bpm);
+    tempoSetting->setBpm(bpm);
 }
 
 double AudioEngine::getBpm()
 {
-	return tempoSetting->getBpm();
+    return tempoSetting->getBpm();
 }
+
 

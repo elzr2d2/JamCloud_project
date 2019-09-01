@@ -4,23 +4,23 @@
 #include "Audio/AudioEngine.h"
 #include "MetronomeGuiComponent.h"
 
-class ToolbarComponent  : public Component,
-                          public Button::Listener,
-					      public Timer
+class ToolbarComponent : public Component,
+                         public Button::Listener,
+                         public Timer
 {
 public:
 
-    ToolbarComponent (AudioEngine& inEngine);
+    ToolbarComponent(AudioEngine& inEngine);
     ~ToolbarComponent();
 
-    void paint (Graphics& g) override;
+    void paint(Graphics& g) override;
     void resized() override;
-    void buttonClicked (Button* buttonThatWasClicked) override;
+    void buttonClicked(Button* buttonThatWasClicked) override;
 
-	void getCurrentTimeText();
-	void timerCallback() override;
+    void getCurrentTimeText();
+    void timerCallback() override;
 
-	void setBpm();
+    void setBpm();
 
 private:
 
@@ -28,13 +28,13 @@ private:
     std::unique_ptr<ImageButton> stopButton;
     std::unique_ptr<ImageButton> loopButton;
     std::unique_ptr<ImageButton> metronomeButton;
-	std::unique_ptr<ImageButton> playButton;
-	std::unique_ptr<TextEditor>  timeText;
-	std::unique_ptr<TextEditor>  bpmText;
-	MetronomeGuiComponent metroGui;
+    std::unique_ptr<ImageButton> playButton;
+    std::unique_ptr<TextEditor> timeText;
+    std::unique_ptr<TextEditor> bpmText;
+    MetronomeGuiComponent metroGui;
 
-	int minutes = 0;
-	int seconds = 0;
+    int minutes = 0;
+    int seconds = 0;
 
     AudioEngine& engine;
 

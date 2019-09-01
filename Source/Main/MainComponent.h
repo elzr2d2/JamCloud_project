@@ -5,12 +5,6 @@
 #include "Audio/AudioEngine.h"
 #include "CommandManager.h"
 
-struct JamCloud
-{
-    AudioEngine engine;
-    UIEngine ui { engine };
-};
-
 class MainComponent : public Component, public CommandTarget
 {
 public:
@@ -21,9 +15,14 @@ public:
 
     void performCommand(Command* command) override;
 
+    void loadFile();
+
 
 private:
-    void createJamCloud();
+    void createJamCloud(ValueTree tree);
 
-    std::unique_ptr<JamCloud> cloud;
+    std::unique_ptr<AudioEngine> engine;
+    std::unique_ptr<UIEngine> ui;
+
+
 };

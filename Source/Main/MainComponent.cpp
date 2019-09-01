@@ -5,7 +5,7 @@ MainComponent::MainComponent()
 {
     getCommandManager().setTarget(this);
 
-    createJamCloud();
+    createJamCloud(ValueTree());
 
     setSize(1000, 600);
 }
@@ -18,20 +18,51 @@ void MainComponent::paint(Graphics& g)
 
 void MainComponent::resized()
 {
-    if (cloud != nullptr)
-        cloud->ui.setBounds(getLocalBounds());
+    if (ui != nullptr)
+        ui->setBounds(getLocalBounds());
 }
 
-void MainComponent::createJamCloud()
+void MainComponent::createJamCloud(ValueTree tree)
 {
-    cloud = std::make_unique<JamCloud>();
-    addAndMakeVisible(cloud->ui);
+    ui.reset();
+    engine = std::make_unique<AudioEngine>(tree);
+    ui = std::make_unique<UIEngine>(*engine);
+
+    addAndMakeVisible(*ui);
     resized();
 }
 
 void MainComponent::performCommand(Command* command)
 {
     if (auto newProject = dynamic_cast<Commands::NewProject*>(command))
-        createJamCloud();
+        createJamCloud(ValueTree());
+
+    else if (auto loadProject = dynamic_cast<Commands::LoadProject*>(command))
+        loadFile();
+}
+
+void MainComponent::loadFile()
+{
+    /*not working yet*/
+    auto location = File::getSpecialLocation(File::userDesktopDirectory);
+
+    FileChooser chooser("Choose a file", location, "*.tracktionedit", true, false);
+
+    if (chooser.browseForFileToOpen())
+    {
+        auto file = chooser.getResult();
+
+        std::unique_ptr<XmlElement> xml;
+        xml.reset(XmlDocument::parse(file));
+
+        if (xml != nullptr)
+        {
+            auto tree = ValueTree::fromXml(*xml);
+
+            if (tree.isValid())
+                createJamCloud(tree);
+        }
+
+    }
 }
 
