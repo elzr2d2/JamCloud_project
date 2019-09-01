@@ -13,13 +13,10 @@ UIEngine::UIEngine(AudioEngine& inEngine) :
 	menu(inEngine),
 	grid(inEngine)
 {
-
-	
 	addAndMakeVisible(menu);
 	addAndMakeVisible(toolbar);
 	addAndMakeVisible(grid);
 
-	
 }
 
 void UIEngine::resized()

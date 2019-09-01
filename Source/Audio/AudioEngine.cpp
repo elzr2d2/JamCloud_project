@@ -12,8 +12,10 @@ AudioEngine::AudioEngine()
 	tempoSetting = std::make_unique<TempoSetting>(*tempoSequence.get(), createEmptyEdit());
 	
 	te::EditFileOperations(*edit).save(true, true, false);
-	
+
 	removeAllTracks();
+
+    createNewProject();
 }
 
 AudioEngine::~AudioEngine()

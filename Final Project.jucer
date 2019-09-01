@@ -150,20 +150,24 @@
               file="Source/Audio/MetronomeComponent.h"/>
       </GROUP>
       <GROUP id="{663A585A-E65B-2BD5-BBF8-CF3A5BD99027}" name="Main">
+        <FILE id="o1LWUI" name="CommandManager.cpp" compile="1" resource="0"
+              file="Source/Main/CommandManager.cpp"/>
+        <FILE id="shFmvj" name="CommandManager.h" compile="0" resource="0"
+              file="Source/Main/CommandManager.h"/>
         <FILE id="FLUxVS" name="Main.cpp" compile="1" resource="0" file="Source/Main/Main.cpp"/>
         <FILE id="euND6o" name="MainComponent.cpp" compile="1" resource="0"
               file="Source/Main/MainComponent.cpp"/>
         <FILE id="LgVuWd" name="MainComponent.h" compile="0" resource="0" file="Source/Main/MainComponent.h"/>
       </GROUP>
       <GROUP id="{556B2127-059F-C9B1-5111-5DE8263C093A}" name="UI">
+        <GROUP id="{F2F711D1-E3DB-75CD-DC60-34884BD574AB}" name="Menu">
+          <FILE id="uZ0exL" name="MenuComponent.cpp" compile="1" resource="0"
+                file="Source/UI/Menu/MenuComponent.cpp"/>
+          <FILE id="D10dCl" name="MenuComponent.h" compile="0" resource="0" file="Source/UI/Menu/MenuComponent.h"/>
+        </GROUP>
         <GROUP id="{790BCFDA-B8D2-9947-0A9E-4C16D7024B26}" name="Engine">
           <FILE id="xSz0RQ" name="UIEngine.cpp" compile="1" resource="0" file="Source/UI/UIEngine.cpp"/>
           <FILE id="JpVLMc" name="UIEngine.h" compile="0" resource="0" file="Source/UI/UIEngine.h"/>
-        </GROUP>
-        <GROUP id="{DB80995D-47CC-A6E6-1A22-5EF95068CDD4}" name="Menu">
-          <FILE id="VL7Bft" name="MenuComponent.cpp" compile="1" resource="0"
-                file="Source/UI/MenuComponent.cpp"/>
-          <FILE id="d0VyWq" name="MenuComponent.h" compile="0" resource="0" file="Source/UI/MenuComponent.h"/>
         </GROUP>
         <GROUP id="{478D433C-2B3C-1F87-2AFC-CC1C9A51077F}" name="Toolbar">
           <FILE id="UgDcUE" name="MetronomeGuiComponent.cpp" compile="1" resource="0"
@@ -264,6 +268,7 @@
         <MODULEPATH id="juce_dsp" path="SDKs/JUCE/modules"/>
         <MODULEPATH id="juce_osc" path="SDKs/JUCE/modules"/>
         <MODULEPATH id="tracktion_engine" path="SDKs"/>
+        <MODULEPATH id="juce_analytics" path="SDKs/JUCE/modules"/>
       </MODULEPATHS>
     </XCODE_MAC>
     <XCODE_IPHONE targetFolder="Builds/iOS">
@@ -286,6 +291,7 @@
         <MODULEPATH id="juce_dsp" path="SDKs/JUCE/modules"/>
         <MODULEPATH id="juce_osc" path="SDKs/JUCE/modules"/>
         <MODULEPATH id="tracktion_engine" path="SDKs"/>
+        <MODULEPATH id="juce_analytics" path="SDKs/JUCE/modules"/>
       </MODULEPATHS>
     </XCODE_IPHONE>
     <VS2017 targetFolder="Builds/VisualStudio2017">
@@ -308,6 +314,7 @@
         <MODULEPATH id="juce_dsp" path="SDKs/JUCE/modules"/>
         <MODULEPATH id="juce_osc" path="SDKs/JUCE/modules"/>
         <MODULEPATH id="tracktion_engine" path="SDKs"/>
+        <MODULEPATH id="juce_analytics" path="SDKs/JUCE/modules"/>
       </MODULEPATHS>
     </VS2017>
     <CLION targetFolder="Builds/CLion" clionXcodeEnabled="1">
@@ -326,6 +333,7 @@
         <MODULEPATH id="juce_dsp" path="../tracktion_engine/modules/juce/modules"/>
         <MODULEPATH id="juce_osc" path="../tracktion_engine/modules/juce/modules"/>
         <MODULEPATH id="tracktion_engine" path="SDKs"/>
+        <MODULEPATH id="juce_analytics" path="SDKs/JUCE/modules"/>
       </MODULEPATHS>
     </CLION>
     <VS2019 targetFolder="Builds/VisualStudio2019">
@@ -348,10 +356,12 @@
         <MODULEPATH id="juce_audio_devices" path="SDKs/JUCE/modules"/>
         <MODULEPATH id="juce_audio_basics" path="SDKs/JUCE/modules"/>
         <MODULEPATH id="tracktion_engine" path="SDKs"/>
+        <MODULEPATH id="juce_analytics" path="SDKs/JUCE/modules"/>
       </MODULEPATHS>
     </VS2019>
   </EXPORTFORMATS>
   <MODULES>
+    <MODULE id="juce_analytics" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
     <MODULE id="juce_audio_basics" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
     <MODULE id="juce_audio_devices" showAllCode="1" useLocalCopy="1" useGlobalPath="1"/>
     <MODULE id="juce_audio_formats" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>

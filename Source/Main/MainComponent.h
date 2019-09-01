@@ -3,8 +3,15 @@
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "UI/UIEngine.h"
 #include "Audio/AudioEngine.h"
+#include "CommandManager.h"
 
-class MainComponent : public Component
+struct JamCloud
+{
+    AudioEngine engine;
+    UIEngine ui { engine };
+};
+
+class MainComponent : public Component, public CommandTarget
 {
 public:
     MainComponent();
@@ -12,10 +19,11 @@ public:
     void paint(Graphics& g) override;
     void resized() override;
 
-private:
-	AudioEngine engine;
-    UIEngine ui;
-    
+    void performCommand(Command* command) override;
 
-    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (MainComponent)
+
+private:
+    void createJamCloud();
+
+    std::unique_ptr<JamCloud> cloud;
 };

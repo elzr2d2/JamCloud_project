@@ -1,0 +1,3 @@
+/Code/JamCloud_project/Builds/CLion/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/Code/JamCloud_project/Builds/CLion/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Code/JamCloud_project/Builds/CLion/cmake-build-debug/CMakeFiles/APP.dir
