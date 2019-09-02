@@ -38,6 +38,7 @@ void AudioEngine::initEditFromProject(ValueTree projectFile)
 
     tempoSequence = std::make_unique<TempoSequence>(*edit.get());
     tempoSetting = std::make_unique<TempoSetting>(*tempoSequence.get(), createEmptyEdit());
+	
 }
 
 AudioEngine::~AudioEngine()
@@ -382,7 +383,7 @@ void AudioEngine::createNewProject()
 {
 #if JUCE_MODAL_LOOPS_PERMITTED
     AlertWindow w("New Project",
-                  "This AlertWindow has a couple of extra components added to show how to add drop-down lists and text entry boxes.",
+                  "",
                   AlertWindow::AlertIconType::NoIcon);
     w.addTextEditor("projectName", "enter the name of yo song", "Name");
     w.addTextEditor("bpm", "enter the BPM here", "BPM");

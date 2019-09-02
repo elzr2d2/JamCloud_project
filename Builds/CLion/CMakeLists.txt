@@ -241,8 +241,11 @@ add_executable (APP
     "../../JuceLibraryCode/modules/juce_audio_devices/audio_io/juce_SystemAudioVolume.h"
     "../../JuceLibraryCode/modules/juce_audio_devices/midi_io/juce_MidiDevices.cpp"
     "../../JuceLibraryCode/modules/juce_audio_devices/midi_io/juce_MidiDevices.h"
+    "../../JuceLibraryCode/modules/juce_audio_devices/midi_io/juce_MidiInput.h"
     "../../JuceLibraryCode/modules/juce_audio_devices/midi_io/juce_MidiMessageCollector.cpp"
     "../../JuceLibraryCode/modules/juce_audio_devices/midi_io/juce_MidiMessageCollector.h"
+    "../../JuceLibraryCode/modules/juce_audio_devices/midi_io/juce_MidiOutput.cpp"
+    "../../JuceLibraryCode/modules/juce_audio_devices/midi_io/juce_MidiOutput.h"
     "../../JuceLibraryCode/modules/juce_audio_devices/native/juce_android_Audio.cpp"
     "../../JuceLibraryCode/modules/juce_audio_devices/native/juce_android_Midi.cpp"
     "../../JuceLibraryCode/modules/juce_audio_devices/native/juce_android_Oboe.cpp"
@@ -265,8 +268,9 @@ add_executable (APP
     "../../JuceLibraryCode/modules/juce_audio_devices/sources/juce_AudioTransportSource.cpp"
     "../../JuceLibraryCode/modules/juce_audio_devices/sources/juce_AudioTransportSource.h"
     "../../JuceLibraryCode/modules/juce_audio_devices/juce_audio_devices.cpp"
-    "../../JuceLibraryCode/modules/juce_audio_devices/juce_audio_devices.mm"
     "../../JuceLibraryCode/modules/juce_audio_devices/juce_audio_devices.h"
+    "../../JuceLibraryCode/modules/juce_audio_devices/juce_audio_devices.mm"
+    "../../../../../../JUCE/modules/juce_audio_devices/juce_audio_devices.h"
     "../../SDKs/JUCE/modules/juce_audio_formats/codecs/flac/libFLAC/include/private/all.h"
     "../../SDKs/JUCE/modules/juce_audio_formats/codecs/flac/libFLAC/include/private/bitmath.h"
     "../../SDKs/JUCE/modules/juce_audio_formats/codecs/flac/libFLAC/include/private/bitreader.h"
@@ -2563,8 +2567,11 @@ set_source_files_properties ("../../JuceLibraryCode/modules/juce_audio_devices/a
 set_source_files_properties ("../../JuceLibraryCode/modules/juce_audio_devices/audio_io/juce_SystemAudioVolume.h" PROPERTIES HEADER_FILE_ONLY TRUE)
 set_source_files_properties ("../../JuceLibraryCode/modules/juce_audio_devices/midi_io/juce_MidiDevices.cpp" PROPERTIES HEADER_FILE_ONLY TRUE)
 set_source_files_properties ("../../JuceLibraryCode/modules/juce_audio_devices/midi_io/juce_MidiDevices.h" PROPERTIES HEADER_FILE_ONLY TRUE)
+set_source_files_properties ("../../JuceLibraryCode/modules/juce_audio_devices/midi_io/juce_MidiInput.h" PROPERTIES HEADER_FILE_ONLY TRUE)
 set_source_files_properties ("../../JuceLibraryCode/modules/juce_audio_devices/midi_io/juce_MidiMessageCollector.cpp" PROPERTIES HEADER_FILE_ONLY TRUE)
 set_source_files_properties ("../../JuceLibraryCode/modules/juce_audio_devices/midi_io/juce_MidiMessageCollector.h" PROPERTIES HEADER_FILE_ONLY TRUE)
+set_source_files_properties ("../../JuceLibraryCode/modules/juce_audio_devices/midi_io/juce_MidiOutput.cpp" PROPERTIES HEADER_FILE_ONLY TRUE)
+set_source_files_properties ("../../JuceLibraryCode/modules/juce_audio_devices/midi_io/juce_MidiOutput.h" PROPERTIES HEADER_FILE_ONLY TRUE)
 set_source_files_properties ("../../JuceLibraryCode/modules/juce_audio_devices/native/juce_android_Audio.cpp" PROPERTIES HEADER_FILE_ONLY TRUE)
 set_source_files_properties ("../../JuceLibraryCode/modules/juce_audio_devices/native/juce_android_Midi.cpp" PROPERTIES HEADER_FILE_ONLY TRUE)
 set_source_files_properties ("../../JuceLibraryCode/modules/juce_audio_devices/native/juce_android_Oboe.cpp" PROPERTIES HEADER_FILE_ONLY TRUE)
@@ -2587,8 +2594,9 @@ set_source_files_properties ("../../JuceLibraryCode/modules/juce_audio_devices/s
 set_source_files_properties ("../../JuceLibraryCode/modules/juce_audio_devices/sources/juce_AudioTransportSource.cpp" PROPERTIES HEADER_FILE_ONLY TRUE)
 set_source_files_properties ("../../JuceLibraryCode/modules/juce_audio_devices/sources/juce_AudioTransportSource.h" PROPERTIES HEADER_FILE_ONLY TRUE)
 set_source_files_properties ("../../JuceLibraryCode/modules/juce_audio_devices/juce_audio_devices.cpp" PROPERTIES HEADER_FILE_ONLY TRUE)
-set_source_files_properties ("../../JuceLibraryCode/modules/juce_audio_devices/juce_audio_devices.mm" PROPERTIES HEADER_FILE_ONLY TRUE)
 set_source_files_properties ("../../JuceLibraryCode/modules/juce_audio_devices/juce_audio_devices.h" PROPERTIES HEADER_FILE_ONLY TRUE)
+set_source_files_properties ("../../JuceLibraryCode/modules/juce_audio_devices/juce_audio_devices.mm" PROPERTIES HEADER_FILE_ONLY TRUE)
+set_source_files_properties ("../../../../../../JUCE/modules/juce_audio_devices/juce_audio_devices.h" PROPERTIES HEADER_FILE_ONLY TRUE)
 set_source_files_properties ("../../SDKs/JUCE/modules/juce_audio_formats/codecs/flac/libFLAC/include/private/all.h" PROPERTIES HEADER_FILE_ONLY TRUE)
 set_source_files_properties ("../../SDKs/JUCE/modules/juce_audio_formats/codecs/flac/libFLAC/include/private/bitmath.h" PROPERTIES HEADER_FILE_ONLY TRUE)
 set_source_files_properties ("../../SDKs/JUCE/modules/juce_audio_formats/codecs/flac/libFLAC/include/private/bitreader.h" PROPERTIES HEADER_FILE_ONLY TRUE)

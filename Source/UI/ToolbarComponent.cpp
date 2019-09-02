@@ -4,7 +4,7 @@ ToolbarComponent::ToolbarComponent(AudioEngine& inEngine) :
         engine(inEngine)
 {
     startTimerHz(30);
-
+	engine.getTransport().state.addListener(this);
     Colour darkGreyJam = Colour(0xff2c302f);
     Colour orangeJam = Colour(0xffc39400);
 
@@ -111,6 +111,7 @@ ToolbarComponent::ToolbarComponent(AudioEngine& inEngine) :
 
 ToolbarComponent::~ToolbarComponent()
 {
+	engine.getTransport().state.removeListener(this);
     recordButton = nullptr;
     stopButton = nullptr;
     loopButton = nullptr;
@@ -258,7 +259,8 @@ void ToolbarComponent::buttonClicked(Button* buttonThatWasClicked)
 
 void ToolbarComponent::getCurrentTimeText()
 {
-    auto playheadPos = engine.getTransport().getCurrentPlayhead()->getPosition();
+  
+	auto playheadPos = engine.getTransport().getCurrentPosition();
     auto totalTime = roundDoubleToInt(playheadPos);
 
     seconds = totalTime % 60;
@@ -285,10 +287,12 @@ void ToolbarComponent::getCurrentTimeText()
     }
 }
 
-void ToolbarComponent::timerCallback()
+
+
+void ToolbarComponent::update()
 {
-    getCurrentTimeText();
-    setBpm();
+	getCurrentTimeText();
+	setBpm();
 }
 
 void ToolbarComponent::setBpm()

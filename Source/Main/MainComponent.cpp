@@ -43,7 +43,6 @@ void MainComponent::performCommand(Command* command)
 
 void MainComponent::loadFile()
 {
-    /*not working yet*/
     auto location = File::getSpecialLocation(File::userDesktopDirectory);
 
     FileChooser chooser("Choose a file", location, "*.tracktionedit", true, false);

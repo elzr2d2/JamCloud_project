@@ -3,10 +3,11 @@
 #include "JuceHeader.h"
 #include "Audio/AudioEngine.h"
 #include "MetronomeGuiComponent.h"
+#include "TreeComponent.h"
 
-class ToolbarComponent : public Component,
-                         public Button::Listener,
-                         public Timer
+class ToolbarComponent : public TreeComponent,
+                         public Button::Listener
+                         
 {
 public:
 
@@ -18,8 +19,9 @@ public:
     void buttonClicked(Button* buttonThatWasClicked) override;
 
     void getCurrentTimeText();
-    void timerCallback() override;
-
+  
+	void update() override;
+	void valueTreeChanged() override { markForUpdate(); };
     void setBpm();
 
 private:

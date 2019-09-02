@@ -1156,6 +1156,9 @@
     <ClCompile Include="..\..\JuceLibraryCode\modules\juce_audio_devices\midi_io\juce_MidiMessageCollector.cpp">
       <Filter>JUCE Modules\juce_audio_devices\midi_io</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\JuceLibraryCode\modules\juce_audio_devices\midi_io\juce_MidiOutput.cpp">
+      <Filter>JUCE Modules\juce_audio_devices\midi_io</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\JuceLibraryCode\modules\juce_audio_devices\native\juce_android_Audio.cpp">
       <Filter>JUCE Modules\juce_audio_devices\native</Filter>
     </ClCompile>
@@ -4629,7 +4632,13 @@
     <ClInclude Include="..\..\JuceLibraryCode\modules\juce_audio_devices\midi_io\juce_MidiDevices.h">
       <Filter>JUCE Modules\juce_audio_devices\midi_io</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\JuceLibraryCode\modules\juce_audio_devices\midi_io\juce_MidiInput.h">
+      <Filter>JUCE Modules\juce_audio_devices\midi_io</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\JuceLibraryCode\modules\juce_audio_devices\midi_io\juce_MidiMessageCollector.h">
+      <Filter>JUCE Modules\juce_audio_devices\midi_io</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\JuceLibraryCode\modules\juce_audio_devices\midi_io\juce_MidiOutput.h">
       <Filter>JUCE Modules\juce_audio_devices\midi_io</Filter>
     </ClInclude>
     <ClInclude Include="..\..\JuceLibraryCode\modules\juce_audio_devices\native\juce_ios_Audio.h">
@@ -4645,6 +4654,9 @@
       <Filter>JUCE Modules\juce_audio_devices\sources</Filter>
     </ClInclude>
     <ClInclude Include="..\..\JuceLibraryCode\modules\juce_audio_devices\juce_audio_devices.h">
+      <Filter>JUCE Modules\juce_audio_devices</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\JUCE\modules\juce_audio_devices\juce_audio_devices.h">
       <Filter>JUCE Modules\juce_audio_devices</Filter>
     </ClInclude>
     <ClInclude Include="..\..\SDKs\JUCE\modules\juce_audio_formats\codecs\flac\libFLAC\include\private\all.h">

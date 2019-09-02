@@ -110,10 +110,12 @@ void AudioThumbnailComponent::mouseDown(const MouseEvent& e/*event*/)
 
 void AudioThumbnailComponent::mouseDrag(const MouseEvent & e)
 {
+	
 	double y = getPosition().getY();
 	double x = 0;
 	if (e.x > 0)
 	{
+
 		x = e.x;
 		setBounds(x, y, getWidth(), getHeight());
 		repaint();
