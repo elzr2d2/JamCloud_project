@@ -7,6 +7,7 @@ ToolbarComponent::ToolbarComponent(AudioEngine& inEngine) :
 	engine.getTransport().state.addListener(this);
     Colour darkGreyJam = Colour(0xff2c302f);
     Colour orangeJam = Colour(0xffc39400);
+	Colour lightgrey = Colour(0x258A878B);
 
     /* Play Button */
     playButton.reset(new ImageButton("playButton"));
@@ -106,6 +107,25 @@ ToolbarComponent::ToolbarComponent(AudioEngine& inEngine) :
                                Image(), 1.0f, darkGreyJam);
     metronomeButton->setBounds(352, 20, 20, 20);
 
+	/* Zoom ComboBox */
+	zoomComboBox.reset(new ComboBox("zoomComboBox"));
+	addAndMakeVisible(zoomComboBox.get());
+	zoomComboBox->setEditableText(false);
+	zoomComboBox->setJustificationType(Justification::centredLeft);
+	zoomComboBox->setTextWhenNothingSelected(TRANS("x1"));
+	zoomComboBox->setTextWhenNoChoicesAvailable(TRANS("(no choices)"));
+	zoomComboBox->addItem(TRANS("x1"), 1);
+	zoomComboBox->addItem(TRANS("x1.2"), 2);
+	zoomComboBox->addItem(TRANS("x2"), 3);
+	zoomComboBox->addItem(TRANS("x4"), 4);
+	zoomComboBox->setColour(ComboBox::ColourIds::backgroundColourId, lightgrey);
+	zoomComboBox->setColour(ComboBox::ColourIds::textColourId, orangeJam);
+	zoomComboBox->setColour(ComboBox::ColourIds::focusedOutlineColourId, orangeJam);
+	zoomComboBox->setColour(ComboBox::ColourIds::arrowColourId, orangeJam);
+	zoomComboBox->setColour(ComboBox::ColourIds::outlineColourId, darkGreyJam);
+	zoomComboBox->addListener(this);
+	zoomComboBox->setBounds(408, 23, 70, 24);
+
     setSize(1000, 500);
 }
 
@@ -125,6 +145,8 @@ ToolbarComponent::~ToolbarComponent()
 void ToolbarComponent::paint(Graphics& g)
 {
     Colour darkGreyJam = Colour(0xff2c302f);
+	Colour orangeJam = Colour(0xffc39400);
+
     /* Background */
     g.fillAll(Colour(0xff2c2d35));
 
@@ -158,6 +180,16 @@ void ToolbarComponent::paint(Graphics& g)
         g.setColour(littleLineColor);
         g.fillRect(x, y, width, height);
     }
+	/* Zoom text */
+	{
+		int x = 415, y = 1, width = 48, height = 30;
+		String text(TRANS("ZOOM"));
+		g.setColour(orangeJam);
+		g.setFont(Font("Bahnschrift", 15.00f, Font::plain).withTypefaceStyle("Regular"));
+		g.drawText(text, x, y, width, height,
+			Justification::centred, true);
+		
+	}
 
     /* Toggle Color For Buttons */
     if (engine.isLooping())
@@ -298,6 +330,17 @@ void ToolbarComponent::update()
 void ToolbarComponent::setBpm()
 {
     engine.setBpm(bpmText->getText().getDoubleValue());
+}
+
+void ToolbarComponent::comboBoxChanged(ComboBox * comboBoxThatHasChanged)
+{
+	if (comboBoxThatHasChanged == zoomComboBox.get())
+	{
+		int zoomChoice = zoomComboBox->getSelectedItemIndex();
+		UiHelper uih;
+		uih.setZoomIndex(zoomChoice);
+		repaint();
+	}
 }
 
 

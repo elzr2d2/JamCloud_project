@@ -20,7 +20,7 @@ private:
 	MenuComponent menu;
 	GridComponent grid;
 	AudioEngine& engine;
-	LoadingDialog loadingDialog{};
+	//LoadingDialog loadingDialog{};
 
 	JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(UIEngine)
 };

@@ -4,9 +4,10 @@
 #include "Audio/AudioEngine.h"
 #include "MetronomeGuiComponent.h"
 #include "TreeComponent.h"
-
+#include "UiHelper.h"
 class ToolbarComponent : public TreeComponent,
-                         public Button::Listener
+                         public Button::Listener,
+						public ComboBox::Listener
                          
 {
 public:
@@ -24,6 +25,8 @@ public:
 	void valueTreeChanged() override { markForUpdate(); };
     void setBpm();
 
+	void comboBoxChanged(ComboBox* comboBoxThatHasChanged) override;
+
 private:
 
     std::unique_ptr<ImageButton> recordButton;
@@ -34,7 +37,7 @@ private:
     std::unique_ptr<TextEditor> timeText;
     std::unique_ptr<TextEditor> bpmText;
     MetronomeGuiComponent metroGui;
-
+	std::unique_ptr<ComboBox> zoomComboBox;
     int minutes = 0;
     int seconds = 0;
 

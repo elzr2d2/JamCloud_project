@@ -6,6 +6,7 @@
 constexpr int deleteClip = 1;
 constexpr int trimClip = 2;
 
+
 AudioThumbnailComponent::AudioThumbnailComponent(tracktion_engine::Clip& inClip) :
         thumbnailCache(5), thumbnail(512, formatManager, thumbnailCache),
         clip(inClip)
