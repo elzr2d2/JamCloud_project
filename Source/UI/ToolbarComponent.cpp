@@ -129,16 +129,14 @@ ToolbarComponent::ToolbarComponent(AudioEngine& inEngine) :
 	/* Master volume Slider */
 	masterVolSlider.reset(new Slider("masterVolSlider"));
 	addAndMakeVisible(masterVolSlider.get());
-	masterVolSlider->setRange(0, 10, 0);
+	masterVolSlider->setRange(0, 1, 0);
 	masterVolSlider->setSliderStyle(Slider::LinearHorizontal);
 	masterVolSlider->setTextBoxStyle(Slider::NoTextBox, false, 80, 20);
 	masterVolSlider->setColour(Slider::backgroundColourId, Colour(0xff949494));
 	masterVolSlider->setColour(Slider::thumbColourId, Colour(0xffc39400));
 	masterVolSlider->addListener(this);
-
+	masterVolSlider->setValue(0.8f);
 	masterVolSlider->setBounds(490, 24, 88, 25);
-
-
 
     setSize(1000, 500);
 }
@@ -375,8 +373,8 @@ void ToolbarComponent::sliderValueChanged(Slider * sliderThatWasMoved)
 
 	if (sliderThatWasMoved == masterVolSlider.get())
 	{
-		//[UserSliderCode_masterVolSlider] -- add your slider handling code here..
-		//[/UserSliderCode_masterVolSlider]
+		auto volume = (float)sliderThatWasMoved->getValue();
+		engine.getEdit()->setMasterVolumeSliderPos(volume);
 	}
 
 	//[UsersliderValueChanged_Post]
