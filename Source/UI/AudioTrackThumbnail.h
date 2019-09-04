@@ -14,7 +14,7 @@ public:
 	void update() override;
 	void paint(Graphics& g) override;
 	void resized() override;
-
+	void mouseDown(const MouseEvent&) override;
 private:
 	void rebuildClips();
 	std::vector<std::unique_ptr<AudioThumbnailComponent>> audioThumbnailComponents;

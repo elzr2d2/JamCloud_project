@@ -43,6 +43,13 @@ void AudioTrackThumbnail::resized()
 	}
 }
 
+void AudioTrackThumbnail::mouseDown(const MouseEvent &e)
+{
+	auto newPlayheadPos = e.x;
+	track.edit.getTransport().setCurrentPosition(UiHelper::xToTime(newPlayheadPos));
+
+}
+
 void AudioTrackThumbnail::rebuildClips()
 {
 	audioThumbnailComponents.clear();

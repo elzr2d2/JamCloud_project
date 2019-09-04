@@ -7,7 +7,8 @@
 #include "UiHelper.h"
 class ToolbarComponent : public TreeComponent,
                          public Button::Listener,
-						public ComboBox::Listener
+						public ComboBox::Listener,
+		public Slider::Listener
                          
 {
 public:
@@ -26,6 +27,7 @@ public:
     void setBpm();
 
 	void comboBoxChanged(ComboBox* comboBoxThatHasChanged) override;
+	void sliderValueChanged(Slider* sliderThatWasMoved) override;
 
 private:
 
@@ -37,6 +39,7 @@ private:
     std::unique_ptr<TextEditor> timeText;
     std::unique_ptr<TextEditor> bpmText;
     MetronomeGuiComponent metroGui;
+	std::unique_ptr<Slider> masterVolSlider;
 	std::unique_ptr<ComboBox> zoomComboBox;
     int minutes = 0;
     int seconds = 0;

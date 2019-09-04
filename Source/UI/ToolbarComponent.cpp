@@ -126,6 +126,20 @@ ToolbarComponent::ToolbarComponent(AudioEngine& inEngine) :
 	zoomComboBox->addListener(this);
 	zoomComboBox->setBounds(408, 23, 70, 24);
 
+	/* Master volume Slider */
+	masterVolSlider.reset(new Slider("masterVolSlider"));
+	addAndMakeVisible(masterVolSlider.get());
+	masterVolSlider->setRange(0, 10, 0);
+	masterVolSlider->setSliderStyle(Slider::LinearHorizontal);
+	masterVolSlider->setTextBoxStyle(Slider::NoTextBox, false, 80, 20);
+	masterVolSlider->setColour(Slider::backgroundColourId, Colour(0xff949494));
+	masterVolSlider->setColour(Slider::thumbColourId, Colour(0xffc39400));
+	masterVolSlider->addListener(this);
+
+	masterVolSlider->setBounds(490, 24, 88, 25);
+
+
+
     setSize(1000, 500);
 }
 
@@ -139,6 +153,9 @@ ToolbarComponent::~ToolbarComponent()
     bpmText = nullptr;
     metronomeButton = nullptr;
     playButton = nullptr;
+	zoomComboBox = nullptr;
+	masterVolSlider = nullptr;
+
 }
 
 
@@ -190,7 +207,17 @@ void ToolbarComponent::paint(Graphics& g)
 			Justification::centred, true);
 		
 	}
+	/* Volume Text */
+	{
+		int x = 500, y = 1, width = 48, height = 30;
+		String text(TRANS("VOL"));
+		g.setColour(orangeJam);
+		g.setFont(Font("Bahnschrift", 15.00f, Font::plain).withTypefaceStyle("Regular"));
+		g.drawText(text, x, y, width, height,
+			Justification::centred, true);
 
+	}
+	
     /* Toggle Color For Buttons */
     if (engine.isLooping())
     {
@@ -341,6 +368,19 @@ void ToolbarComponent::comboBoxChanged(ComboBox * comboBoxThatHasChanged)
 		uih.setZoomIndex(zoomChoice);
 		repaint();
 	}
+}
+
+void ToolbarComponent::sliderValueChanged(Slider * sliderThatWasMoved)
+{
+
+	if (sliderThatWasMoved == masterVolSlider.get())
+	{
+		//[UserSliderCode_masterVolSlider] -- add your slider handling code here..
+		//[/UserSliderCode_masterVolSlider]
+	}
+
+	//[UsersliderValueChanged_Post]
+	//[/UsersliderValueChanged_Post]
 }
 
 
