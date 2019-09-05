@@ -17,26 +17,19 @@ class MetronomeComponent
 public:
 	MetronomeComponent();
     
-    // public methods
-    void prepareToPlay (int samplesPerBlock, double sampleRate);
-    void getNextAudioBlock (const AudioSourceChannelInfo& bufferToFill);
-    void reset();
+	// public methods
+	void prepareToPlay(int samplesPerBlock, double sampleRate);
+	void getNextAudioBlock(const AudioSourceChannelInfo& bufferToFill);
+	void reset();
 
-	void setBpm(double bpm=132.0);
-	double getBpm();
-    
 private:
-	double bpm = 132.0;
-    int mTotalSamples { 0 };
-    double mSampleRate { 0 };
-    double mBpm { getBpm() };
-    int mUpdateInterval { 0 };
-    int mSamplesRemaining { 0 };
-    
-    AudioFormatManager mFormatManager;
-    std::unique_ptr <AudioFormatReaderSource> pMetronomeSample { nullptr };
+	int mTotalSamples{ 0 };
+	double mSampleRate{ 0 };
+	double mBpm{ 132.0 };
+	int mUpdateInterval{ 0 };
+	int mSamplesRemaining{ 0 };
 
-	File hiBeat{ "C:/Users/yarde/Desktop/JamCloud_project/Source/Metronome WAV/Cowbell.wav" };
-	File loBeat{ "C:/Users/yarde/Desktop/JamCloud_project/Source/Metronome WAVClaves.wav" };
+	AudioFormatManager mFormatManager;
+	std::unique_ptr <AudioFormatReaderSource> pMetronomeSample{ nullptr };
 };
 

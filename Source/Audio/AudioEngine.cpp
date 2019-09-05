@@ -536,14 +536,31 @@ void AudioEngine::deleteSelectedClips()
 
 }
 
-void AudioEngine::activeMetro()
+void AudioEngine::activeMetronome()
 {
-    String clickFileUrl[2] { "H:\\Juce-spacework\\Final-Project\\Metro\\Metronom Claves.wav",
-                             "H:\\Juce-spacework\\Final-Project\\Metro\\Metronom Taktell Junior.wav" };
+	
+	/*
+    String clickFileUrl[2] { "C:/Users/yarde/Desktop/Projects Files/wavs/Cowbell.wav",
+                             "C:/Users/yarde/Desktop/Projects Files/wavs/Cowbell.wav" };
 
     click->setClickWaveFile(getTracktionEngine(), false, clickFileUrl[0]);
 
-    click->getAudioNodeProperties(*clickAudioNodeProperties);
+	
+    click->getAudioNodeProperties(clickAudioNodeProperties);
+	*/
+	/*
+	auto numTracks = edit->getTrackList().size();
+	auto track = getOrInsertAudioTrackAt(*edit, numTracks - 1);
+	File cowbell{ "C:/Users/yarde/Desktop/Projects Files/wavs/Cowbell.wav"};
+	addNewClipFromFile(cowbell, *track);
+	auto clip = track->getClips().getFirst();
+	auto x= UiHelper::getBeatDistanceByBPM(getBpm());
+	auto endloop = UiHelper::xToTime(x);
+	EditTimeRange range{ 0,endloop };
+	DBG(endloop);
+	DBG(endloop);
+	*/
+
 }
 
 void AudioEngine::setBpm(double bpm)

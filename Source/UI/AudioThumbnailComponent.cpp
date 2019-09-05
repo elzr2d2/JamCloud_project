@@ -25,6 +25,7 @@ AudioThumbnailComponent::~AudioThumbnailComponent()
 void AudioThumbnailComponent::paint(Graphics& g)
 {
 	Rectangle<int> thumbnailBounds(100, 70);
+	
 	auto w = UiHelper::timeToX(clip.getMaximumLength());
 	thumbnailBounds.setSize(w, 70);
 	if (!selected)

@@ -3,6 +3,7 @@
 ToolbarComponent::ToolbarComponent(AudioEngine& inEngine) :
         engine(inEngine)
 {
+	
     startTimerHz(30);
 	engine.getTransport().state.addListener(this);
     Colour darkGreyJam = Colour(0xff2c302f);
@@ -138,6 +139,10 @@ ToolbarComponent::ToolbarComponent(AudioEngine& inEngine) :
 	masterVolSlider->setValue(0.8f);
 	masterVolSlider->setBounds(490, 24, 88, 25);
 
+	addAndMakeVisible(mgc);
+	mgc.setBounds(0, 0, 100, 100);
+	mgc.setVisible(false);
+	
     setSize(1000, 500);
 }
 
@@ -300,18 +305,20 @@ void ToolbarComponent::buttonClicked(Button* buttonThatWasClicked)
     }
     else if (buttonThatWasClicked == metronomeButton.get())
     {
-        setBpm();
+       
+		engine.activeMetronome();
+		if (engine.isPlaying())
+		{
+			mgc.stop();
+		}
+		else
+		{
+			engine.play();
+			mgc.play();
+		}
 
-        if (!metroGui.getStatePlay())
-        {
-            metroGui.setStatePlay(true);
-        }
-        else
-        {
-            metroGui.setStatePlay(false);
-        }
     }
-    repaint();
+  
 }
 
 void ToolbarComponent::getCurrentTimeText()
@@ -362,9 +369,6 @@ void ToolbarComponent::comboBoxChanged(ComboBox * comboBoxThatHasChanged)
 	if (comboBoxThatHasChanged == zoomComboBox.get())
 	{
 		int zoomChoice = zoomComboBox->getSelectedItemIndex();
-		UiHelper uih;
-		uih.setZoomIndex(zoomChoice);
-		repaint();
 	}
 }
 
@@ -377,8 +381,6 @@ void ToolbarComponent::sliderValueChanged(Slider * sliderThatWasMoved)
 		engine.getEdit()->setMasterVolumeSliderPos(volume);
 	}
 
-	//[UsersliderValueChanged_Post]
-	//[/UsersliderValueChanged_Post]
 }
 
 

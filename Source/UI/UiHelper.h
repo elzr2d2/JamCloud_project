@@ -16,6 +16,7 @@ class UiHelper
 {
 public:
 
+
 	static double timeToX(double timeLength)
 	{		
 		double relativeTime = timeLength / trackLength;
@@ -28,21 +29,11 @@ public:
 		return relativeX * trackLength;
 	}
 
-	static double bpmToX(double bpm)
-	{
-		return 0;
-	}
-
-	static double xToBpm()
-	{
-		return 0;
-	}
-
 	static double getBeatDistanceByBPM(double bpm)
 	{
 		double numOfBeats = bpm * trackLengthInMin;
 		double beatDis = gridWidth / numOfBeats;
-		return beatDis ;
+		return beatDis;
 	}
 
 	static double getNumOfBeats(double bpm)
@@ -66,27 +57,9 @@ public:
 		return numOfChannels * channelHeight+ timelineHeight;
 	}
 
-	 void setZoomIndex(int zoom)
-	{
-		zoomIndex = zoom;
-	}
-
-	 int  zoomIndex = 0;
+	
 private:
-/*
-	double zoomFactor()
-	{
-		switch (zoomIndex)
-		{
-		case 0:return 1;
-		case 1:return 1.4f;
-		case 2:return 2;
-		case 3:return 4;
-		default:return 1;
-			break;
-		}
-	}
-*/
+
 	
 };
 

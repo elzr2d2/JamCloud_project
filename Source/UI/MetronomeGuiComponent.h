@@ -29,16 +29,24 @@ public:
     void releaseResources() override;
 
 
-  
-	bool getStatePlay();
-	void setStatePlay(bool statePlay);
+	//==============================================================================
+	void paint(Graphics& g) override;
+	void resized() override;
 
-	void setBpm(double bpm);
-	double getBpm();
+	void play();
+	void stop();
+
+	enum class PlayState
+	{
+		Playing,
+		Stopped
+	};
 
 private:
-	double bpm = getBpm();
-	bool statePlay = false;
+	TextButton playButton{ "Play" };
+	TextButton stopButton{ "Stop" };
+
+	PlayState playState{ PlayState::Stopped };
 
 	MetronomeComponent metronome;
 

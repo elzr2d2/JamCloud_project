@@ -2,7 +2,7 @@
 
 #include "JuceHeader.h"
 #include <atomic> 
-
+#include "../UI/UiHelper.h"
 using namespace tracktion_engine;
 namespace te = tracktion_engine;
 
@@ -66,7 +66,7 @@ public:
 	bool isInputMonitoringEnabled(te::AudioTrack& t, int position = 0);
 	bool isTrackArmed(te::AudioTrack& t, int position = 0);
 
-	void activeMetro();
+	void activeMetronome();
 	void changeListenerCallback(ChangeBroadcaster* source);
 	TransportControl& getTransport() const;
 	Edit * getEdit() const;

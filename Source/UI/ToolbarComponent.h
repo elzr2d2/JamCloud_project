@@ -5,6 +5,8 @@
 #include "MetronomeGuiComponent.h"
 #include "TreeComponent.h"
 #include "UiHelper.h"
+#include "MetronomeGuiComponent.h"
+
 class ToolbarComponent : public TreeComponent,
                          public Button::Listener,
 						public ComboBox::Listener,
@@ -43,7 +45,7 @@ private:
 	std::unique_ptr<ComboBox> zoomComboBox;
     int minutes = 0;
     int seconds = 0;
-
+	MetronomeGuiComponent mgc;
     AudioEngine& engine;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (ToolbarComponent)
