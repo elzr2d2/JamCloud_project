@@ -1,38 +1,31 @@
-/*
-  ==============================================================================
-
-    This file was auto-generated!
-
-  ==============================================================================
-*/
-
 #pragma once
 
 #include "JuceHeader.h"
 #include "Audio/MetronomeComponent.h"
+#include "TreeComponent.h"
+#include "Audio/AudioEngine.h"
 
-//==============================================================================
-/*
-    This component lives inside our window, and this is where you should put all
-    your controls and content.
-*/
-class MetronomeGuiComponent : public AudioAppComponent
+class MetronomeGuiComponent : public AudioAppComponent,
+								public Button::Listener,
+								public Timer
+				
 {
 public:
-    //==============================================================================
-	MetronomeGuiComponent();
+	MetronomeGuiComponent(AudioEngine &inEngine);
     ~MetronomeGuiComponent();
 
-    //==============================================================================
     void prepareToPlay (int samplesPerBlockExpected, double sampleRate) override;
     void getNextAudioBlock (const AudioSourceChannelInfo& bufferToFill) override;
     void releaseResources() override;
 
 
-	//==============================================================================
 	void paint(Graphics& g) override;
 	void resized() override;
 
+	void buttonClicked(Button* buttonThatWasClicked) override;
+
+	void timerCallback() override;
+	
 	void play();
 	void stop();
 
@@ -43,13 +36,11 @@ public:
 	};
 
 private:
-	TextButton playButton{ "Play" };
-	TextButton stopButton{ "Stop" };
 
+	std::unique_ptr<ImageButton> metronomeButton;
 	PlayState playState{ PlayState::Stopped };
-
 	MetronomeComponent metronome;
-
+	AudioEngine &engine;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (MetronomeGuiComponent)
 };

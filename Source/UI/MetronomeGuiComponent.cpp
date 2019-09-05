@@ -1,25 +1,30 @@
-/*
-  ==============================================================================
-
-	This file was auto-generated!
-
-  ==============================================================================
-*/
 
 #include "MetronomeGuiComponent.h"
 
-//==============================================================================
-MetronomeGuiComponent::MetronomeGuiComponent()
+MetronomeGuiComponent::MetronomeGuiComponent(AudioEngine &inEngine):engine(inEngine)
 {
-	playButton.setRadioGroupId(1);
-	playButton.setToggleState(false, NotificationType::dontSendNotification);
-	playButton.onClick = [this]() { play(); };
-	addAndMakeVisible(playButton);
+	Colour darkGreyJam = Colour(0xff2c302f);
+	Colour orangeJam = Colour(0xffc39400);
+	Colour lightgrey = Colour(0x258A878B);
 
-	stopButton.setRadioGroupId(1);
-	playButton.setToggleState(true, NotificationType::dontSendNotification);
-	stopButton.onClick = [this]() { stop(); };
-	addAndMakeVisible(stopButton);
+	startTimerHz(30);
+
+	//metronome.setBpm(engine.getBpm());
+
+	/* button */
+	metronomeButton.reset(new ImageButton("metronomeButton"));
+	addAndMakeVisible(metronomeButton.get());
+	metronomeButton->setButtonText(TRANS("new button"));
+	metronomeButton->addListener(this);
+	metronomeButton->setImages(false, true, true,
+		ImageCache::getFromMemory(BinaryData::_010triangle_png,
+			BinaryData::_010triangle_pngSize), 1.0f,
+		darkGreyJam,
+		Image(), 1.0f, Colours::orange,
+		Image(), 1.0f, darkGreyJam);
+	metronomeButton->setBounds(0, 0, 20, 20);
+	metronomeButton->setClickingTogglesState(true);
+	metronomeButton->setToggleState(false, NotificationType::dontSendNotification);
 
 	setSize(200, 200);
 
@@ -43,6 +48,7 @@ MetronomeGuiComponent::~MetronomeGuiComponent()
 	shutdownAudio();
 }
 
+
 void MetronomeGuiComponent::play()
 {
 	playState = PlayState::Playing;
@@ -54,7 +60,27 @@ void MetronomeGuiComponent::stop()
 	metronome.reset();
 }
 
-//==============================================================================
+void MetronomeGuiComponent::buttonClicked(Button * buttonThatWasClicked)
+{
+	if (buttonThatWasClicked == metronomeButton.get())
+	{
+		auto buttonPressed = metronomeButton->getToggleState();
+		
+	}
+}
+
+void MetronomeGuiComponent::timerCallback()
+{
+	metronome.setBpm(engine.getBpm());
+
+	auto buttonPressed = metronomeButton->getToggleState();
+
+	if (buttonPressed && engine.isPlaying())
+		play();
+	else
+		stop();
+}
+
 void MetronomeGuiComponent::prepareToPlay(int samplesPerBlockExpected, double sampleRate)
 {
 	metronome.prepareToPlay(samplesPerBlockExpected, sampleRate);
@@ -78,21 +104,37 @@ void MetronomeGuiComponent::releaseResources()
 	// For more details, see the help for AudioProcessor::releaseResources()
 }
 
-//==============================================================================
 void MetronomeGuiComponent::paint(Graphics& g)
 {
-	// (Our component is opaque, so we must completely fill the background with a solid colour)
-	g.fillAll(getLookAndFeel().findColour(ResizableWindow::backgroundColourId));
+	Colour darkGreyJam = Colour(0xff2c302f);
+	Colour orangeJam = Colour(0xffc39400);
+	Colour lightgrey = Colour(0x258A878B);
+	
+	g.fillAll(Colours::transparentWhite);
 
-	// You can add your drawing code here!
+	if (metronomeButton->getToggleState())
+	{
+		metronomeButton->setImages(false, true, true,
+			ImageCache::getFromMemory(BinaryData::_010triangle_png,
+				BinaryData::_010triangle_pngSize), 1.0f,
+			Colours::orange,
+			Image(), 1.0f, Colours::orange,
+			Image(), 1.0f, Colours::orange);
+	}
+	else
+	{
+		metronomeButton->setImages(false, true, true,
+			ImageCache::getFromMemory(BinaryData::_010triangle_png,
+				BinaryData::_010triangle_pngSize), 1.0f,
+			darkGreyJam,
+			Image(), 1.0f, Colours::orange,
+			Image(), 1.0f, darkGreyJam);
+	}
+
+
 }
 
 void MetronomeGuiComponent::resized()
 {
-	Rectangle<int> bounds = getLocalBounds();
 
-	FlexBox flexBox;
-	flexBox.items.add(FlexItem(100, 100, playButton));
-	flexBox.items.add(FlexItem(100, 100, stopButton));
-	flexBox.performLayout(bounds);
 }

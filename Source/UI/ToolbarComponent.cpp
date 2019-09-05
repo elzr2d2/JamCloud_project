@@ -1,7 +1,8 @@
 #include "ToolbarComponent.h"
 
 ToolbarComponent::ToolbarComponent(AudioEngine& inEngine) :
-        engine(inEngine)
+        engine(inEngine),
+		metronomeButton(inEngine)
 {
 	
     startTimerHz(30);
@@ -95,18 +96,7 @@ ToolbarComponent::ToolbarComponent(AudioEngine& inEngine) :
     bpmText->setText(TRANS("120"));
     bpmText->setBounds(116, 16, 40, 30);
 
-    /* Metronome Button */
-    metronomeButton.reset(new ImageButton("metronomeButton"));
-    addAndMakeVisible(metronomeButton.get());
-    metronomeButton->setButtonText(TRANS("new button"));
-    metronomeButton->addListener(this);
-    metronomeButton->setImages(false, true, true,
-                               ImageCache::getFromMemory(BinaryData::_010triangle_png,
-                                                         BinaryData::_010triangle_pngSize), 1.0f,
-                               darkGreyJam,
-                               Image(), 1.0f, Colours::orange,
-                               Image(), 1.0f, darkGreyJam);
-    metronomeButton->setBounds(352, 20, 20, 20);
+
 
 	/* Zoom ComboBox */
 	zoomComboBox.reset(new ComboBox("zoomComboBox"));
@@ -139,10 +129,10 @@ ToolbarComponent::ToolbarComponent(AudioEngine& inEngine) :
 	masterVolSlider->setValue(0.8f);
 	masterVolSlider->setBounds(490, 24, 88, 25);
 
-	addAndMakeVisible(mgc);
-	mgc.setBounds(0, 0, 100, 100);
-	mgc.setVisible(false);
-	
+	/* Metronome Button */
+	addAndMakeVisible(metronomeButton);
+	metronomeButton.setBounds(352, 20, 20, 20);
+
     setSize(1000, 500);
 }
 
@@ -154,7 +144,6 @@ ToolbarComponent::~ToolbarComponent()
     loopButton = nullptr;
     timeText = nullptr;
     bpmText = nullptr;
-    metronomeButton = nullptr;
     playButton = nullptr;
 	zoomComboBox = nullptr;
 	masterVolSlider = nullptr;
@@ -303,21 +292,7 @@ void ToolbarComponent::buttonClicked(Button* buttonThatWasClicked)
         else
             engine.pause();
     }
-    else if (buttonThatWasClicked == metronomeButton.get())
-    {
-       
-		engine.activeMetronome();
-		if (engine.isPlaying())
-		{
-			mgc.stop();
-		}
-		else
-		{
-			engine.play();
-			mgc.play();
-		}
 
-    }
   
 }
 

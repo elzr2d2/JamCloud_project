@@ -32,11 +32,11 @@ void MetronomeComponent::prepareToPlay(int samplesPerBlock, double sampleRate)
 {
 	mSampleRate = sampleRate;
 	mUpdateInterval = 60.0 / mBpm * mSampleRate;
-
+	
 	if (pMetronomeSample != nullptr)
 	{
 		pMetronomeSample->prepareToPlay(samplesPerBlock, sampleRate);
-		DBG("file loaded");
+		DBG("Metronome Cowbell is loaded");
 	}
 
 	pMetronomeSample->setNextReadPosition(0);
@@ -44,6 +44,9 @@ void MetronomeComponent::prepareToPlay(int samplesPerBlock, double sampleRate)
 
 void MetronomeComponent::getNextAudioBlock(const AudioSourceChannelInfo& bufferToFill)
 {
+	
+	mUpdateInterval = 60.0 / mBpm * mSampleRate;
+
 	const auto bufferSize = bufferToFill.numSamples;
 
 	mTotalSamples += bufferSize;
@@ -60,7 +63,7 @@ void MetronomeComponent::getNextAudioBlock(const AudioSourceChannelInfo& bufferT
 			if (sample == timeToStartPlaying)
 			{
 				pMetronomeSample->getNextAudioBlock(bufferToFill);
-				DBG("Cllickkkck");
+				DBG("Ding !");
 			}
 		}
 	}
