@@ -27,6 +27,7 @@ public:
 	/* Clip Actions */
 	void addNewClipFromFile(const File& editFile, AudioTrack& track);
 	void deleteSelectedClips();
+	void trimClipFromLeft(Clip &clip);
 
 	/* Channel Sliders */
 	void changeVolume(AudioTrack& track, float newVolume);
@@ -66,7 +67,7 @@ public:
 	bool isInputMonitoringEnabled(te::AudioTrack& t, int position = 0);
 	bool isTrackArmed(te::AudioTrack& t, int position = 0);
 
-	void activeMetronome();
+
 	void changeListenerCallback(ChangeBroadcaster* source);
 	TransportControl& getTransport() const;
 	Edit * getEdit() const;
@@ -95,4 +96,7 @@ private:
 	bool channelSelected = false;
     int trackN = 0;
     void initEditFromProject(ValueTree projectFile);
+
+
+	
 };

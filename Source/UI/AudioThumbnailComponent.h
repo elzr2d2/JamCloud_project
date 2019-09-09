@@ -19,6 +19,10 @@ public:
 	void mouseDrag(const MouseEvent& event) override;
 	void mouseUp(const MouseEvent& event) override;
 	bool isSelected() { return selected; };
+
+	void trimClipFromLeft();
+	void trimClipFromRight();
+	
 private:
 
     void initSource();
@@ -33,6 +37,6 @@ private:
 	bool selected = false;
 
     tracktion_engine::Clip& clip;
-
+	double xDrag = 0;
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (AudioThumbnailComponent)
 };

@@ -9,8 +9,8 @@
 
 class ToolbarComponent : public TreeComponent,
                          public Button::Listener,
-						public ComboBox::Listener,
-		public Slider::Listener
+						 public ComboBox::Listener,
+						 public Slider::Listener
                          
 {
 public:

@@ -6,7 +6,7 @@ te::Engine& getTracktionEngine()
 {
     if (tracktionEngine == nullptr)
         tracktionEngine = std::make_unique<te::Engine>("JamCloud");
-
+	
     return *tracktionEngine;
 }
 
@@ -27,6 +27,7 @@ AudioEngine::AudioEngine(ValueTree projectToLoad)
         removeAllTracks();
         createNewProject();
     }
+	
 }
 
 
@@ -259,6 +260,7 @@ void AudioEngine::adjustClipProperties(tracktion_engine::WaveAudioClip& clip) co
     clip.setAutoTempo(false);
     clip.setAutoPitch(false);
     clip.setTimeStretchMode(TimeStretcher::defaultMode);
+	
 }
 
 void AudioEngine::addChannel()
@@ -365,57 +367,32 @@ void AudioEngine::saveAsFile()
 
 void AudioEngine::exportFile()
 {
-    File dir {};
+	Renderer renderer;
 
-    if (dir == File())
-    {
-        FileChooser fc("export", File::getSpecialLocation(File::userDocumentsDirectory), "*.tracktionedit");
-        if (fc.browseForDirectory())
-        {
-            dir = fc.getResult();
-            //edit->editFileRetriever = [editFile] { return editFile; };
-        }
-    }
-    //te::ExportJob exJob(edit.get(),&dir,Project::Ptr::get(),)
+	Range<double> range(0, getTransport().getCurrentPosition());
+	
+
+	
+
+	File outputFile("C:\\Users\\yarde\\Desktop\\export4.wav");
+	
+	if (renderer.renderToFile("Exporting to Wav File", outputFile, *edit, range, getTrackList().size(), true, nullptr, false))
+	{
+		DBG("\nrendering\n");
+
+	}
+	else
+	{
+		DBG("\n!rendering\n");
+	}
 }
 
 void AudioEngine::createNewProject()
 {
-#if JUCE_MODAL_LOOPS_PERMITTED
-    AlertWindow w("New Project",
-                  "",
-                  AlertWindow::AlertIconType::NoIcon);
-    w.addTextEditor("projectName", "enter the name of yo song", "Name");
-    w.addTextEditor("bpm", "enter the BPM here", "BPM");
-
-    w.addButton("OK", 1, KeyPress(KeyPress::returnKey, 0, 0));
-    w.addButton("Cancel", 0, KeyPress(KeyPress::escapeKey, 0, 0));
-
-    if (w.runModalLoop() != 0) // is they picked 'ok'
-    {
-
-        // this is the text they entered..
-        auto bpmText = w.getTextEditorContents("bpm");
-        double bpm = 0.0;
-        projectName = w.getTextEditorContents("projectName");
-
-        //convert from string to double
-        std::stringstream stringToDouble;
-        stringToDouble << bpmText;
-        stringToDouble >> bpm;
-
-        if (bpm > 60 && bpm < 200)
-            setBpm(bpm);
-        else
-            setBpm(120);
-
-
-        for (int i = 0; i < NumberOfChannels; i++)
-        {
-            addChannel();
-        }
-    }
-#endif
+	for (int i = 0; i < NumberOfChannels; i++)
+	{
+		addChannel();
+	}
 
 }
 
@@ -536,32 +513,6 @@ void AudioEngine::deleteSelectedClips()
 
 }
 
-void AudioEngine::activeMetronome()
-{
-	
-	/*
-    String clickFileUrl[2] { "C:/Users/yarde/Desktop/Projects Files/wavs/Cowbell.wav",
-                             "C:/Users/yarde/Desktop/Projects Files/wavs/Cowbell.wav" };
-
-    click->setClickWaveFile(getTracktionEngine(), false, clickFileUrl[0]);
-
-	
-    click->getAudioNodeProperties(clickAudioNodeProperties);
-	*/
-	/*
-	auto numTracks = edit->getTrackList().size();
-	auto track = getOrInsertAudioTrackAt(*edit, numTracks - 1);
-	File cowbell{ "C:/Users/yarde/Desktop/Projects Files/wavs/Cowbell.wav"};
-	addNewClipFromFile(cowbell, *track);
-	auto clip = track->getClips().getFirst();
-	auto x= UiHelper::getBeatDistanceByBPM(getBpm());
-	auto endloop = UiHelper::xToTime(x);
-	EditTimeRange range{ 0,endloop };
-	DBG(endloop);
-	DBG(endloop);
-	*/
-
-}
 
 void AudioEngine::setBpm(double bpm)
 {

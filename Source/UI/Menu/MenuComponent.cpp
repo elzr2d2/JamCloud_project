@@ -93,7 +93,8 @@ void MenuComponent::buttonClicked (Button* buttonThatWasClicked)
 		switch (result)
 		{
 		case newFile:
-			invokeCommand(new Commands::NewProject());
+			runNewProjectDialog();
+			
 			break;
 		case loadFile:
 		    invokeCommand(new Commands::LoadProject());
@@ -130,6 +131,39 @@ void MenuComponent::buttonClicked (Button* buttonThatWasClicked)
 
 
 
+}
+
+void MenuComponent::runNewProjectDialog()
+{
+#if JUCE_MODAL_LOOPS_PERMITTED
+	AlertWindow w("New Project",
+		"",
+		AlertWindow::AlertIconType::NoIcon);
+	w.addTextEditor("projectName", "enter the name of yo song", "Name");
+	w.addTextEditor("bpm", "enter the BPM here", "BPM");
+
+	w.addButton("OK", 1, KeyPress(KeyPress::returnKey, 0, 0));
+	w.addButton("Cancel", 0, KeyPress(KeyPress::escapeKey, 0, 0));
+
+	if (w.runModalLoop() != 0) // is they picked 'ok'
+	{
+		// this is the text they entered..
+		auto bpmText = w.getTextEditorContents("bpm");
+		double bpm = 0.0;
+		//projectName = w.getTextEditorContents("projectName");
+
+		//convert from string to double
+		//std::stringstream stringToDouble;
+		//stringToDouble << bpmText;
+		//stringToDouble >> bpm;
+
+
+
+		invokeCommand(new Commands::NewProject());
+
+
+	}
+#endif
 }
 
 

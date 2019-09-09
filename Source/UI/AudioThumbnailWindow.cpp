@@ -106,5 +106,6 @@ void AudioThumbnailWindow::mouseDown(const MouseEvent &e)
 {
 	auto newPlayheadPos = e.x;
 	engine.getTransport().setCurrentPosition(UiHelper::xToTime(newPlayheadPos));
+	
 
 }

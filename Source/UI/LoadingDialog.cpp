@@ -33,10 +33,11 @@ void LoadingDialog::run()
 
 		wait(250);
 
-		setProgress(-1.0); // setting a value beyond the range 0 -> 1 will show a spinning bar..
-		setStatusMessage("Finishing off the last few bits and pieces!");
-		wait(500);
+	
 	}
+	setProgress(-1.0); // setting a value beyond the range 0 -> 1 will show a spinning bar..
+	setStatusMessage("Finishing off the last few bits and pieces!");
+	wait(500);
 }
 
 void LoadingDialog::threadComplete(bool userPressedCancel)

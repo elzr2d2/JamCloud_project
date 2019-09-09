@@ -4,8 +4,8 @@
 #include "UiHelper.h"
 
 constexpr int deleteClip = 1;
-constexpr int trimClip = 2;
-
+constexpr int leftTrim = 2;
+constexpr int rightTrim = 3;
 
 AudioThumbnailComponent::AudioThumbnailComponent(tracktion_engine::Clip& inClip) :
         thumbnailCache(5), thumbnail(512, formatManager, thumbnailCache),
@@ -25,8 +25,9 @@ AudioThumbnailComponent::~AudioThumbnailComponent()
 void AudioThumbnailComponent::paint(Graphics& g)
 {
 	Rectangle<int> thumbnailBounds(100, 70);
-	
-	auto w = UiHelper::timeToX(clip.getMaximumLength());
+	auto len = clip.getPosition().getLength();
+	//auto w = UiHelper::timeToX(clip.getMaximumLength());
+	auto w = UiHelper::timeToX(len);
 	thumbnailBounds.setSize(w, 70);
 	if (!selected)
 	{
@@ -74,11 +75,15 @@ void AudioThumbnailComponent::paintIfFileLoaded(Graphics& g, const Rectangle<int
 {
 	g.setColour(Colours::transparentBlack);
 	g.fillRect(thumbnailBounds);
-	
     g.setColour(Colours::darkorange);
 
-    thumbnail.drawChannels(g, thumbnailBounds, 0.0, thumbnail.getTotalLength(), 1.0f);
+	auto start= clip.getPosition().getStart();
+	auto end = clip.getPosition().getEnd();
+	auto clipLen = clip.getPosition().getLength();
+    //thumbnail.drawChannels(g, thumbnailBounds, 0.0, clip.getMaximumLength(), 1.0f);
+	//thumbnail.drawChannels(g, thumbnailBounds, start, end, 1.0f);
 	
+	thumbnail.drawChannels(g, thumbnailBounds, 0.0, clipLen, 1.0f);
 }
 
 void AudioThumbnailComponent::mouseDown(const MouseEvent& e/*event*/)
@@ -87,14 +92,13 @@ void AudioThumbnailComponent::mouseDown(const MouseEvent& e/*event*/)
 	if (e.mods.isLeftButtonDown())
 	{
 		selected = !selected;
-		
-		repaint();
 	}
 	else if (e.mods.isRightButtonDown() && selected)
 	{
 		PopupMenu menu;
 		menu.addItem(1, "Delete");
-		menu.addItem(2, "Trim");
+		menu.addItem(2, "Trim From Left");
+		menu.addItem(3, "Trim From Right");
 
 		auto result = menu.show();
 
@@ -102,25 +106,42 @@ void AudioThumbnailComponent::mouseDown(const MouseEvent& e/*event*/)
 		{
 		case deleteClip: clip.removeFromParentTrack();
 			break;
-		case trimClip:;
+		case leftTrim: trimClipFromLeft();
+			break;
+		case rightTrim: trimClipFromRight();
 			break;
 		default:
 			break;
 		}
+		repaint();
 	}
 }
 
 void AudioThumbnailComponent::mouseDrag(const MouseEvent & e)
 {
-	
-	double y = getPosition().getY();
-	double x = 0;
-	if (e.x > 0)
-	{
 
-		x = e.x;
-		setBounds(x, y, getWidth(), getHeight());
+	double y = getPosition().getY();
+	auto dis = e.getDistanceFromDragStartX();
+	auto offsetX = e.getOffsetFromDragStart().getX();
+	if (dis < 0)
+	{
+		xDrag = e.x;
+		xDrag = +dis;
+	}
+	else
+	{
+		xDrag = dis;
+	}
+
+	if (xDrag >= 0)
+	{	
+		DBG(xDrag);
+		setBounds(xDrag, y, getWidth(), getHeight());
 		repaint();
+	}
+	if (xDrag < 0)
+	{
+		setBounds(0, y, getWidth(), getHeight());
 	}
 }
 
@@ -128,9 +149,33 @@ void AudioThumbnailComponent::mouseUp(const MouseEvent & e)
 {
 	auto x = getPosition().getX();
 	double newPos = UiHelper::xToTime(x);
-	EditTimeRange timeRange(newPos,  clip.getMaximumLength()+ newPos);
+	auto len = clip.getPosition().getLength();
+	EditTimeRange timeRange(newPos, len + newPos);
 	ClipPosition pos = { timeRange ,0};
 	clip.setPosition(pos);
+	repaint();
+}
+
+void AudioThumbnailComponent::trimClipFromLeft()
+{
+	/*===try members===*/
+	auto playheadPos = clip.edit.getTransport().getCurrentPosition();
+	//EditTimeRange etr{ playheadPos,pos };
+	//auto end = clip.getPosition().getEnd();
+	/*=================*/
+	//clip.setStart(pos, true, false);
+	clip.setStart(playheadPos, false, false);
+	
+	
+}
+
+void AudioThumbnailComponent::trimClipFromRight()
+{
+	auto playheadPos = clip.edit.getTransport().getCurrentPosition();
+	clip.setEnd(playheadPos, false);
+	
+	repaint();
+
 }
 
 void AudioThumbnailComponent::initSource()

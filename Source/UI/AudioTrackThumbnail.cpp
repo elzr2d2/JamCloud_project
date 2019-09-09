@@ -23,7 +23,7 @@ void AudioTrackThumbnail::update()
 
 void AudioTrackThumbnail::paint(Graphics & g)
 {
-
+	
 }
 
 void AudioTrackThumbnail::resized()
