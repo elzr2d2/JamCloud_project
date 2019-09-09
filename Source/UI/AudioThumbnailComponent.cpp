@@ -14,12 +14,13 @@ AudioThumbnailComponent::AudioThumbnailComponent(tracktion_engine::Clip& inClip)
     formatManager.registerBasicFormats();
     thumbnail.addChangeListener(this);
     initSource();
-
+	clip.state.addListener(this);
 }
 
 AudioThumbnailComponent::~AudioThumbnailComponent()
 {
     thumbnail.removeChangeListener(this);
+	clip.state.removeListener(this);
 }
 
 void AudioThumbnailComponent::paint(Graphics& g)
@@ -82,7 +83,7 @@ void AudioThumbnailComponent::paintIfFileLoaded(Graphics& g, const Rectangle<int
 	auto clipLen = clip.getPosition().getLength();
     //thumbnail.drawChannels(g, thumbnailBounds, 0.0, clip.getMaximumLength(), 1.0f);
 	//thumbnail.drawChannels(g, thumbnailBounds, start, end, 1.0f);
-	
+	DBG(clipLen);
 	thumbnail.drawChannels(g, thumbnailBounds, 0.0, clipLen, 1.0f);
 }
 
@@ -122,7 +123,7 @@ void AudioThumbnailComponent::mouseDrag(const MouseEvent & e)
 
 	double y = getPosition().getY();
 	auto dis = e.getDistanceFromDragStartX();
-	auto offsetX = e.getOffsetFromDragStart().getX();
+	
 	if (dis < 0)
 	{
 		xDrag = e.x;
@@ -139,7 +140,7 @@ void AudioThumbnailComponent::mouseDrag(const MouseEvent & e)
 		setBounds(xDrag, y, getWidth(), getHeight());
 		repaint();
 	}
-	if (xDrag < 0)
+	else
 	{
 		setBounds(0, y, getWidth(), getHeight());
 	}
@@ -164,7 +165,7 @@ void AudioThumbnailComponent::trimClipFromLeft()
 	//auto end = clip.getPosition().getEnd();
 	/*=================*/
 	//clip.setStart(pos, true, false);
-	clip.setStart(playheadPos, false, false);
+	//clip.setStart(playheadPos, false, false);
 	
 	
 }
@@ -173,9 +174,25 @@ void AudioThumbnailComponent::trimClipFromRight()
 {
 	auto playheadPos = clip.edit.getTransport().getCurrentPosition();
 	clip.setEnd(playheadPos, false);
-	
+
+	auto x = getPosition().getX();
+	double newPos = UiHelper::xToTime(x);
+	auto len = clip.getPosition().getLength();
+	EditTimeRange timeRange(newPos, len + newPos);
+	ClipPosition pos = { timeRange ,0 };
+	clip.setPosition(pos);
 	repaint();
 
+	double y = getPosition().getY();
+	 x = getPosition().getX();
+	setBounds(x, y, getWidth(), getHeight());
+	repaint();
+
+}
+
+void AudioThumbnailComponent::update()
+{
+	repaint();
 }
 
 void AudioThumbnailComponent::initSource()

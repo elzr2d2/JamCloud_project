@@ -371,9 +371,6 @@ void AudioEngine::exportFile()
 
 	Range<double> range(0, getTransport().getCurrentPosition());
 	
-
-	
-
 	File outputFile("C:\\Users\\yarde\\Desktop\\export4.wav");
 	
 	if (renderer.renderToFile("Exporting to Wav File", outputFile, *edit, range, getTrackList().size(), true, nullptr, false))

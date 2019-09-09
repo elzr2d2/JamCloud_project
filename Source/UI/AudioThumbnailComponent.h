@@ -2,8 +2,8 @@
 
 #include "JuceHeader.h"
 #include "Audio/AudioEngine.h"
-
-class AudioThumbnailComponent : public Component,
+#include "TreeComponent.h"
+class AudioThumbnailComponent : public TreeComponent,
                                 private ChangeListener
 {
 public:
@@ -23,6 +23,7 @@ public:
 	void trimClipFromLeft();
 	void trimClipFromRight();
 	
+	void update() override;
 private:
 
     void initSource();
