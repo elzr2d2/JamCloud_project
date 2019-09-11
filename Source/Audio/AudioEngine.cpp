@@ -40,7 +40,6 @@ void AudioEngine::initEditFromProject(ValueTree projectFile)
     tempoSequence = std::make_unique<TempoSequence>(*edit.get());
     tempoSetting = std::make_unique<TempoSetting>(*tempoSequence.get(), projectFile);
 	
-	
 }
 
 AudioEngine::~AudioEngine()
@@ -375,12 +374,23 @@ void AudioEngine::saveAsFile()
 
 void AudioEngine::exportFile()
 {
+
 	Renderer renderer;
 
 	Range<double> range(0, getTransport().getCurrentPosition());
-	
-	File outputFile("C:\\Users\\yarde\\Desktop\\export4.wav");
-	
+
+	File outputFile{};
+
+	if (outputFile == File())
+	{
+		FileChooser fc("Exporting to Wav File", File::getSpecialLocation(File::userDocumentsDirectory), "*.wav");
+		if (fc.browseForFileToSave(true))
+		{
+			outputFile = fc.getResult();
+
+		}
+	}
+
 	if (renderer.renderToFile("Exporting to Wav File", outputFile, *edit, range, getTrackList().size(), true, nullptr, false))
 	{
 		DBG("\nrendering\n");

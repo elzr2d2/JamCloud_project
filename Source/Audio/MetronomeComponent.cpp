@@ -44,7 +44,7 @@ void MetronomeComponent::prepareToPlay(int samplesPerBlock, double sampleRate)
 
 void MetronomeComponent::getNextAudioBlock(const AudioSourceChannelInfo& bufferToFill)
 {
-	
+	/*
 	mUpdateInterval = 60.0 / mBpm * mSampleRate;
 
 	const auto bufferSize = bufferToFill.numSamples;
@@ -64,6 +64,39 @@ void MetronomeComponent::getNextAudioBlock(const AudioSourceChannelInfo& bufferT
 			{
 				pMetronomeSample->getNextAudioBlock(bufferToFill);
 				DBG("Ding !");
+			}
+		}
+	}
+
+	if (pMetronomeSample->getNextReadPosition() != 0)
+	{
+		pMetronomeSample->getNextAudioBlock(bufferToFill);
+	}
+	*/
+	//El's Code//
+	mUpdateInterval = 60.0 / mBpm * mSampleRate;
+
+	const auto bufferSize = bufferToFill.numSamples;
+
+	mTotalSamples += bufferSize;
+
+	if (mTotalSamples % mUpdateInterval != 0)
+		mSamplesRemaining = mTotalSamples % mUpdateInterval;
+	else
+		mSamplesRemaining = mUpdateInterval % mTotalSamples;
+
+	if ((mSamplesRemaining + bufferSize) >= mUpdateInterval)
+	{
+		const auto timeToStartPlaying = mUpdateInterval - mSamplesRemaining;
+		pMetronomeSample->setNextReadPosition(0);
+
+		for (auto sample = 0; sample < bufferSize; sample++)
+		{
+			if (sample == timeToStartPlaying)
+			{
+				pMetronomeSample->getNextAudioBlock(bufferToFill);
+				DBG("DING!");
+
 			}
 		}
 	}

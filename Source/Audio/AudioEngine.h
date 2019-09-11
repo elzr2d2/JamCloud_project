@@ -69,12 +69,12 @@ public:
 	bool isInputMonitoringEnabled(te::AudioTrack& t, int position = 0);
 	bool isTrackArmed(te::AudioTrack& t, int position = 0);
 
-
 	void changeListenerCallback(ChangeBroadcaster* source);
 	TransportControl& getTransport() const;
 	TempoSetting& getTempoSetting()const;
 	Edit * getEdit() const;
-	String projectName;
+	String projectName = "new project";
+	void setProjectName(String newName) { projectName = newName; };
 private:
 
     te::WaveAudioClip::Ptr loadAudioFileAsClip(const File& file, AudioTrack& track);

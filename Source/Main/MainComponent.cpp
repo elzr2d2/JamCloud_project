@@ -39,6 +39,7 @@ void MainComponent::performCommand(Command* command)
 
     else if (auto loadProject = dynamic_cast<Commands::LoadProject*>(command))
         loadFile();
+
 }
 
 void MainComponent::loadFile()

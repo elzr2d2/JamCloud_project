@@ -128,42 +128,13 @@ void MenuComponent::buttonClicked (Button* buttonThatWasClicked)
 			break;
 		}
     }
-
-
-
 }
 
 void MenuComponent::runNewProjectDialog()
 {
-#if JUCE_MODAL_LOOPS_PERMITTED
-	AlertWindow w("New Project",
-		"",
-		AlertWindow::AlertIconType::NoIcon);
-	w.addTextEditor("projectName", "enter the name of yo song", "Name");
-	w.addTextEditor("bpm", "enter the BPM here", "BPM");
+	invokeCommand(new Commands::NewProject());
+	//AlertWindow::showMessageBox(AlertWindow::NoIcon, "JamCloud", "new project created! , have fun :)");
 
-	w.addButton("OK", 1, KeyPress(KeyPress::returnKey, 0, 0));
-	w.addButton("Cancel", 0, KeyPress(KeyPress::escapeKey, 0, 0));
-
-	if (w.runModalLoop() != 0) // is they picked 'ok'
-	{
-		// this is the text they entered..
-		auto bpmText = w.getTextEditorContents("bpm");
-		double bpm = 0.0;
-		//projectName = w.getTextEditorContents("projectName");
-
-		//convert from string to double
-		//std::stringstream stringToDouble;
-		//stringToDouble << bpmText;
-		//stringToDouble >> bpm;
-
-
-
-		invokeCommand(new Commands::NewProject());
-
-
-	}
-#endif
 }
 
 
