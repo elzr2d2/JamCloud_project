@@ -32,20 +32,23 @@ public:
 	void sliderValueChanged(Slider* sliderThatWasMoved) override;
 
 private:
+	MetronomeGuiComponent metronomeButton;
 
     std::unique_ptr<ImageButton> recordButton;
     std::unique_ptr<ImageButton> stopButton;
     std::unique_ptr<ImageButton> loopButton;
     std::unique_ptr<ImageButton> playButton;
-    std::unique_ptr<TextEditor> timeText;
-    std::unique_ptr<TextEditor> bpmText;
+
 
 	std::unique_ptr<Slider> masterVolSlider;
 	std::unique_ptr<Slider> bpmSlider;
+
 	std::unique_ptr<ComboBox> zoomComboBox;
+
+	std::unique_ptr<TextEditor> timeText;
     int minutes = 0;
     int seconds = 0;
-	MetronomeGuiComponent metronomeButton;
+
     AudioEngine& engine;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (ToolbarComponent)

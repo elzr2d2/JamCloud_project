@@ -80,25 +80,6 @@ ToolbarComponent::ToolbarComponent(AudioEngine& inEngine) :
     timeText->setFont(Font("Bahnschrift", 20.00f, Font::plain).withTypefaceStyle("Regular"));
     timeText->setBounds(12, 16, 80, 30);
 
-
-    /* Bpm Text Editor */
-	/*
-    bpmText.reset(new TextEditor("bpmText"));
-    addAndMakeVisible(bpmText.get());
-    bpmText->setMultiLine(false);
-    bpmText->setReturnKeyStartsNewLine(false);
-    bpmText->setReadOnly(false);
-    bpmText->setScrollbarsShown(false);
-    bpmText->setCaretVisible(false);
-    bpmText->setPopupMenuEnabled(true);
-    bpmText->setColour(TextEditor::backgroundColourId, Colour(0x00000000));
-    bpmText->setColour(TextEditor::ColourIds::outlineColourId, Colours::transparentWhite);
-    bpmText->setColour(TextEditor::ColourIds::textColourId, orangeJam);
-    bpmText->setFont(Font("Bahnschrift", 20.00f, Font::plain).withTypefaceStyle("Regular"));
-    bpmText->setText(TRANS("120"));
-    bpmText->setBounds(116, 16, 40, 30);
-	*/
-
 	/* Zoom ComboBox */
 	zoomComboBox.reset(new ComboBox("zoomComboBox"));
 	addAndMakeVisible(zoomComboBox.get());
@@ -140,7 +121,7 @@ ToolbarComponent::ToolbarComponent(AudioEngine& inEngine) :
 	bpmSlider->setColour(Slider::textBoxTextColourId, Colour(0xffc89706));
 	bpmSlider->setColour(Slider::textBoxOutlineColourId, Colour(0x00000000));
 	bpmSlider->addListener(this);
-	//116, 16, 40, 30
+	bpmSlider->setValue(engine.getBpm());
 	bpmSlider->setBounds(116, 16, 40, 30);
 
 
@@ -159,7 +140,6 @@ ToolbarComponent::~ToolbarComponent()
     stopButton = nullptr;
     loopButton = nullptr;
     timeText = nullptr;
-    bpmText = nullptr;
     playButton = nullptr;
 	zoomComboBox = nullptr;
 	masterVolSlider = nullptr;
@@ -350,16 +330,29 @@ void ToolbarComponent::update()
 	
 }
 
-void ToolbarComponent::setBpm()
-{
-    engine.setBpm(bpmText->getText().getDoubleValue());
-}
 
 void ToolbarComponent::comboBoxChanged(ComboBox * comboBoxThatHasChanged)
 {
 	if (comboBoxThatHasChanged == zoomComboBox.get())
 	{
 		int zoomChoice = zoomComboBox->getSelectedItemIndex();
+		if (zoomChoice == 0)
+		{
+
+		}
+		else if (zoomChoice == 1)
+		{
+
+		}
+		else if (zoomChoice == 2)
+		{
+
+		}
+		else if (zoomChoice == 3)
+		{
+
+		}
+		DBG(zoomChoice);
 	}
 }
 

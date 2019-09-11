@@ -6,14 +6,12 @@ AudioThumbnailWindow::AudioThumbnailWindow(AudioEngine & inEngine):
 {
 	startTimerHz(60);
 	engine.getEdit()->state.addListener(this);
-	//engine.getTempoSetting().state.addListener(this);
 	addAndMakeVisible(playhead);
 }
 
 AudioThumbnailWindow::~AudioThumbnailWindow()
 {
 	engine.getEdit()->state.removeListener(this);
-	//engine.getTempoSetting().state.removeListener(this);
 }
 
 void AudioThumbnailWindow::update()
@@ -25,19 +23,12 @@ void AudioThumbnailWindow::update()
 
 void AudioThumbnailWindow::valueTreeChanged()
 {
-	
-	//needs to mark for update if the value tree that changed is from tempoSettings
-	//markForUpdate();
 	auto bpmChanged = engine.isBpmChange;
 	if (bpmChanged)
 	{
 		markForUpdate();
 		engine.setBpmChange(false);
 	}
-		
-
-	
-	
 }
 
 void AudioThumbnailWindow::paint(Graphics& g)
