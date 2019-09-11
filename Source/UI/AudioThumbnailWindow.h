@@ -13,6 +13,7 @@ public:
 	AudioThumbnailWindow(AudioEngine& inEngine);
 	~AudioThumbnailWindow();
 	void update() override;
+	void valueTreeChanged() override;
 	void paint(Graphics& g) override;
 private:
 	void addNewAudioTrackThumbnail(AudioTrack& audioTrack);
@@ -22,6 +23,6 @@ private:
 	int channelY = 0;
 	AudioEngine& engine;
 	std::vector<std::unique_ptr<AudioTrackThumbnail>> trackThumbnails;
-
+	
 	PlayHeadComponent playhead;
 };

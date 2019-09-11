@@ -27,7 +27,7 @@ public:
 	/* Clip Actions */
 	void addNewClipFromFile(const File& editFile, AudioTrack& track);
 	void deleteSelectedClips();
-	void trimClipFromLeft(Clip &clip);
+
 
 	/* Channel Sliders */
 	void changeVolume(AudioTrack& track, float newVolume);
@@ -48,6 +48,8 @@ public:
 	bool isRecording();
 	bool isPlaying();
 	bool isLooping();
+	bool isBpmChange = false;
+	void setBpmChange(bool b) { isBpmChange = b; };
 
 	/* File Actions */
 	void saveAsFile();
@@ -70,6 +72,7 @@ public:
 
 	void changeListenerCallback(ChangeBroadcaster* source);
 	TransportControl& getTransport() const;
+	TempoSetting& getTempoSetting()const;
 	Edit * getEdit() const;
 	String projectName;
 private:

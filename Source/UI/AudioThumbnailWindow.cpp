@@ -6,12 +6,14 @@ AudioThumbnailWindow::AudioThumbnailWindow(AudioEngine & inEngine):
 {
 	startTimerHz(60);
 	engine.getEdit()->state.addListener(this);
+	//engine.getTempoSetting().state.addListener(this);
 	addAndMakeVisible(playhead);
 }
 
 AudioThumbnailWindow::~AudioThumbnailWindow()
 {
 	engine.getEdit()->state.removeListener(this);
+	//engine.getTempoSetting().state.removeListener(this);
 }
 
 void AudioThumbnailWindow::update()
@@ -19,6 +21,23 @@ void AudioThumbnailWindow::update()
 	rebuildTrackThumbnailList();
 	repaint();
 	playhead.toFront(true);
+}
+
+void AudioThumbnailWindow::valueTreeChanged()
+{
+	
+	//needs to mark for update if the value tree that changed is from tempoSettings
+	//markForUpdate();
+	auto bpmChanged = engine.isBpmChange;
+	if (bpmChanged)
+	{
+		markForUpdate();
+		engine.setBpmChange(false);
+	}
+		
+
+	
+	
 }
 
 void AudioThumbnailWindow::paint(Graphics& g)
@@ -45,8 +64,8 @@ void AudioThumbnailWindow::paint(Graphics& g)
 		int lineX = 0, lineY = 0, lineWidth = 1, lineHeight = proportionOfHeight(1.0000f);
 		int barNumberY = 70 * 5, barNumberWidth = 30,barNumberHeight = 20;
 		Colour mellowGrey = Colour(0xff787d79);
-		auto beats = UiHelper::getNumOfBeats(engine.getBpm());
-		double beatDistance = UiHelper::getBeatDistanceByBPM(engine.getBpm());
+		auto beats = UiHelper::getNumOfBeats(engine.getTempoSetting().getBpm());
+		double beatDistance = UiHelper::getBeatDistanceByBPM(engine.getTempoSetting().getBpm());
 
 		
 		for (int i = 0; i < beats; i++)

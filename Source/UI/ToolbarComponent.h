@@ -41,6 +41,7 @@ private:
     std::unique_ptr<TextEditor> bpmText;
 
 	std::unique_ptr<Slider> masterVolSlider;
+	std::unique_ptr<Slider> bpmSlider;
 	std::unique_ptr<ComboBox> zoomComboBox;
     int minutes = 0;
     int seconds = 0;

@@ -7,6 +7,7 @@ ToolbarComponent::ToolbarComponent(AudioEngine& inEngine) :
 	
     startTimerHz(30);
 	engine.getTransport().state.addListener(this);
+	engine.getTempoSetting().state.addListener(this);
     Colour darkGreyJam = Colour(0xff2c302f);
     Colour orangeJam = Colour(0xffc39400);
 	Colour lightgrey = Colour(0x258A878B);
@@ -81,6 +82,7 @@ ToolbarComponent::ToolbarComponent(AudioEngine& inEngine) :
 
 
     /* Bpm Text Editor */
+	/*
     bpmText.reset(new TextEditor("bpmText"));
     addAndMakeVisible(bpmText.get());
     bpmText->setMultiLine(false);
@@ -95,8 +97,7 @@ ToolbarComponent::ToolbarComponent(AudioEngine& inEngine) :
     bpmText->setFont(Font("Bahnschrift", 20.00f, Font::plain).withTypefaceStyle("Regular"));
     bpmText->setText(TRANS("120"));
     bpmText->setBounds(116, 16, 40, 30);
-
-
+	*/
 
 	/* Zoom ComboBox */
 	zoomComboBox.reset(new ComboBox("zoomComboBox"));
@@ -129,6 +130,20 @@ ToolbarComponent::ToolbarComponent(AudioEngine& inEngine) :
 	masterVolSlider->setValue(0.8f);
 	masterVolSlider->setBounds(490, 24, 88, 25);
 
+	/* Bpm Slider */
+	bpmSlider.reset(new Slider("bpmSlider"));
+	addAndMakeVisible(bpmSlider.get());
+	bpmSlider->setRange(60, 200, 1);
+	bpmSlider->setSliderStyle(Slider::LinearBarVertical);
+	bpmSlider->setTextBoxStyle(Slider::TextBoxLeft, false, 80, 20);
+	bpmSlider->setColour(Slider::thumbColourId, Colour(0xff0c0b0a));
+	bpmSlider->setColour(Slider::textBoxTextColourId, Colour(0xffc89706));
+	bpmSlider->setColour(Slider::textBoxOutlineColourId, Colour(0x00000000));
+	bpmSlider->addListener(this);
+	//116, 16, 40, 30
+	bpmSlider->setBounds(116, 16, 40, 30);
+
+
 	/* Metronome Button */
 	addAndMakeVisible(metronomeButton);
 	metronomeButton.setBounds(352, 20, 20, 20);
@@ -139,6 +154,7 @@ ToolbarComponent::ToolbarComponent(AudioEngine& inEngine) :
 ToolbarComponent::~ToolbarComponent()
 {
 	engine.getTransport().state.removeListener(this);
+	engine.getTempoSetting().state.removeListener(this);
     recordButton = nullptr;
     stopButton = nullptr;
     loopButton = nullptr;
@@ -331,7 +347,7 @@ void ToolbarComponent::getCurrentTimeText()
 void ToolbarComponent::update()
 {
 	getCurrentTimeText();
-	setBpm();
+	
 }
 
 void ToolbarComponent::setBpm()
@@ -349,13 +365,21 @@ void ToolbarComponent::comboBoxChanged(ComboBox * comboBoxThatHasChanged)
 
 void ToolbarComponent::sliderValueChanged(Slider * sliderThatWasMoved)
 {
-
+	
 	if (sliderThatWasMoved == masterVolSlider.get())
 	{
 		auto volume = (float)sliderThatWasMoved->getValue();
 		engine.getEdit()->setMasterVolumeSliderPos(volume);
 	}
+	else if (sliderThatWasMoved == bpmSlider.get())
+	{
+		auto bpm = (float)sliderThatWasMoved->getValue();
+		engine.setBpm(bpm);	
+		engine.setBpmChange(true);
+	}
 
 }
+
+
 
 

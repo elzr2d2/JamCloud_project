@@ -77,7 +77,7 @@ void AudioThumbnailComponent::paintIfFileLoaded(Graphics& g, const Rectangle<int
 	g.setColour(Colours::transparentBlack);
 	g.fillRect(thumbnailBounds);
     g.setColour(Colours::darkorange);
-
+	
 	auto start= clip.getPosition().getStart();
 	auto end = clip.getPosition().getEnd();
 	auto clipLen = clip.getPosition().getLength();
@@ -155,19 +155,30 @@ void AudioThumbnailComponent::mouseUp(const MouseEvent & e)
 	ClipPosition pos = { timeRange ,0};
 	clip.setPosition(pos);
 	repaint();
+	DBG("mouseUppppp");
 }
 
 void AudioThumbnailComponent::trimClipFromLeft()
 {
-	/*===try members===*/
+	/*
 	auto playheadPos = clip.edit.getTransport().getCurrentPosition();
-	//EditTimeRange etr{ playheadPos,pos };
-	//auto end = clip.getPosition().getEnd();
-	/*=================*/
-	//clip.setStart(pos, true, false);
-	//clip.setStart(playheadPos, false, false);
+	
+	clip.setStart(playheadPos, false, false);
+	auto len = clip.getPosition().getLength();
+	EditTimeRange etr{ playheadPos,playheadPos + len };
+	ClipPosition pos  = {etr};
+	clip.setPosition(pos);
 	
 	
+
+
+	double y = getPosition().getY();
+	double x = UiHelper::timeToX(playheadPos);
+	setBounds(x, y, getWidth(), getHeight());
+	repaint();
+	DBG("trimClipFromLeft()");
+	*/
+	AlertWindow::showMessageBox(AlertWindow::AlertIconType::NoIcon, "Stop licking the Cup..", " trim only when the playhead is on the wav form");
 }
 
 void AudioThumbnailComponent::trimClipFromRight()

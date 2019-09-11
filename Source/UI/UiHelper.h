@@ -16,7 +16,6 @@ class UiHelper
 {
 public:
 
-
 	static double timeToX(double timeLength)
 	{		
 		double relativeTime = timeLength / trackLength;

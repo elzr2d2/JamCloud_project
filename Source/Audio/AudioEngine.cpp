@@ -38,7 +38,8 @@ void AudioEngine::initEditFromProject(ValueTree projectFile)
     edit->playInStopEnabled = true;
 
     tempoSequence = std::make_unique<TempoSequence>(*edit.get());
-    tempoSetting = std::make_unique<TempoSetting>(*tempoSequence.get(), createEmptyEdit());
+    tempoSetting = std::make_unique<TempoSetting>(*tempoSequence.get(), projectFile);
+	
 	
 }
 
@@ -177,6 +178,11 @@ bool AudioEngine::trackHasInput(te::AudioTrack& t, int position)
 TransportControl& AudioEngine::getTransport() const
 {
     return edit->getTransport();
+}
+
+TempoSetting & AudioEngine::getTempoSetting() const
+{
+	return *tempoSetting;
 }
 
 Edit* AudioEngine::getEdit() const
@@ -347,6 +353,8 @@ bool AudioEngine::isLooping()
     return getTransport().looping.get();
 }
 
+
+
 void AudioEngine::saveAsFile()
 {
     File editFile {};
@@ -514,6 +522,8 @@ void AudioEngine::deleteSelectedClips()
 void AudioEngine::setBpm(double bpm)
 {
     tempoSetting->setBpm(bpm);
+	
+
 }
 
 double AudioEngine::getBpm()
