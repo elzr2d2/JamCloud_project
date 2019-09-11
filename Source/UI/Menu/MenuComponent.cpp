@@ -96,12 +96,11 @@ void MenuComponent::buttonClicked (Button* buttonThatWasClicked)
 			runNewProjectDialog();
 			
 			break;
-		case loadFile:
-		    invokeCommand(new Commands::LoadProject());
+		case loadFile:			invokeCommand(new Commands::LoadProject());
 			break;
-		case saveAsFile:	engine.saveAsFile();
+		case saveAsFile:		engine.saveAsFile();
 			break;
-		case exportAsWavFile:engine.exportFile();
+		case exportAsWavFile:	engine.exportFile();
 			break;
 		default:
 			break;
