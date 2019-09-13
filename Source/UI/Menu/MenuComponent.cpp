@@ -5,7 +5,7 @@ constexpr int newFile = 1;
 constexpr int saveAsFile = 2;
 constexpr int loadFile = 3;
 constexpr int exportAsWavFile = 4;
-
+constexpr int saveFile= 5;
 constexpr int audioSettings = 7;
 
 
@@ -14,11 +14,14 @@ MenuComponent::MenuComponent (AudioEngine& inEngine):
 	engine(inEngine),
 	newProjectDialog(inEngine)
 {
+	Colour darkGreyJam = Colour(0xff2c302f);
+	Colour orangeJam = Colour(0xffc39400);
 	/* File Button */
     fileButton.reset (new TextButton ("fileButton"));
     addAndMakeVisible (fileButton.get());
     fileButton->setButtonText (TRANS("File"));
     fileButton->addListener (this);
+	fileButton->setColour(TextButton::ColourIds::buttonColourId, darkGreyJam);
     fileButton->setBounds (8, 8, 65, 24);
 
 	/* Cloud Button */
@@ -26,6 +29,7 @@ MenuComponent::MenuComponent (AudioEngine& inEngine):
     addAndMakeVisible (cloudButton.get());
     cloudButton->setButtonText (TRANS("Cloud"));
     cloudButton->addListener (this);
+	cloudButton->setColour(TextButton::ColourIds::buttonColourId, darkGreyJam);
     cloudButton->setBounds (80, 8, 65, 24);
 
 	/* Settings Button */
@@ -33,6 +37,7 @@ MenuComponent::MenuComponent (AudioEngine& inEngine):
     addAndMakeVisible (settingsButton.get());
     settingsButton->setButtonText (TRANS("Settings"));
     settingsButton->addListener (this);
+	settingsButton->setColour(TextButton::ColourIds::buttonColourId, darkGreyJam);
     settingsButton->setBounds (152, 8, 65, 24);
 
 	/* LOGO */
@@ -46,11 +51,14 @@ MenuComponent::MenuComponent (AudioEngine& inEngine):
     logo->setColour (TextEditor::backgroundColourId, Colours::white);
 
 	/* File Menu */
-	fileMenu.addItem(newFile, "New");
+	fileMenu.addSectionHeader("Project");
+	fileMenu.addItem(newFile, "New Project");
+	fileMenu.addItem(loadFile, "Load Project");
+	fileMenu.addSectionHeader("Files");
+	fileMenu.addItem(saveFile, "save");
 	fileMenu.addItem(saveAsFile, "Save As..");
-	fileMenu.addItem(loadFile, "Load");
 	fileMenu.addItem(exportAsWavFile, "Export As WAV");
-
+	
 	/* Settings Menu*/
 	settingsMenu.addItem(audioSettings, "Audio Settings");
 	
@@ -92,15 +100,15 @@ void MenuComponent::buttonClicked (Button* buttonThatWasClicked)
 
 		switch (result)
 		{
-		case newFile:
-			runNewProjectDialog();
-			
+		case newFile:			invokeCommand(new Commands::NewProject());
 			break;
 		case loadFile:			invokeCommand(new Commands::LoadProject());
 			break;
 		case saveAsFile:		engine.saveAsFile();
 			break;
 		case exportAsWavFile:	engine.exportFile();
+			break;
+		case saveFile:			engine.saveFile();
 			break;
 		default:
 			break;
@@ -128,14 +136,6 @@ void MenuComponent::buttonClicked (Button* buttonThatWasClicked)
 		}
     }
 }
-
-void MenuComponent::runNewProjectDialog()
-{
-	invokeCommand(new Commands::NewProject());
-	//AlertWindow::showMessageBox(AlertWindow::NoIcon, "JamCloud", "new project created! , have fun :)");
-
-}
-
 
 
 #if 0

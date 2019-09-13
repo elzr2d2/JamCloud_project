@@ -10,6 +10,7 @@ class ChannelWindow : public TreeComponent
 public:
 	ChannelWindow(AudioEngine& inEngine);
 	~ChannelWindow();
+
 	void update() override;
 
 private:

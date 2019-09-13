@@ -36,19 +36,24 @@ void AudioThumbnailWindow::paint(Graphics& g)
 
 	{
 		float x = 0.0f, y = 0.0f, width = static_cast<float> (proportionOfWidth(1.0000f)), height = static_cast<float> (proportionOfHeight(1.0000f));
-		Colour fillColour = Colour(0x5c000000);
+
 		Colour greyJam = Colour(0x5C666666);
-		int h = 70;
+		Colour blackJam = Colour(0x5c000000);
+		int channelHeight = UiHelper::getChannelHeight();
+		int numOfChannels = UiHelper::numChannels();
 		/* Draw grey channels */
-		for (int i = 0; i < 5; i++)
+		for (int i = 0; i < numOfChannels; i++)
 		{
 			g.setColour(greyJam);
-			g.fillRoundedRectangle(x, y, width, h, 10.000f);
-			h += 70;
+			g.fillRoundedRectangle(x, y, width, channelHeight, 10.000f);
+			channelHeight += channelHeight;
 		}
-		/* Draw Frame */
-		g.setColour(fillColour);
-		g.fillRoundedRectangle(x, 70*5, width, 20, 10.000f);
+		/* Draw Timeline */
+		y = UiHelper::getChannelHeight()*UiHelper::numChannels();
+		height = 20;
+		g.setColour(blackJam);
+		g.fillRoundedRectangle(x, y, width, height, 5.000f);
+
 	}
 
 	{
@@ -83,7 +88,7 @@ void AudioThumbnailWindow::paint(Graphics& g)
 
 void AudioThumbnailWindow::addNewAudioTrackThumbnail(AudioTrack & audioTrack)
 {
-	int channelHeight = 70;
+	int channelHeight = UiHelper::getChannelHeight();
 	trackThumbnails.emplace_back();
 
 	auto& addedTrackThumbnail = trackThumbnails.back();
@@ -116,6 +121,4 @@ void AudioThumbnailWindow::mouseDown(const MouseEvent &e)
 {
 	auto newPlayheadPos = e.x;
 	engine.getTransport().setCurrentPosition(UiHelper::xToTime(newPlayheadPos));
-	
-
 }

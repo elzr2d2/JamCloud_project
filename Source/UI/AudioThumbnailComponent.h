@@ -36,8 +36,8 @@ private:
     AudioThumbnail thumbnail;
 	
 	bool selected = false;
-
-    tracktion_engine::Clip& clip;
 	double xDrag = 0;
+    tracktion_engine::Clip& clip;
+	
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (AudioThumbnailComponent)
 };

@@ -8,7 +8,6 @@ class MenuComponent  : public Component,
                        public Button::Listener
 {
 public:
-
     MenuComponent (AudioEngine& inEngine);
     ~MenuComponent();
 
@@ -17,7 +16,6 @@ public:
     void buttonClicked (Button* buttonThatWasClicked) override;
 
 private:
-	void runNewProjectDialog();
 
     std::unique_ptr<TextButton> fileButton;
     std::unique_ptr<TextButton> cloudButton;

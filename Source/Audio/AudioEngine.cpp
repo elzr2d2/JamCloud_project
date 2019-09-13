@@ -21,13 +21,9 @@ AudioEngine::AudioEngine(ValueTree projectToLoad)
     else
     {
         initEditFromProject(createEmptyEdit());
-
-        //te::EditFileOperations(*edit).save(true, true, false);
-
         removeAllTracks();
         createNewProject();
     }
-	
 }
 
 
@@ -224,6 +220,12 @@ void AudioEngine::recording()
         te::EditFileOperations(*edit).save(true, true, false);
 }
 
+void AudioEngine::toggleArm(AudioTrack& track)
+{
+	bool shouldArm = !isTrackArmed(track);
+	armTrack(track, shouldArm);
+}
+
 void AudioEngine::loop()
 {
     auto endLoopPos = edit->getTransport().getCurrentPosition();
@@ -286,6 +288,7 @@ void AudioEngine::addVolumeAndPanPlugin(AudioTrack& track) const
 
     plugins.add(newPlugin);
 }
+
 
 void AudioEngine::changeVolume(AudioTrack& track, float newVolume)
 {
@@ -381,25 +384,34 @@ void AudioEngine::exportFile()
 
 	File outputFile{};
 
+
+	
 	if (outputFile == File())
 	{
 		FileChooser fc("Exporting to Wav File", File::getSpecialLocation(File::userDocumentsDirectory), "*.wav");
 		if (fc.browseForFileToSave(true))
 		{
 			outputFile = fc.getResult();
+			
+			if (renderer.renderToFile("Exporting to Wav File", outputFile, *edit, range, getTrackList().size()+1, true,nullptr, false))
+			{
+				DBG("\nrendering\n");
+
+			}
+			else
+			{
+				DBG("\n!rendering\n");
+			}
 
 		}
 	}
 
-	if (renderer.renderToFile("Exporting to Wav File", outputFile, *edit, range, getTrackList().size(), true, nullptr, false))
-	{
-		DBG("\nrendering\n");
+	
+}
 
-	}
-	else
-	{
-		DBG("\n!rendering\n");
-	}
+void AudioEngine::saveFile()
+{
+	te::EditFileOperations(*edit).save(true, true, true);
 }
 
 void AudioEngine::createNewProject()

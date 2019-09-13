@@ -1,8 +1,4 @@
-
 #include "ChannelComponent.h"
-
-const Colour notArmedColor = Colour(0xff1b605e);
-const Colour notToggledColor = Colours::white;
 
 ChannelComponent::ChannelComponent(AudioEngine& inEngine, AudioTrack& inTrack)
         : engine(inEngine),
@@ -18,9 +14,10 @@ ChannelComponent::ChannelComponent(AudioEngine& inEngine, AudioTrack& inTrack)
     addAndMakeVisible(selectButton.get());
     selectButton->setButtonText(String());
     selectButton->addListener(this);
-    selectButton->setColour(TextButton::buttonColourId, Colour(0xff1b605e));
     selectButton->setBounds(8, 8, 20, 20);
-
+	
+	Colour darkGreyJam = Colour(0xff2c302f);
+	Colour orangeJam = Colour(0xffc39400);
 	/* Text Editor */
     nameText.reset(new TextEditor("nameText"));
     addAndMakeVisible(nameText.get());
@@ -33,6 +30,7 @@ ChannelComponent::ChannelComponent(AudioEngine& inEngine, AudioTrack& inTrack)
     nameText->setText(String());
     nameText->setBounds(35, 10, 90, 18);
 	nameText->setColour(TextEditor::ColourIds::outlineColourId, Colours::transparentWhite);
+	nameText->setColour(TextEditor::ColourIds::backgroundColourId, darkGreyJam);
 
 	/* Volume Slider */
     volumeSlider.reset(new Slider("volume slider"));
@@ -41,6 +39,8 @@ ChannelComponent::ChannelComponent(AudioEngine& inEngine, AudioTrack& inTrack)
     volumeSlider->setSliderStyle(Slider::SliderStyle::LinearHorizontal);
     volumeSlider->setTextBoxStyle(Slider::NoTextBox, false, 0, 0);
     volumeSlider->setColour(Slider::thumbColourId, Colours::whitesmoke);
+	volumeSlider->setColour(Slider::ColourIds::backgroundColourId, darkGreyJam);
+	volumeSlider->setColour(Slider::ColourIds::trackColourId, orangeJam);
     volumeSlider->addListener(this);
     volumeSlider->setBounds(135, 10, 60, 20);
 
@@ -51,6 +51,8 @@ ChannelComponent::ChannelComponent(AudioEngine& inEngine, AudioTrack& inTrack)
 	panSlider->setSliderStyle(Slider::SliderStyle::LinearHorizontal);
 	panSlider->setTextBoxStyle(Slider::NoTextBox, true, 0, 0);
 	panSlider->setColour(Slider::thumbColourId, Colours::whitesmoke);
+	panSlider->setColour(Slider::ColourIds::backgroundColourId, darkGreyJam);
+	panSlider->setColour(Slider::ColourIds::trackColourId, darkGreyJam);
 	panSlider->addListener(this);
 	panSlider->setBounds(135, 40, 60, 20);
 
@@ -125,8 +127,11 @@ ChannelComponent::~ChannelComponent()
 
 void ChannelComponent::paint(Graphics& g)
 {
-    g.fillAll(Colour(0xff25292b));
 
+    g.fillAll(Colour(0xff25292b));
+	Colour lightGrey = Colour(0x258A878B);
+	Colour darkGreyJam = Colour(0xff2c302f);
+	Colour orangeJam = Colour(0xffc39400);
     {
         float x = 0.0f, y = 0.0f, width = 200.0f, height = 70.0f;
         Colour fillColour2 = Colour(0xff262626);
@@ -141,15 +146,34 @@ void ChannelComponent::paint(Graphics& g)
 
         g.fillRoundedRectangle(x, y, width, height, 10.000f);
     }
+	/* Vol Text */
+	{
+		int x = 145, y = 1, width = 40, height = 20;
+		String text(TRANS("VOL"));
+		g.setColour(Colours::whitesmoke);
+		g.setFont(Font("Bahnschrift", 10.00f, Font::plain).withTypefaceStyle("Regular"));
+		g.drawText(text, x, y, width, height,
+			Justification::centred, true);
+	}
+	/* PAN Text */
+	{
+		int x = 145, y = 30, width = 40, height = 20;
+		String text(TRANS("PAN"));
+		g.setColour(Colours::whitesmoke);
+		g.setFont(Font("Bahnschrift", 10.00f, Font::plain).withTypefaceStyle("Regular"));
+		g.drawText(text, x, y, width, height,
+			Justification::centred, true);
+	}
 
+	/* Mute Button */
 	if (track.isMuted(true))
 	{
 		//change color if is  Muted
 		muteButton->setImages(false, true, true,
 			ImageCache::getFromMemory(BinaryData::_033mute_png, BinaryData::_033mute_pngSize), 1.000f,
-			Colours::darkorange,
-			Image(), 1.000f, Colours::orange,
-			Image(), 1.000f, Colours::darkorange);
+			orangeJam,
+			Image(), 1.000f, Colours::blue,
+			Image(), 1.000f, orangeJam);
 	}
 	else
 	{
@@ -161,6 +185,7 @@ void ChannelComponent::paint(Graphics& g)
 			Image(), 1.000f, Colours::whitesmoke);
 	}
 
+	/* Solo Button */
 	if (track.isSolo(false))
 	{
 		//change color if is Not Solo
@@ -180,6 +205,16 @@ void ChannelComponent::paint(Graphics& g)
 			Image(), 1.000f, Colours::whitesmoke);
 	}
 
+	/* Select Button */
+	if (engine.isTrackArmed(track))
+	{
+		selectButton->setColour(TextButton::ColourIds::buttonColourId, orangeJam);
+
+	}
+	else
+	{
+		selectButton->setColour(TextButton::ColourIds::buttonColourId, darkGreyJam);
+	}
 }
 
 void ChannelComponent::resized()
@@ -192,7 +227,7 @@ void ChannelComponent::buttonClicked(Button* buttonThatWasClicked)
 {
 	if (buttonThatWasClicked == selectButton.get())
 	{
-		clickSelectButton();
+		engine.toggleArm(track);
 	}
 	else if (buttonThatWasClicked == muteButton.get())
 	{
@@ -222,25 +257,6 @@ void ChannelComponent::clickAddFileButton()
     }
 }
 
-void ChannelComponent::clickSelectButton() const
-{
-    bool shouldArm = !engine.isTrackArmed(track);
-
-    engine.armTrack(track, shouldArm);
-
-    selectButton->setToggleState(engine.isTrackArmed(track), dontSendNotification);
-    selectButton->setColour(selectButton->buttonColourId, getArmedTrackColor());
-}
-
-Colour ChannelComponent::getArmedTrackColor() const
-{
-    auto color = notArmedColor;
-
-    if (selectButton->getToggleState())
-        color = Colours::orange;
-
-    return color;
-}
 
 void ChannelComponent::sliderValueChanged(Slider* sliderThatWasMoved)
 {

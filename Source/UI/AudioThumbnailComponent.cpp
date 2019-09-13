@@ -26,10 +26,10 @@ AudioThumbnailComponent::~AudioThumbnailComponent()
 void AudioThumbnailComponent::paint(Graphics& g)
 {
 	Rectangle<int> thumbnailBounds(100, 70);
-	auto len = clip.getPosition().getLength();
-	//auto w = UiHelper::timeToX(clip.getMaximumLength());
-	auto w = UiHelper::timeToX(len);
-	thumbnailBounds.setSize(w, 70);
+
+	auto clipLength = clip.getPosition().getLength();
+	auto thumbnailWidth = UiHelper::timeToX(clipLength);
+	thumbnailBounds.setSize(thumbnailWidth, UiHelper::getChannelHeight());
 	if (!selected)
 	{
 		g.setColour(Colours::transparentWhite);
@@ -48,7 +48,7 @@ void AudioThumbnailComponent::paint(Graphics& g)
 
 	if (selected)
 	{
-		g.setColour(Colours::purple);
+		g.setColour(Colours::lightgoldenrodyellow);
 		g.drawRect(thumbnailBounds, 1);
 	}
 }
@@ -69,7 +69,7 @@ void AudioThumbnailComponent::thumbnailChanged()
 void AudioThumbnailComponent::paintIfNoFileLoaded(Graphics& g, const Rectangle<int>& thumbnailBounds)
 {
     g.fillAll(Colours::red);
-    g.drawFittedText("", thumbnailBounds, Justification::centred, 1);
+    g.drawFittedText("File Error", thumbnailBounds, Justification::centred, 1);
 }
 
 void AudioThumbnailComponent::paintIfFileLoaded(Graphics& g, const Rectangle<int>& thumbnailBounds)
@@ -81,9 +81,6 @@ void AudioThumbnailComponent::paintIfFileLoaded(Graphics& g, const Rectangle<int
 	auto start= clip.getPosition().getStart();
 	auto end = clip.getPosition().getEnd();
 	auto clipLen = clip.getPosition().getLength();
-    //thumbnail.drawChannels(g, thumbnailBounds, 0.0, clip.getMaximumLength(), 1.0f);
-	//thumbnail.drawChannels(g, thumbnailBounds, start, end, 1.0f);
-	DBG(clipLen);
 	thumbnail.drawChannels(g, thumbnailBounds, 0.0, clipLen, 1.0f);
 }
 
@@ -114,7 +111,7 @@ void AudioThumbnailComponent::mouseDown(const MouseEvent& e/*event*/)
 		default:
 			break;
 		}
-		repaint();
+		
 	}
 }
 
@@ -123,22 +120,22 @@ void AudioThumbnailComponent::mouseDrag(const MouseEvent & e)
 
 	double y = getPosition().getY();
 	auto dis = e.getDistanceFromDragStartX();
-	
-	if (dis < 0)
+
+	if (dis <= 0)
 	{
 		xDrag = e.x;
 		xDrag = +dis;
 	}
 	else
 	{
-		xDrag = dis;
+		xDrag =+ dis;
 	}
 
 	if (xDrag >= 0)
 	{	
-		DBG(xDrag);
+		
 		setBounds(xDrag, y, getWidth(), getHeight());
-		repaint();
+		
 	}
 	else
 	{
@@ -155,7 +152,6 @@ void AudioThumbnailComponent::mouseUp(const MouseEvent & e)
 	ClipPosition pos = { timeRange ,0};
 	clip.setPosition(pos);
 	repaint();
-	DBG("mouseUppppp");
 }
 
 void AudioThumbnailComponent::trimClipFromLeft()
@@ -178,26 +174,38 @@ void AudioThumbnailComponent::trimClipFromLeft()
 	repaint();
 	DBG("trimClipFromLeft()");
 	*/
-	AlertWindow::showMessageBox(AlertWindow::AlertIconType::NoIcon, "Stop licking the Cup..", " trim only when the playhead is on the wav form");
+	repaint();
+	
 }
 
 void AudioThumbnailComponent::trimClipFromRight()
 {
 	auto playheadPos = clip.edit.getTransport().getCurrentPosition();
-	clip.setEnd(playheadPos, false);
+	auto start = clip.getPosition().getStart();
+	auto end = clip.getPosition().getEnd();
 
-	auto x = getPosition().getX();
-	double newPos = UiHelper::xToTime(x);
-	auto len = clip.getPosition().getLength();
-	EditTimeRange timeRange(newPos, len + newPos);
-	ClipPosition pos = { timeRange ,0 };
-	clip.setPosition(pos);
-	repaint();
+	if (playheadPos < end && playheadPos > start)
+	{
+		clip.setEnd(playheadPos, false);
+		auto x = getPosition().getX();
+		double newPos = UiHelper::xToTime(x);
+		auto len = clip.getPosition().getLength();
+		EditTimeRange timeRange(newPos, len + newPos);
+		ClipPosition pos = { timeRange ,0 };
+		clip.setPosition(pos);
+		
 
-	double y = getPosition().getY();
-	 x = getPosition().getX();
-	setBounds(x, y, getWidth(), getHeight());
-	repaint();
+		double y = getPosition().getY();
+		x = getPosition().getX();
+		setBounds(x, y, getWidth(), getHeight());
+		repaint();
+	}
+	else
+	{
+		AlertWindow::showMessageBox(AlertWindow::AlertIconType::NoIcon, "Trim not Succeed", "triming is possible only when the playhead is on the wav form");
+	}
+	
+	
 
 }
 

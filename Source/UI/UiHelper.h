@@ -11,20 +11,12 @@ constexpr double trackLength = 600;//seconds
 constexpr double trackLengthInMin = trackLength/60;
 
 
-enum zoomState {
-	x1,
-	x2,
-	x3,
-	x4
-};
-
 class UiHelper
 {
 public:
 	
 	static double timeToX(double timeLength)
 	{		
-		
 		double relativeTime = timeLength / trackLength;
 		return gridWidth * relativeTime;
 	}
@@ -63,16 +55,13 @@ public:
 		return numOfChannels * channelHeight+ timelineHeight;
 	}
 
-	void setZoom(double z)
+	static double getGridWidth()
 	{
-				
+		return gridWidth;
 	}
-
-
 	
 private:
 
-	
 };
 
 

@@ -95,8 +95,6 @@ void MetronomeComponent::getNextAudioBlock(const AudioSourceChannelInfo& bufferT
 			if (sample == timeToStartPlaying)
 			{
 				pMetronomeSample->getNextAudioBlock(bufferToFill);
-				DBG("DING!");
-
 			}
 		}
 	}

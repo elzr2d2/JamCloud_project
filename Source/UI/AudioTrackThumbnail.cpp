@@ -5,7 +5,6 @@ AudioTrackThumbnail::AudioTrackThumbnail( AudioTrack& inTrack):
 	track(inTrack)
   {
 	startTimerHz(60);
-
 	track.state.addListener(this);
   }
 
@@ -35,11 +34,10 @@ void AudioTrackThumbnail::resized()
 		auto position = thumbnail->getClip().getPosition();
 		auto length = position.getLength();
 		auto width = UiHelper::timeToX(length);
-
 		auto start = position.getStart();
 		auto stratPos = UiHelper::timeToX(start);
-		thumbnail->setBounds(stratPos, 0, width, 70);
-		
+
+		thumbnail->setBounds(stratPos, 0, width, UiHelper::getChannelHeight());
 	}
 }
 

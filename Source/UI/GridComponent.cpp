@@ -27,8 +27,15 @@ void GridComponent::paint (Graphics& g)
 
 void GridComponent::resized()
 {
-	channelWindow.setBounds(0,0,200,360);
-	viewport.setBounds(200,0,proportionOfWidth(0.8f), (70*5)+10+20);
-	thumbnailsWindow.setBounds(0, 0, 60000, 70 * 5+20);
+	//odrder numberrs
+	double channelsWindowWidth = 200;
+	double channelsWindowHeight = UiHelper::getChannelHeight()*UiHelper::numChannels();
+	double offset = 10;
+	double timeline = 20;
+	double viewportHeight = channelsWindowHeight + timeline + offset;
+	double gridWidth = UiHelper::getGridWidth();
+	channelWindow.setBounds(0,0, channelsWindowWidth, channelsWindowHeight);
+	viewport.setBounds(200,0,proportionOfWidth(0.8f), viewportHeight);
+	thumbnailsWindow.setBounds(0, 0, gridWidth, channelsWindowHeight + timeline);
 }
 

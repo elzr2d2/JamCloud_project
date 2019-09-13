@@ -9,8 +9,6 @@ MetronomeGuiComponent::MetronomeGuiComponent(AudioEngine &inEngine):engine(inEng
 
 	startTimerHz(30);
 
-	//metronome.setBpm(engine.getBpm());
-
 	/* button */
 	metronomeButton.reset(new ImageButton("metronomeButton"));
 	addAndMakeVisible(metronomeButton.get());

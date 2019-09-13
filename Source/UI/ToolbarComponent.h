@@ -9,9 +9,7 @@
 
 class ToolbarComponent : public TreeComponent,
                          public Button::Listener,
-						 public ComboBox::Listener,
-						 public Slider::Listener
-                         
+						 public Slider::Listener               
 {
 public:
 
@@ -26,9 +24,6 @@ public:
   
 	void update() override;
 	void valueTreeChanged() override { markForUpdate(); };
-    void setBpm();
-
-	void comboBoxChanged(ComboBox* comboBoxThatHasChanged) override;
 	void sliderValueChanged(Slider* sliderThatWasMoved) override;
 
 private:
@@ -42,8 +37,6 @@ private:
 
 	std::unique_ptr<Slider> masterVolSlider;
 	std::unique_ptr<Slider> bpmSlider;
-
-	std::unique_ptr<ComboBox> zoomComboBox;
 
 	std::unique_ptr<TextEditor> timeText;
     int minutes = 0;

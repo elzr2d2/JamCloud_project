@@ -4,6 +4,7 @@
 #include "Audio/AudioEngine.h"
 #include "TreeComponent.h"
 #include "UiHelper.h"
+
 class ChannelComponent : public TreeComponent,
                          public Button::Listener,
                          public Slider::Listener
@@ -11,7 +12,6 @@ class ChannelComponent : public TreeComponent,
                          
 {
 public:
-
     ChannelComponent(AudioEngine& inEngine, AudioTrack& inTrack);
 	~ChannelComponent();
     void paint(Graphics& g) override;
@@ -23,12 +23,7 @@ public:
 	void update() override;
 
 private:
-  
-    void clickSelectButton() const;
     void clickAddFileButton();
-    void valueTreeChanged() override {};
-	
-	Colour getArmedTrackColor() const;
 
     std::unique_ptr<TextButton>  selectButton;
     std::unique_ptr<TextEditor>  nameText;
@@ -36,7 +31,6 @@ private:
     std::unique_ptr<ImageButton> muteButton, soloButton, addFileButton, selectInputButton;
 	std::unique_ptr<Label>		 volLabel, panLabel;
 	
-
     AudioEngine& engine;
     AudioTrack& track;
 

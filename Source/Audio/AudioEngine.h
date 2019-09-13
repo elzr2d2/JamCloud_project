@@ -41,6 +41,7 @@ public:
 	void stop();
 	void pause();
 	void recording();
+	void toggleArm(AudioTrack& track);
 	void setBpm(double bpm);
 	double getBpm();
 
@@ -54,6 +55,7 @@ public:
 	/* File Actions */
 	void saveAsFile();
 	void exportFile();
+	void saveFile();
 	void createNewProject();
 
 	/* Audio Settings */
@@ -83,6 +85,7 @@ private:
     void adjustClipProperties(tracktion_engine::WaveAudioClip& clip) const;
 	void removeAllTracks();
 	void addVolumeAndPanPlugin(AudioTrack& track) const;
+
 
 	void toggleRecord();
 

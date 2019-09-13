@@ -4,7 +4,7 @@
 #include "Audio/AudioEngine.h"
 #include "ChannelWindow.h"
 #include "AudioThumbnailWindow.h"
-
+#include "UiHelper.h"
 
 class GridComponent  : public Component
 					  

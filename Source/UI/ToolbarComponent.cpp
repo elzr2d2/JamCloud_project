@@ -11,7 +11,7 @@ ToolbarComponent::ToolbarComponent(AudioEngine& inEngine) :
     Colour darkGreyJam = Colour(0xff2c302f);
     Colour orangeJam = Colour(0xffc39400);
 	Colour lightgrey = Colour(0x258A878B);
-
+	Colour greyFrameButton = Colour(0xff848180);
     /* Play Button */
     playButton.reset(new ImageButton("playButton"));
     addAndMakeVisible(playButton.get());
@@ -77,27 +77,8 @@ ToolbarComponent::ToolbarComponent(AudioEngine& inEngine) :
     timeText->setJustification(Justification::centredLeft);
     timeText->setColour(TextEditor::ColourIds::textColourId, orangeJam);
     timeText->setColour(TextEditor::ColourIds::outlineColourId, Colours::transparentWhite);
-    timeText->setFont(Font("Bahnschrift", 20.00f, Font::plain).withTypefaceStyle("Regular"));
-    timeText->setBounds(12, 16, 80, 30);
-
-	/* Zoom ComboBox */
-	zoomComboBox.reset(new ComboBox("zoomComboBox"));
-	addAndMakeVisible(zoomComboBox.get());
-	zoomComboBox->setEditableText(false);
-	zoomComboBox->setJustificationType(Justification::centredLeft);
-	zoomComboBox->setTextWhenNothingSelected(TRANS("x1"));
-	zoomComboBox->setTextWhenNoChoicesAvailable(TRANS("(no choices)"));
-	zoomComboBox->addItem(TRANS("x1"), 1);
-	zoomComboBox->addItem(TRANS("x1.2"), 2);
-	zoomComboBox->addItem(TRANS("x2"), 3);
-	zoomComboBox->addItem(TRANS("x4"), 4);
-	zoomComboBox->setColour(ComboBox::ColourIds::backgroundColourId, lightgrey);
-	zoomComboBox->setColour(ComboBox::ColourIds::textColourId, orangeJam);
-	zoomComboBox->setColour(ComboBox::ColourIds::focusedOutlineColourId, orangeJam);
-	zoomComboBox->setColour(ComboBox::ColourIds::arrowColourId, orangeJam);
-	zoomComboBox->setColour(ComboBox::ColourIds::outlineColourId, darkGreyJam);
-	zoomComboBox->addListener(this);
-	zoomComboBox->setBounds(408, 23, 70, 24);
+    timeText->setFont(Font("Bahnschrift", 24.00f, Font::plain).withTypefaceStyle("Regular"));
+    timeText->setBounds(40, 16, 95, 30);
 
 	/* Master volume Slider */
 	masterVolSlider.reset(new Slider("masterVolSlider"));
@@ -105,8 +86,9 @@ ToolbarComponent::ToolbarComponent(AudioEngine& inEngine) :
 	masterVolSlider->setRange(0, 1, 0);
 	masterVolSlider->setSliderStyle(Slider::LinearHorizontal);
 	masterVolSlider->setTextBoxStyle(Slider::NoTextBox, false, 80, 20);
-	masterVolSlider->setColour(Slider::backgroundColourId, Colour(0xff949494));
-	masterVolSlider->setColour(Slider::thumbColourId, Colour(0xffc39400));
+	masterVolSlider->setColour(Slider::ColourIds::backgroundColourId, greyFrameButton);
+	masterVolSlider->setColour(Slider::thumbColourId, orangeJam);
+	masterVolSlider->setColour(Slider::trackColourId, orangeJam);
 	masterVolSlider->addListener(this);
 	masterVolSlider->setValue(0.8f);
 	masterVolSlider->setBounds(490, 24, 88, 25);
@@ -122,8 +104,7 @@ ToolbarComponent::ToolbarComponent(AudioEngine& inEngine) :
 	bpmSlider->setColour(Slider::textBoxOutlineColourId, Colour(0x00000000));
 	bpmSlider->addListener(this);
 	bpmSlider->setValue(engine.getBpm());
-	bpmSlider->setBounds(116, 16, 40, 30);
-
+	bpmSlider->setBounds(420, 20, 40, 30);
 
 	/* Metronome Button */
 	addAndMakeVisible(metronomeButton);
@@ -141,9 +122,7 @@ ToolbarComponent::~ToolbarComponent()
     loopButton = nullptr;
     timeText = nullptr;
     playButton = nullptr;
-	zoomComboBox = nullptr;
 	masterVolSlider = nullptr;
-
 }
 
 
@@ -180,24 +159,23 @@ void ToolbarComponent::paint(Graphics& g)
 
     /* littleLine */
     {
-        int x = 100, y = 16, width = 1, height = 28;
+        int x = 485, y = 16, width = 1, height = 28;
         Colour littleLineColor = Colour(0xffa7a7a7);
         g.setColour(littleLineColor);
         g.fillRect(x, y, width, height);
     }
-	/* Zoom text */
+	/* BPM text */
 	{
 		int x = 415, y = 1, width = 48, height = 30;
-		String text(TRANS("ZOOM"));
+		String text(TRANS("BPM"));
 		g.setColour(orangeJam);
 		g.setFont(Font("Bahnschrift", 15.00f, Font::plain).withTypefaceStyle("Regular"));
 		g.drawText(text, x, y, width, height,
 			Justification::centred, true);
-		
 	}
 	/* Volume Text */
 	{
-		int x = 500, y = 1, width = 48, height = 30;
+		int x = 505, y = 1, width = 48, height = 30;
 		String text(TRANS("VOL"));
 		g.setColour(orangeJam);
 		g.setFont(Font("Bahnschrift", 15.00f, Font::plain).withTypefaceStyle("Regular"));
@@ -205,7 +183,6 @@ void ToolbarComponent::paint(Graphics& g)
 			Justification::centred, true);
 
 	}
-	
     /* Toggle Color For Buttons */
     if (engine.isLooping())
     {
@@ -294,7 +271,6 @@ void ToolbarComponent::buttonClicked(Button* buttonThatWasClicked)
 
 void ToolbarComponent::getCurrentTimeText()
 {
-  
 	auto playheadPos = engine.getTransport().getCurrentPosition();
     auto totalTime = roundDoubleToInt(playheadPos);
 
@@ -322,43 +298,13 @@ void ToolbarComponent::getCurrentTimeText()
     }
 }
 
-
-
 void ToolbarComponent::update()
 {
 	getCurrentTimeText();
-	
-}
-
-
-void ToolbarComponent::comboBoxChanged(ComboBox * comboBoxThatHasChanged)
-{
-	if (comboBoxThatHasChanged == zoomComboBox.get())
-	{
-		int zoomChoice = zoomComboBox->getSelectedItemIndex();
-		if (zoomChoice == 0)
-		{
-
-		}
-		else if (zoomChoice == 1)
-		{
-
-		}
-		else if (zoomChoice == 2)
-		{
-
-		}
-		else if (zoomChoice == 3)
-		{
-
-		}
-		DBG(zoomChoice);
-	}
 }
 
 void ToolbarComponent::sliderValueChanged(Slider * sliderThatWasMoved)
 {
-	
 	if (sliderThatWasMoved == masterVolSlider.get())
 	{
 		auto volume = (float)sliderThatWasMoved->getValue();
@@ -370,7 +316,6 @@ void ToolbarComponent::sliderValueChanged(Slider * sliderThatWasMoved)
 		engine.setBpm(bpm);	
 		engine.setBpmChange(true);
 	}
-
 }
 
 
