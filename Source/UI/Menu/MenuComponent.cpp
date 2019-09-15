@@ -8,8 +8,6 @@ constexpr int exportAsWavFile = 4;
 constexpr int saveFile= 5;
 constexpr int audioSettings = 7;
 
-
-
 MenuComponent::MenuComponent (AudioEngine& inEngine):
 	engine(inEngine),
 	newProjectDialog(inEngine)

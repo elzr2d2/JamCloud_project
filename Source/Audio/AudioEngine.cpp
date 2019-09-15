@@ -325,10 +325,14 @@ void AudioEngine::muteChannel(AudioTrack& track)
     if (track.isMuted(false))
     {
         track.setMute(false);
+	
     }
     else
     {
-        track.setMute(true);
+		track.setMute(true);
+		if (track.isSolo(true))
+			track.setSolo(false);
+		
     }
 }
 
@@ -337,10 +341,14 @@ void AudioEngine::soloChannel(AudioTrack& track)
     if (track.isSolo(true))
     {
         track.setSolo(false);
+		
     }
     else
     {
-        track.setSolo(true);
+		track.setSolo(true);
+		if (track.isMuted(true))
+			track.setMute(false);
+	
     }
 }
 
@@ -492,11 +500,11 @@ void AudioEngine::audioSettings()
 void AudioEngine::inputMonitoring(AudioTrack* at)
 {
     PopupMenu m;
-
+	constexpr int inputMonitoring = 1000;
     if (trackHasInput(*at))
     {
         bool ticked = isInputMonitoringEnabled(*at);
-        m.addItem(1000, "Input Monitoring", true, ticked);
+        m.addItem(inputMonitoring, "Input Monitoring", true, ticked);
         m.addSeparator();
     }
 
@@ -512,7 +520,7 @@ void AudioEngine::inputMonitoring(AudioTrack* at)
 
     int res = m.show();
 
-    if (res == 1000)
+    if (res == inputMonitoring)
     {
         enableInputMonitoring(*at, !isInputMonitoringEnabled(*at));
     }

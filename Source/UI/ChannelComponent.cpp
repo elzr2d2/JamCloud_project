@@ -8,29 +8,24 @@ ChannelComponent::ChannelComponent(AudioEngine& inEngine, AudioTrack& inTrack)
     startTimerHz(60);
 
     track.state.addListener(this);
-
-	/* Select Button */
-    selectButton.reset(new TextButton("selectButton"));
-    addAndMakeVisible(selectButton.get());
-    selectButton->setButtonText(String());
-    selectButton->addListener(this);
-    selectButton->setBounds(8, 8, 20, 20);
 	
+
 	Colour darkGreyJam = Colour(0xff2c302f);
 	Colour orangeJam = Colour(0xffc39400);
-	/* Text Editor */
-    nameText.reset(new TextEditor("nameText"));
-    addAndMakeVisible(nameText.get());
-    nameText->setMultiLine(false);
-    nameText->setReturnKeyStartsNewLine(false);
-    nameText->setReadOnly(false);
-    nameText->setScrollbarsShown(true);
-    nameText->setCaretVisible(true);
-    nameText->setPopupMenuEnabled(true);
-    nameText->setText(String());
-    nameText->setBounds(35, 10, 90, 18);
-	nameText->setColour(TextEditor::ColourIds::outlineColourId, Colours::transparentWhite);
-	nameText->setColour(TextEditor::ColourIds::backgroundColourId, darkGreyJam);
+
+	/* Track Name Label */
+	trackText.reset(new Label("trackText",TRANS("")));
+	addAndMakeVisible(trackText.get());
+	trackText->setFont(Font("Bahnschrift", 15.00f, Font::plain).withTypefaceStyle("Regular").withExtraKerningFactor(-0.048f));
+	trackText->setJustificationType(Justification::centredLeft);
+	trackText->setEditable(false, true, false);
+	trackText->setColour(Label::backgroundColourId, darkGreyJam);
+	trackText->setColour(TextEditor::textColourId, Colours::whitesmoke);
+	trackText->setColour(TextEditor::backgroundColourId, darkGreyJam);
+	trackText->setColour(TextEditor::highlightColourId, Colours::lightseagreen);
+	trackText->addListener(this);
+	trackText->setText(track.getName(),NotificationType::dontSendNotification);
+	trackText->setBounds(35, 8, 80, 20);
 
 	/* Volume Slider */
     volumeSlider.reset(new Slider("volume slider"));
@@ -56,6 +51,13 @@ ChannelComponent::ChannelComponent(AudioEngine& inEngine, AudioTrack& inTrack)
 	panSlider->addListener(this);
 	panSlider->setBounds(135, 40, 60, 20);
 
+	/* Select Button */
+	selectButton.reset(new TextButton("selectButton"));
+	addAndMakeVisible(selectButton.get());
+	selectButton->setButtonText(String());
+	selectButton->addListener(this);
+	selectButton->setBounds(8, 8, 20, 20);
+
 	/* Mute Button */
     muteButton.reset(new ImageButton("muteBotton"));
     addAndMakeVisible(muteButton.get());
@@ -64,7 +66,7 @@ ChannelComponent::ChannelComponent(AudioEngine& inEngine, AudioTrack& inTrack)
     muteButton->setImages(false, true, true,
                           ImageCache::getFromMemory(BinaryData::_033mute_png, BinaryData::_033mute_pngSize), 1.000f,
                           Colours::whitesmoke,
-                          Image(), 1.000f, Colours::orange,
+                          Image(), 1.000f, Colours::lightgoldenrodyellow,
                           Image(), 1.000f, Colours::whitesmoke);
     muteButton->setBounds(10, 40, 15, 15);
 
@@ -76,7 +78,7 @@ ChannelComponent::ChannelComponent(AudioEngine& inEngine, AudioTrack& inTrack)
     soloButton->setImages(false, true, true,
                           ImageCache::getFromMemory(BinaryData::_048headphones_png, BinaryData::_048headphones_pngSize),
                           1.000f, Colours::whitesmoke,
-                          Image(), 1.000f, Colours::orange,
+                          Image(), 1.000f, Colours::lightgoldenrodyellow,
                           Image(), 1.000f, Colours::whitesmoke);
     soloButton->setBounds(45, 40, 15, 15);
 
@@ -93,10 +95,10 @@ ChannelComponent::ChannelComponent(AudioEngine& inEngine, AudioTrack& inTrack)
 							Colours::whitesmoke,
                              Image(),
                              1.000f,
-							Colours::orange,
+							Colours::lightgoldenrodyellow,
                              Image(),
                              1.000f,
-                             Colours::darkorange);
+                             Colours::lightseagreen);
     addFileButton->setBounds(80, 40, 15, 15);
 
 	/* Select Input Button */
@@ -112,12 +114,11 @@ ChannelComponent::ChannelComponent(AudioEngine& inEngine, AudioTrack& inTrack)
 		Colours::whitesmoke,
 		Image(),
 		1.000f,
-		Colours::orange,
+		Colours::lightgoldenrodyellow,
 		Image(),
 		1.000f,
-		Colours::darkorange);
+		Colours::lightseagreen);
 	selectInputButton->setBounds(80+35, 40, 15, 15);
-
 }
 
 ChannelComponent::~ChannelComponent()
@@ -132,6 +133,7 @@ void ChannelComponent::paint(Graphics& g)
 	Colour lightGrey = Colour(0x258A878B);
 	Colour darkGreyJam = Colour(0xff2c302f);
 	Colour orangeJam = Colour(0xffc39400);
+	/* Background */
     {
         float x = 0.0f, y = 0.0f, width = 200.0f, height = 70.0f;
         Colour fillColour2 = Colour(0xff262626);
@@ -146,7 +148,7 @@ void ChannelComponent::paint(Graphics& g)
 
         g.fillRoundedRectangle(x, y, width, height, 10.000f);
     }
-	/* Vol Text */
+	/* Vol Label */
 	{
 		int x = 145, y = 1, width = 40, height = 20;
 		String text(TRANS("VOL"));
@@ -155,7 +157,7 @@ void ChannelComponent::paint(Graphics& g)
 		g.drawText(text, x, y, width, height,
 			Justification::centred, true);
 	}
-	/* PAN Text */
+	/* PAN Label */
 	{
 		int x = 145, y = 30, width = 40, height = 20;
 		String text(TRANS("PAN"));
@@ -171,9 +173,9 @@ void ChannelComponent::paint(Graphics& g)
 		//change color if is  Muted
 		muteButton->setImages(false, true, true,
 			ImageCache::getFromMemory(BinaryData::_033mute_png, BinaryData::_033mute_pngSize), 1.000f,
-			orangeJam,
-			Image(), 1.000f, Colours::blue,
-			Image(), 1.000f, orangeJam);
+			Colours::lightseagreen,
+			Image(), 1.000f, Colours::lightseagreen,
+			Image(), 1.000f, Colours::lightseagreen);
 	}
 	else
 	{
@@ -181,7 +183,7 @@ void ChannelComponent::paint(Graphics& g)
 		muteButton->setImages(false, true, true,
 			ImageCache::getFromMemory(BinaryData::_033mute_png, BinaryData::_033mute_pngSize), 1.000f,
 			Colours::whitesmoke,
-			Image(), 1.000f, Colours::orange,
+			Image(), 1.000f, Colours::lightgoldenrodyellow,
 			Image(), 1.000f, Colours::whitesmoke);
 	}
 
@@ -191,17 +193,17 @@ void ChannelComponent::paint(Graphics& g)
 		//change color if is Not Solo
 		soloButton->setImages(false, true, true,
 			ImageCache::getFromMemory(BinaryData::_048headphones_png, BinaryData::_048headphones_pngSize), 1.000f,
-			Colours::darkorange,
-			Image(), 1.000f, Colours::orange,
-			Image(), 1.000f, Colours::darkorange);
+			Colours::lightseagreen,
+			Image(), 1.000f, Colours::lightseagreen,
+			Image(), 1.000f, Colours::lightseagreen);
 	}
 	else
 	{
 		//change color if is  Solo
 		soloButton->setImages(false, true, true,
 			ImageCache::getFromMemory(BinaryData::_048headphones_png, BinaryData::_048headphones_pngSize),
-			1.000f, Colours::white,
-			Image(), 1.000f, Colours::orange,
+			1.000f, Colours::whitesmoke,
+			Image(), 1.000f, Colours::lightgoldenrodyellow,
 			Image(), 1.000f, Colours::whitesmoke);
 	}
 
@@ -238,9 +240,13 @@ void ChannelComponent::buttonClicked(Button* buttonThatWasClicked)
 		engine.soloChannel(track);
 	}
 	else if (buttonThatWasClicked == addFileButton.get())
+	{
 		clickAddFileButton();
+	}
 	else if (buttonThatWasClicked == selectInputButton.get())
+	{
 		engine.inputMonitoring(&track);
+	}
 	repaint();
 }
 
@@ -253,7 +259,7 @@ void ChannelComponent::clickAddFileButton()
     {
         auto file = chooser.getResult();
         engine.addNewClipFromFile(file, track);
-		nameText.get()->setText(file.getFileName());
+		
     }
 }
 
@@ -272,9 +278,17 @@ void ChannelComponent::sliderValueChanged(Slider* sliderThatWasMoved)
 	}
 }
 
+void ChannelComponent::labelTextChanged(Label * labelThatHasChanged)
+{
+	if (labelThatHasChanged == trackText.get())
+	{
+		track.setName(trackText->getText());
+	}
+}
+
 void ChannelComponent::update()
 {
-
+	
 }
 
 
