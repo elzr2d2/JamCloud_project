@@ -46,7 +46,7 @@ void MainComponent::loadFile()
 {
     auto location = File::getSpecialLocation(File::userDesktopDirectory);
 
-    FileChooser chooser("Choose a file", location, "*.tracktionedit", true, false);
+    FileChooser chooser("Choose a file", location, "*.jam", true, false);
 
     if (chooser.browseForFileToOpen())
     {

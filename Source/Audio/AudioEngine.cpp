@@ -112,7 +112,6 @@ void AudioEngine::addNewClipFromFile(const File& editFile, AudioTrack& track)
 
 }
 
-
 void AudioEngine::armTrack(te::AudioTrack& t, bool arm, int position)
 {
     auto& currentEdit = t.edit;
@@ -169,7 +168,6 @@ bool AudioEngine::trackHasInput(te::AudioTrack& t, int position)
     return false;
 }
 
-
 TransportControl& AudioEngine::getTransport() const
 {
     return edit->getTransport();
@@ -184,7 +182,6 @@ Edit* AudioEngine::getEdit() const
 {
     return edit.get();
 }
-
 
 void AudioEngine::play()
 {
@@ -325,14 +322,12 @@ void AudioEngine::muteChannel(AudioTrack& track)
     if (track.isMuted(false))
     {
         track.setMute(false);
-	
     }
     else
     {
 		track.setMute(true);
 		if (track.isSolo(true))
 			track.setSolo(false);
-		
     }
 }
 
@@ -341,14 +336,12 @@ void AudioEngine::soloChannel(AudioTrack& track)
     if (track.isSolo(true))
     {
         track.setSolo(false);
-		
     }
     else
     {
 		track.setSolo(true);
 		if (track.isMuted(true))
 			track.setMute(false);
-	
     }
 }
 
@@ -371,7 +364,7 @@ void AudioEngine::saveAsFile()
 
     if (editFile == File())
     {
-        FileChooser fc("New Edit", File::getSpecialLocation(File::userDocumentsDirectory), "*.tracktionedit");
+        FileChooser fc("New Edit", File::getSpecialLocation(File::userDocumentsDirectory), "*.jam");
         if (fc.browseForFileToSave(true))
         {
             editFile = fc.getResult();
@@ -391,8 +384,6 @@ void AudioEngine::exportFile()
 	Range<double> range(0, getTransport().getCurrentPosition());
 
 	File outputFile{};
-
-
 	
 	if (outputFile == File())
 	{
