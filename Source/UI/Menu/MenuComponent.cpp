@@ -53,8 +53,8 @@ MenuComponent::MenuComponent (AudioEngine& inEngine):
 	fileMenu.addItem(newFile, "New Project");
 	fileMenu.addItem(loadFile, "Load Project");
 	fileMenu.addSectionHeader("Files");
-	fileMenu.addItem(saveFile, "save");
-	fileMenu.addItem(saveAsFile, "Save As..");
+	fileMenu.addItem(saveFile, "Save");
+	fileMenu.addItem(saveAsFile, "Save As...");
 	fileMenu.addItem(exportAsWavFile, "Export As WAV");
 	
 	/* Settings Menu*/
