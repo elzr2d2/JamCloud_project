@@ -2,7 +2,7 @@
 
 #include "JuceHeader.h"
 #include <atomic> 
-#include "../UI/UiHelper.h"
+#include "../UI/Helpers/UiHelper.h"
 using namespace tracktion_engine;
 namespace te = tracktion_engine;
 

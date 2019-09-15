@@ -9,8 +9,8 @@ constexpr int saveFile= 5;
 constexpr int audioSettings = 7;
 
 MenuComponent::MenuComponent (AudioEngine& inEngine):
-	engine(inEngine),
-	newProjectDialog(inEngine)
+	engine(inEngine)
+
 {
 	Colour darkGreyJam = Colour(0xff2c302f);
 	Colour orangeJam = Colour(0xffc39400);
@@ -173,4 +173,3 @@ BEGIN_JUCER_METADATA
 END_JUCER_METADATA
 */
 #endif
-

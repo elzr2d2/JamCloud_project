@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../JuceLibraryCode/JuceHeader.h"
-#include "UI/UIEngine.h"
+#include "UI/UiEngine/UIEngine.h"
 #include "Audio/AudioEngine.h"
 #include "CommandManager.h"
 
