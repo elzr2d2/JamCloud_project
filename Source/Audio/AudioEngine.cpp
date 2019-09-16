@@ -35,7 +35,6 @@ void AudioEngine::initEditFromProject(ValueTree projectFile)
 
     tempoSequence = std::make_unique<TempoSequence>(*edit.get());
     tempoSetting = std::make_unique<TempoSetting>(*tempoSequence.get(), projectFile);
-	
 }
 
 AudioEngine::~AudioEngine()
@@ -374,6 +373,7 @@ void AudioEngine::saveAsFile()
 
         te::EditFileOperations(*edit).saveAs(editFile, false);
     }
+	
 }
 
 void AudioEngine::exportFile()

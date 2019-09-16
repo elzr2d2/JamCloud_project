@@ -7,10 +7,16 @@ MainComponent::MainComponent()
 
     createJamCloud(ValueTree());
 
-    setSize(1000, 600);
+    setSize(1200, 600);
+	
 }
 
-//==============================================================================
+MainComponent::~MainComponent()
+{
+	ui.reset();
+	engine.reset();
+}
+
 void MainComponent::paint(Graphics& g)
 {
     g.fillAll(Colour(0xff25292b));

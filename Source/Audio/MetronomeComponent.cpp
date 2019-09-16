@@ -1,13 +1,3 @@
-/*
-  ==============================================================================
-
-	Metronome.cpp
-	Created: 13 Apr 2019 3:29:47pm
-	Author:  Joshua Hodge
-
-  ==============================================================================
-*/
-
 #include "MetronomeComponent.h"
 
 MetronomeComponent::MetronomeComponent()
@@ -44,36 +34,6 @@ void MetronomeComponent::prepareToPlay(int samplesPerBlock, double sampleRate)
 
 void MetronomeComponent::getNextAudioBlock(const AudioSourceChannelInfo& bufferToFill)
 {
-	/*
-	mUpdateInterval = 60.0 / mBpm * mSampleRate;
-
-	const auto bufferSize = bufferToFill.numSamples;
-
-	mTotalSamples += bufferSize;
-
-	mSamplesRemaining = mTotalSamples % mUpdateInterval;
-
-	if ((mSamplesRemaining + bufferSize) >= mUpdateInterval)
-	{
-		const auto timeToStartPlaying = mUpdateInterval - mSamplesRemaining;
-		pMetronomeSample->setNextReadPosition(0);
-
-		for (auto sample = 0; sample < bufferSize; sample++)
-		{
-			if (sample == timeToStartPlaying)
-			{
-				pMetronomeSample->getNextAudioBlock(bufferToFill);
-				DBG("Ding !");
-			}
-		}
-	}
-
-	if (pMetronomeSample->getNextReadPosition() != 0)
-	{
-		pMetronomeSample->getNextAudioBlock(bufferToFill);
-	}
-	*/
-	//El's Code//
 	mUpdateInterval = 60.0 / mBpm * mSampleRate;
 
 	const auto bufferSize = bufferToFill.numSamples;

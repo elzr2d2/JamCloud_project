@@ -9,7 +9,7 @@ class MainComponent : public Component, public CommandTarget
 {
 public:
     MainComponent();
-
+	~MainComponent();
     void paint(Graphics& g) override;
     void resized() override;
 
@@ -17,12 +17,10 @@ public:
 
     void loadFile();
 
-
 private:
     void createJamCloud(ValueTree tree);
 
     std::unique_ptr<AudioEngine> engine;
     std::unique_ptr<UIEngine> ui;
-
 
 };

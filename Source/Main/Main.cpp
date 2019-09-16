@@ -31,7 +31,7 @@ public:
     void shutdown() override
     {
         // Add your application's shutdown code here..
-
+		
         mainWindow = nullptr; // (deletes our window)
     }
 
@@ -63,6 +63,7 @@ public:
                                                                           .findColour (ResizableWindow::backgroundColourId),
                                                     DocumentWindow::allButtons)
         {
+			
             setUsingNativeTitleBar (true);
             setContentOwned (new MainComponent(), true);
             setResizable (true, true);
@@ -76,6 +77,7 @@ public:
             // This is called when the user tries to close this window. Here, we'll just
             // ask the app to quit when this happens, but you can change this to do
             // whatever you need.
+		
             JUCEApplication::getInstance()->systemRequestedQuit();
         }
 
@@ -87,11 +89,13 @@ public:
         */
 
     private:
+		
         JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (MainWindow)
     };
 
 private:
     std::unique_ptr<MainWindow> mainWindow;
+
 };
 
 //==============================================================================
