@@ -4,6 +4,7 @@
 #include "AudioThumbnailComponent.h"
 #include "Audio/AudioEngine.h"
 #include "UI/Helpers/TreeComponent.h"
+#include "UI/Helpers/Colors.h"
 #include "ChannelComponent.h"
 
 class AudioTrackThumbnail : public TreeComponent					 

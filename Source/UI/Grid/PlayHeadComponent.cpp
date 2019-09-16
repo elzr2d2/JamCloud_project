@@ -29,10 +29,9 @@ void PlayHeadComponent::timerCallback()
 void PlayHeadComponent::paint(Graphics & g)
 {
 	auto yPosition = 0;
-	int Height = UiHelper::getPlayheadHeight();
-	Colour orangeJam = Colour(0xffc39400);
+	int height = UiHelper::getPlayheadHeight();
 	g.setColour(orangeJam);
-	g.fillRect(0, yPosition, 3, Height);
+	g.fillRect(0, yPosition, 3, height);
 }
 
 

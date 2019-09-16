@@ -4,6 +4,7 @@
 #include "Audio/AudioEngine.h"
 #include "UI/Helpers/TreeComponent.h"
 #include "ChannelComponent.h"
+#include "UI/Helpers/Colors.h"
 
 class ChannelWindow : public TreeComponent
 {

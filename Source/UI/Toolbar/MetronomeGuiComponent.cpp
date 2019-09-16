@@ -3,9 +3,6 @@
 
 MetronomeGuiComponent::MetronomeGuiComponent(AudioEngine &inEngine):engine(inEngine)
 {
-	Colour darkGreyJam = Colour(0xff2c302f);
-	Colour orangeJam = Colour(0xffc39400);
-	Colour lightgrey = Colour(0x258A878B);
 
 	startTimerHz(30);
 
@@ -104,10 +101,7 @@ void MetronomeGuiComponent::releaseResources()
 
 void MetronomeGuiComponent::paint(Graphics& g)
 {
-	Colour darkGreyJam = Colour(0xff2c302f);
-	Colour orangeJam = Colour(0xffc39400);
-	Colour lightgrey = Colour(0x258A878B);
-	
+
 	g.fillAll(Colours::transparentWhite);
 
 	if (metronomeButton->getToggleState())
@@ -128,7 +122,6 @@ void MetronomeGuiComponent::paint(Graphics& g)
 			Image(), 1.0f, Colours::orange,
 			Image(), 1.0f, darkGreyJam);
 	}
-
 
 }
 

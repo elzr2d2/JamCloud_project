@@ -4,7 +4,7 @@
 #include "Audio/MetronomeComponent.h"
 #include "Audio/AudioEngine.h"
 #include "UI/Helpers/TreeComponent.h"
-
+#include "UI/Helpers/Colors.h"
 class MetronomeGuiComponent : public AudioAppComponent,
 								public Button::Listener,
 								public Timer

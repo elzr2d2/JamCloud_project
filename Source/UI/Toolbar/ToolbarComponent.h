@@ -5,7 +5,7 @@
 #include "UI/Helpers/TreeComponent.h"
 #include "UI/Helpers/UiHelper.h"
 #include "MetronomeGuiComponent.h"
-
+#include "UI/Helpers/Colors.h"
 class ToolbarComponent : public TreeComponent,
                          public Button::Listener,
 						 public Slider::Listener               

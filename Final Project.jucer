@@ -188,16 +188,13 @@
           <FILE id="bCDkIi" name="GridComponent.cpp" compile="1" resource="0"
                 file="Source/UI/Grid/GridComponent.cpp"/>
           <FILE id="yryHVv" name="GridComponent.h" compile="0" resource="0" file="Source/UI/Grid/GridComponent.h"/>
-          <FILE id="O03Ize" name="NewProjectDialog.cpp" compile="1" resource="0"
-                file="Source/UI/Grid/NewProjectDialog.cpp"/>
-          <FILE id="P6XNwk" name="NewProjectDialog.h" compile="0" resource="0"
-                file="Source/UI/Grid/NewProjectDialog.h"/>
           <FILE id="xxqYeQ" name="PlayHeadComponent.cpp" compile="1" resource="0"
                 file="Source/UI/Grid/PlayHeadComponent.cpp"/>
           <FILE id="uv8gJp" name="PlayHeadComponent.h" compile="0" resource="0"
                 file="Source/UI/Grid/PlayHeadComponent.h"/>
         </GROUP>
         <GROUP id="{D661C97B-ED19-B039-043B-9020A6693C25}" name="Helpers">
+          <FILE id="oADjC6" name="Colors.h" compile="0" resource="0" file="Source/UI/Helpers/Colors.h"/>
           <FILE id="BiZsO5" name="ImageBinary.h" compile="0" resource="0" file="Source/UI/Helpers/ImageBinary.h"/>
           <FILE id="U9ooCv" name="TreeComponent.cpp" compile="1" resource="0"
                 file="Source/UI/Helpers/TreeComponent.cpp"/>

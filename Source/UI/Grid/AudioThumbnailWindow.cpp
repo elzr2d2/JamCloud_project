@@ -37,8 +37,7 @@ void AudioThumbnailWindow::paint(Graphics& g)
 	{
 		float x = 0.0f, y = 0.0f, width = static_cast<float> (proportionOfWidth(1.0000f)), height = static_cast<float> (proportionOfHeight(1.0000f));
 
-		Colour greyJam = Colour(0x5C666666);
-		Colour blackJam = Colour(0x5c000000);
+
 		double channelsHeight = channelHeight;
 		
 		/* Draw grey channels */
@@ -62,7 +61,7 @@ void AudioThumbnailWindow::paint(Graphics& g)
 	{
 		int lineX = 0, lineY = 0, lineWidth = 1, lineHeight = proportionOfHeight(1.0000f);
 		int barNumberY = 70 * 5, barNumberWidth = 30,barNumberHeight = 20;
-		Colour mellowGrey = Colour(0xff787d79);
+		
 		auto beats = UiHelper::getNumOfBeats(engine.getTempoSetting().getBpm());
 		int beatDistance = UiHelper::getBeatDistanceByBPM(engine.getTempoSetting().getBpm());
 

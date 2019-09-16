@@ -2,7 +2,7 @@
 
 #include "JuceHeader.h"
 #include "Audio/AudioEngine.h"
-
+#include "UI/Helpers/Colors.h"
 
 class MenuComponent : public Component,
 	public Button::Listener

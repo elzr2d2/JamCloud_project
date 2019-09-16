@@ -5,6 +5,7 @@
 #include "AudioTrackThumbnail.h"
 #include "UI/Helpers/TreeComponent.h"
 #include "UI/Helpers/UiHelper.h"
+#include "UI/Helpers/Colors.h"
 #include "PlayHeadComponent.h"
 
 class AudioThumbnailWindow : public TreeComponent

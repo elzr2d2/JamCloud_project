@@ -83,10 +83,7 @@ void AudioThumbnailComponent::paintIfFileLoaded(Graphics& g, const Rectangle<int
 	
 	auto clipLen = clip.getPosition().getLength();
 
-	thumbnail.drawChannels(g, thumbnailBounds, 0.0, clipLen, 1.0f);
-	//thumbnail.drawChannels(g, thumbnailBounds, clip.getPosition().getStart(), clip.getPosition().getEnd(), 1.0f);
-
-	
+	thumbnail.drawChannels(g, thumbnailBounds, 0.0, clipLen, 1.0f);	
 }
 
 void AudioThumbnailComponent::mouseDown(const MouseEvent& e/*event*/)

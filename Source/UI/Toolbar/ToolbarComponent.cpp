@@ -8,10 +8,7 @@ ToolbarComponent::ToolbarComponent(AudioEngine& inEngine) :
     startTimerHz(30);
 	engine.getTransport().state.addListener(this);
 	engine.getTempoSetting().state.addListener(this);
-    Colour darkGreyJam = Colour(0xff2c302f);
-    Colour orangeJam = Colour(0xffc39400);
-	Colour lightgrey = Colour(0x258A878B);
-	Colour greyFrameButton = Colour(0xff848180);
+
     /* Play Button */
     playButton.reset(new ImageButton("playButton"));
     addAndMakeVisible(playButton.get());

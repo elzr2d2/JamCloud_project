@@ -5,6 +5,7 @@
 #include "UI/Helpers/UiHelper.h"
 #include "ChannelWindow.h"
 #include "AudioThumbnailWindow.h"
+#include "UI/Helpers/Colors.h"
 
 class GridComponent  : public Component			
 {

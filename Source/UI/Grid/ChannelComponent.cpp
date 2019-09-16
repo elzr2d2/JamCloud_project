@@ -9,10 +9,6 @@ ChannelComponent::ChannelComponent(AudioEngine& inEngine, AudioTrack& inTrack)
 
     track.state.addListener(this);
 	
-
-	Colour darkGreyJam = Colour(0xff2c302f);
-	Colour orangeJam = Colour(0xffc39400);
-
 	/* Track Name Label */
 	trackText.reset(new Label("trackText",TRANS("")));
 	addAndMakeVisible(trackText.get());
@@ -130,9 +126,7 @@ void ChannelComponent::paint(Graphics& g)
 {
 
     g.fillAll(Colour(0xff25292b));
-	Colour lightGrey = Colour(0x258A878B);
-	Colour darkGreyJam = Colour(0xff2c302f);
-	Colour orangeJam = Colour(0xffc39400);
+
 	/* Background */
     {
         float x = 0.0f, y = 0.0f, width = 200.0f, height = 70.0f;

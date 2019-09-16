@@ -3,6 +3,7 @@
 #include "JuceHeader.h"
 #include "Audio/AudioEngine.h"
 #include "UI/helpers/UiHelper.h"
+#include "UI/Helpers/Colors.h"
 
 namespace te = tracktion_engine;
 

@@ -1,23 +1,18 @@
 #pragma once
-//Track
+
 constexpr int numOfChannels = 5;
 constexpr double trackLength = 600;//seconds
 constexpr double trackLengthInMin = trackLength / 60;
-//Main
-
-//Grid
-
-//-Toolbar
-//-
-
-
-//Channels
 constexpr int channelHeight = 70;
 constexpr int channelWidth = 200;
-
 constexpr double gridWidth = 60000;
 constexpr int gridHeight = numOfChannels * channelHeight;
-
+constexpr int toolBarHeight = 60;
+constexpr int menuHeight = 40;
+constexpr int yOfGrid = 100;
+constexpr int xOfGrid = 200;
+constexpr int gridHeightUI = gridHeight + 30;
+constexpr int gridY = 80;
 
 
 class UiHelper

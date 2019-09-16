@@ -6,7 +6,7 @@
 #include "UI/Menu/MenuComponent.h"
 #include "UI/Grid/GridComponent.h"
 #include "UI/Dialogs/LoadingDialog.h"
-
+#include "UI/Helpers/UiHelper.h"
 
 class UIEngine : public Component	 
 {
