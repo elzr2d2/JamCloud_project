@@ -26,17 +26,6 @@ void AudioThumbnailComponent::paint(Graphics& g)
 	auto thumbnailWidth = UiHelper::timeToX(clipLength);
 	thumbnailBounds.setSize(thumbnailWidth, UiHelper::getChannelHeight());
 
-	if (!selected)
-	{
-		g.setColour(Colours::transparentWhite);
-		g.fillRect(thumbnailBounds);
-	}
-	else
-	{
-		thumbnailBounds.~Rectangle();
-	}
-    
-
     if (thumbnail.getNumChannels() == 0)
         paintIfNoFileLoaded(g, thumbnailBounds);
     else
@@ -44,7 +33,7 @@ void AudioThumbnailComponent::paint(Graphics& g)
 	
 	if (selected)
 	{
-		g.setColour(Colours::lightgoldenrodyellow);
+		g.setColour(blueSky);
 		g.drawRect(thumbnailBounds, 1);
 	}
 	else

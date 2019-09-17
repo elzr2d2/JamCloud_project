@@ -18,7 +18,7 @@ ChannelComponent::ChannelComponent(AudioEngine& inEngine, AudioTrack& inTrack)
 	trackText->setColour(Label::backgroundColourId, darkGreyJam);
 	trackText->setColour(TextEditor::textColourId, Colours::whitesmoke);
 	trackText->setColour(TextEditor::backgroundColourId, darkGreyJam);
-	trackText->setColour(TextEditor::highlightColourId, Colours::lightseagreen);
+	trackText->setColour(TextEditor::highlightColourId,blueSky);
 	trackText->addListener(this);
 	trackText->setText(track.getName(),NotificationType::dontSendNotification);
 	trackText->setBounds(35, 8, 80, 20);
@@ -93,8 +93,8 @@ ChannelComponent::ChannelComponent(AudioEngine& inEngine, AudioTrack& inTrack)
                              1.000f,
 							Colours::lightgoldenrodyellow,
                              Image(),
-                             1.000f,
-                             Colours::lightseagreen);
+		                      1.000f,
+							blueSky);
     addFileButton->setBounds(80, 40, 15, 15);
 
 	/* Select Input Button */
@@ -113,7 +113,7 @@ ChannelComponent::ChannelComponent(AudioEngine& inEngine, AudioTrack& inTrack)
 		Colours::lightgoldenrodyellow,
 		Image(),
 		1.000f,
-		Colours::lightseagreen);
+		blueSky);
 	selectInputButton->setBounds(80+35, 40, 15, 15);
 }
 
@@ -167,9 +167,9 @@ void ChannelComponent::paint(Graphics& g)
 		//change color if is  Muted
 		muteButton->setImages(false, true, true,
 			ImageCache::getFromMemory(BinaryData::_033mute_png, BinaryData::_033mute_pngSize), 1.000f,
-			Colours::lightseagreen,
-			Image(), 1.000f, Colours::lightseagreen,
-			Image(), 1.000f, Colours::lightseagreen);
+			blueSky,
+			Image(), 1.000f, blueSky,
+			Image(), 1.000f, blueSky);
 	}
 	else
 	{
@@ -187,9 +187,9 @@ void ChannelComponent::paint(Graphics& g)
 		//change color if is Not Solo
 		soloButton->setImages(false, true, true,
 			ImageCache::getFromMemory(BinaryData::_048headphones_png, BinaryData::_048headphones_pngSize), 1.000f,
-			Colours::lightseagreen,
-			Image(), 1.000f, Colours::lightseagreen,
-			Image(), 1.000f, Colours::lightseagreen);
+			blueSky,
+			Image(), 1.000f, blueSky,
+			Image(), 1.000f, blueSky);
 	}
 	else
 	{

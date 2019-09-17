@@ -36,16 +36,6 @@ MenuComponent::MenuComponent(AudioEngine& inEngine) :
 	settingsButton->setColour(TextButton::ColourIds::buttonColourId, darkGreyJam);
 	settingsButton->setBounds(152, 8, 65, 24);
 
-	/* LOGO */
-	logo.reset(new Label("logo",
-		TRANS("JamCloud")));
-	addAndMakeVisible(logo.get());
-	logo->setFont(Font("Levenim MT", 26.40f, Font::plain).withTypefaceStyle("Regular").withExtraKerningFactor(-0.030f));
-	logo->setJustificationType(Justification::centredLeft);
-	logo->setEditable(false, false, false);
-	logo->setColour(TextEditor::textColourId, Colours::orange);
-	logo->setColour(TextEditor::backgroundColourId, Colours::white);
-
 	/* File Menu */
 	fileMenu.addSectionHeader("Project");
 	fileMenu.addItem(newFile, "New Project");
@@ -58,6 +48,11 @@ MenuComponent::MenuComponent(AudioEngine& inEngine) :
 	/* Settings Menu*/
 	settingsMenu.addItem(audioSettings, "Audio Settings");
 
+	/* logo */
+	File logoFile{ "C:/Users/yarde/Desktop/CODE/JamCloud_project/Icons/logo_noname.png" };
+	logoImage = ImageCache::getFromFile(logoFile);
+
+
 	setSize(600, 40);
 }
 
@@ -66,25 +61,35 @@ MenuComponent::~MenuComponent()
 	fileButton = nullptr;
 	cloudButton = nullptr;
 	settingsButton = nullptr;
-	logo = nullptr;
+	
 }
 
 
 void MenuComponent::paint(Graphics& g)
 {
 	g.fillAll(Colour(0xff323e44));
-
+	/* Background */
 	{
 		int x = 0, y = 0, width = proportionOfWidth(1.0000f), height = 40;
 		g.setColour(menuGrey);
 		g.fillRect(x, y, width, height);
 	}
 
+	/* Logo */
+	{
+		int x = proportionOfWidth(0.4827f) - (proportionOfWidth(0.1445f) / 2), y = 2, width = proportionOfWidth(0.1445f), height = 38;
+		g.setColour(Colours::black);
+		g.drawImageWithin(logoImage,
+			x, y, width, height,
+			RectanglePlacement::centred,
+			false);
+	}
+
 }
 
 void MenuComponent::resized()
 {
-	logo->setBounds(568, 6, roundToInt(65 * 1.6615f), 32);
+	
 }
 
 void MenuComponent::buttonClicked(Button* buttonThatWasClicked)
