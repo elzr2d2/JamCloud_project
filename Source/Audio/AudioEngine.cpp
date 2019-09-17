@@ -1,7 +1,9 @@
 #include "AudioEngine.h"
 
 std::unique_ptr<te::Engine> tracktionEngine;
+constexpr int NumberOfChannels = 5;
 
+// Creating the TracktionEngine as Singleton
 te::Engine& getTracktionEngine()
 {
     if (tracktionEngine == nullptr)
@@ -10,8 +12,7 @@ te::Engine& getTracktionEngine()
     return *tracktionEngine;
 }
 
-constexpr int NumberOfChannels = 5;
-
+// Creating new project
 AudioEngine::AudioEngine(ValueTree projectToLoad)
 {
     getTracktionEngine(); //makes sure an engine exists;
@@ -26,7 +27,7 @@ AudioEngine::AudioEngine(ValueTree projectToLoad)
     }
 }
 
-
+// initiates edit class for the current new project 
 void AudioEngine::initEditFromProject(ValueTree projectFile)
 {
     edit = std::make_unique<Edit>(getTracktionEngine(), projectFile, Edit::forEditing, nullptr, 0);
@@ -37,10 +38,12 @@ void AudioEngine::initEditFromProject(ValueTree projectFile)
     tempoSetting = std::make_unique<TempoSetting>(*tempoSequence.get(), projectFile);
 }
 
+// Destroys engine once exits the software
 AudioEngine::~AudioEngine()
 {
     getTracktionEngine().getTemporaryFileManager().getTempDirectory().deleteRecursively();
 }
+
 
 void AudioEngine::removeAllTracks()
 {
@@ -111,6 +114,7 @@ void AudioEngine::addNewClipFromFile(const File& editFile, AudioTrack& track)
 
 }
 
+// A specific track is active and ready to record
 void AudioEngine::armTrack(te::AudioTrack& t, bool arm, int position)
 {
     auto& currentEdit = t.edit;
@@ -120,6 +124,7 @@ void AudioEngine::armTrack(te::AudioTrack& t, bool arm, int position)
             instance->setRecordingEnabled(arm);
 
 }
+
 
 bool AudioEngine::isTrackArmed(te::AudioTrack& t, int position)
 {
@@ -132,18 +137,7 @@ bool AudioEngine::isTrackArmed(te::AudioTrack& t, int position)
     return false;
 }
 
-
-bool AudioEngine::isInputMonitoringEnabled(te::AudioTrack& t, int position)
-{
-    auto& currentEdit = t.edit;
-
-    for (auto instance : currentEdit.getAllInputDevices())
-        if (instance->getTargetTrack() == &t && instance->getTargetIndex() == position)
-            return instance->getInputDevice().isEndToEndEnabled();
-
-    return false;
-}
-
+// Implements and checks track input
 void AudioEngine::enableInputMonitoring(te::AudioTrack& t, bool im, int position)
 {
     if (isInputMonitoringEnabled(t, position) != im)
@@ -156,6 +150,18 @@ void AudioEngine::enableInputMonitoring(te::AudioTrack& t, bool im, int position
     }
 }
 
+
+bool AudioEngine::isInputMonitoringEnabled(te::AudioTrack& t, int position)
+{
+	auto& currentEdit = t.edit;
+
+	for (auto instance : currentEdit.getAllInputDevices())
+		if (instance->getTargetTrack() == &t && instance->getTargetIndex() == position)
+			return instance->getInputDevice().isEndToEndEnabled();
+
+	return false;
+}
+
 bool AudioEngine::trackHasInput(te::AudioTrack& t, int position)
 {
     auto& currentEdit = t.edit;
@@ -166,6 +172,8 @@ bool AudioEngine::trackHasInput(te::AudioTrack& t, int position)
 
     return false;
 }
+
+
 
 TransportControl& AudioEngine::getTransport() const
 {
@@ -216,6 +224,7 @@ void AudioEngine::recording()
         te::EditFileOperations(*edit).save(true, true, false);
 }
 
+// state maching for the armTrack function
 void AudioEngine::toggleArm(AudioTrack& track)
 {
 	bool shouldArm = !isTrackArmed(track);
@@ -266,6 +275,7 @@ void AudioEngine::adjustClipProperties(tracktion_engine::WaveAudioClip& clip) co
 	
 }
 
+// Not active
 void AudioEngine::addChannel()
 {
     auto numTracks = edit->getTrackList().size();
@@ -275,6 +285,8 @@ void AudioEngine::addChannel()
 
 }
 
+
+// Controling each track volume and pan with a plugin
 void AudioEngine::addVolumeAndPanPlugin(AudioTrack& track) const
 {
     auto plugins = track.getAllPlugins();
@@ -356,7 +368,6 @@ bool AudioEngine::isLooping()
 }
 
 
-
 void AudioEngine::saveAsFile()
 {
     File editFile {};
@@ -426,12 +437,12 @@ void AudioEngine::createNewProject()
 
 }
 
-
 bool AudioEngine::isRecording()
 {
     return getTransport().isRecording();
 }
 
+// Creates tracks and assigns their inputs when a new project is created
 void AudioEngine::createTracksAndAssignInputs()
 {
     auto& dm = getTracktionEngine().getDeviceManager();
@@ -492,6 +503,7 @@ void AudioEngine::audioSettings()
     o.launchAsync();
 }
 
+// track input menu
 void AudioEngine::inputMonitoring(AudioTrack* at)
 {
     PopupMenu m;
@@ -547,8 +559,6 @@ void AudioEngine::deleteSelectedClips()
 void AudioEngine::setBpm(double bpm)
 {
     tempoSetting->setBpm(bpm);
-	
-
 }
 
 double AudioEngine::getBpm()
