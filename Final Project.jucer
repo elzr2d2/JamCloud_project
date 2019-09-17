@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<JUCERPROJECT id="LuD3xr" name="Final Project" projectType="guiapp" jucerVersion="5.4.3"
+<JUCERPROJECT id="LuD3xr" name="Final Project" projectType="guiapp" jucerVersion="5.4.4"
               headerPath="../../SDKs/JUCE/modules&#10;../../SDKs/tracktion_engine&#10;../../Source&#10;">
   <MAINGROUP id="O4Tt23" name="Final Project">
     <GROUP id="{1AFD6650-92F3-872C-C857-A28CBFF0FBC0}" name="Icons">
@@ -358,5 +358,5 @@
     <WINDOWS/>
     <OSX/>
   </LIVE_SETTINGS>
-  <JUCEOPTIONS JUCE_STRICT_REFCOUNTEDPOINTER="1"/>
+  <JUCEOPTIONS JUCE_STRICT_REFCOUNTEDPOINTER="1" JUCE_ASIO="1"/>
 </JUCERPROJECT>
